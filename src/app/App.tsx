@@ -2,9 +2,20 @@ import { HashRouter, Route, Routes } from 'react-router-dom';
 import { AppShell } from '../components/AppShell';
 import { ArticlesPractice } from '../modules/articles/ArticlesPractice';
 import { DatesPractice } from '../modules/dates/DatesPractice';
+import { FindTheMistakePractice } from '../modules/find-the-mistake/FindTheMistakePractice';
+import { ListeningPractice } from '../modules/listening/ListeningPractice';
 import { MissingWordPractice } from '../modules/missing-word/MissingWordPractice';
+import { ModalVerbsPractice } from '../modules/modal-verbs/ModalVerbsPractice';
+import { NegationPractice } from '../modules/negation/NegationPractice';
 import { NumbersPractice } from '../modules/numbers/NumbersPractice';
+import { PerfectTensePractice } from '../modules/perfect-tense/PerfectTensePractice';
+import { PictureDescriptionPractice } from '../modules/picture-description/PictureDescriptionPractice';
+import { PrepositionsPractice } from '../modules/prepositions/PrepositionsPractice';
+import { PronunciationPractice } from '../modules/pronunciation/PronunciationPractice';
+import { SeparableVerbsPractice } from '../modules/separable-verbs/SeparableVerbsPractice';
+import { ConversationPractice } from '../modules/conversations/ConversationPractice';
 import { TimePractice } from '../modules/time/TimePractice';
+import { TranslationPractice } from '../modules/translation/TranslationPractice';
 import { VerbsPractice } from '../modules/verbs/VerbsPractice';
 import { VocabularyPractice } from '../modules/vocabulary/VocabularyPractice';
 import { WordOrderPractice } from '../modules/word-order/WordOrderPractice';
@@ -39,6 +50,17 @@ export function App() {
             <Route path="practice/verbs" element={<VerbsPractice />} />
             <Route path="practice/word-order" element={<WordOrderPractice />} />
             <Route path="practice/missing-word" element={<MissingWordPractice />} />
+            <Route path="practice/modal-verbs" element={<ModalVerbsPractice />} />
+            <Route path="practice/negation" element={<NegationPractice />} />
+            <Route path="practice/separable-verbs" element={<SeparableVerbsPractice />} />
+            <Route path="practice/perfect-tense" element={<PerfectTensePractice />} />
+            <Route path="practice/prepositions" element={<PrepositionsPractice />} />
+            <Route path="practice/find-the-mistake" element={<FindTheMistakePractice />} />
+            <Route path="practice/translation" element={<TranslationPractice />} />
+            <Route path="practice/listening" element={<ListeningPractice />} />
+            <Route path="practice/conversations" element={<ConversationPractice />} />
+            <Route path="practice/picture-description" element={<PictureDescriptionPractice />} />
+            <Route path="practice/pronunciation" element={<PronunciationPractice />} />
             <Route path="modules/:moduleId" element={<PlaceholderModulePage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Route>

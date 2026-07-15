@@ -529,7 +529,7 @@ Use reusable types rather than implementing every module independently.
 Suggested TypeScript model:
 
 ```ts
-type Difficulty = "easy" | "medium" | "hard";
+type Difficulty = 'easy' | 'medium' | 'hard';
 
 interface BaseQuestion {
   id: string;
@@ -542,18 +542,18 @@ interface BaseQuestion {
 }
 
 interface TextQuestion extends BaseQuestion {
-  type: "text";
+  type: 'text';
   acceptedAnswers: string[];
 }
 
 interface MultipleChoiceQuestion extends BaseQuestion {
-  type: "multiple-choice";
+  type: 'multiple-choice';
   options: string[];
   correctOption: string;
 }
 
 interface OrderingQuestion extends BaseQuestion {
-  type: "ordering";
+  type: 'ordering';
   tokens: string[];
   correctOrder: string[];
 }

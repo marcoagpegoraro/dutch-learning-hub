@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type FormEvent } from 'react';
+import { useEffect, useRef, useState, type FormEvent, type ReactNode } from 'react';
 import { useAppState } from '../../app/AppStateContext';
 import { AnswerDiff } from '../../components/AnswerDiff';
 import { ExerciseShell } from '../../components/ExerciseShell';
@@ -21,6 +21,7 @@ interface QuizPracticeProps {
   inputPlaceholder?: string;
   difficultyLabels?: Record<Difficulty, string>;
   showAnswerDiff?: boolean;
+  renderPromptAddon?: (question: QuizQuestion) => ReactNode;
 }
 
 interface SessionScore {
@@ -44,6 +45,7 @@ export function QuizPractice({
   inputPlaceholder = 'Type your answer',
   difficultyLabels,
   showAnswerDiff = false,
+  renderPromptAddon,
 }: QuizPracticeProps) {
   const { state, updateSettings, addAttempt } = useAppState();
   const [difficulty, setDifficulty] = useState<Difficulty>(state.settings.defaultDifficulty);
@@ -149,6 +151,7 @@ export function QuizPractice({
               </div>
               <p className="text-secondary small fw-semibold text-uppercase mb-2">Question</p>
               <h2 className="quiz-prompt fw-bold mb-4">{question.prompt}</h2>
+              {renderPromptAddon?.(question)}
 
               <form onSubmit={submitAnswer} noValidate>
                 {question.type === 'multiple-choice' ? (

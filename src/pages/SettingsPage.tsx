@@ -150,7 +150,7 @@ export function SettingsPage() {
                 <label className="form-check-label" htmlFor="soundEnabled">
                   <strong>Enable sound</strong>
                   <span className="d-block small text-secondary">
-                    Reserved for later listening and feedback features.
+                    Controls listening playback, conversation audio, and pronunciation examples.
                   </span>
                 </label>
               </div>

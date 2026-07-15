@@ -1,6 +1,6 @@
 # Dutch Learning Hub
 
-Phases 1 and 2 of a static, modular Dutch-learning application. The original clock exercise now lives inside the React application as the time-practice module.
+Phases 1–4 of a static, modular Dutch-learning application. The original clock exercise now lives inside the React application as the time-practice module.
 
 ## Included
 
@@ -12,12 +12,19 @@ Phases 1 and 2 of a static, modular Dutch-learning application. The original clo
 - Core A1 exercises for de/het, vocabulary, numbers, dates, present-tense verbs, word order, and missing words
 - Drag-and-drop plus click-to-build, keyboard-accessible word-order questions
 - Functional mistake review with 1, 3, 7, 14, and 30-day intervals
+- Expanded grammar exercises for modal verbs, niet/geen, separable verbs, perfect tense, and prepositions
+- Sentence-correction and curated English/Portuguese translation exercises
+- Word-level answer differences for corrections and translations
+- Speech-synthesis listening practice with normal and slower playback
+- Eight predefined branching conversation scenarios
+- Self-assessed picture-description practice with curated examples
+- Experimental pronunciation shadowing with explicit browser and scoring limitations
 - Easy, medium, and hard time generation
 - Shared XP, streak, accuracy, history, and mistake tracking
 - Versioned and validated `localStorage` state at `dutch-learning-hub:v1`
 - Persistent settings plus progress export, import, and confirmed reset
-- Unit tests for time, normalization, storage, numbers, dates, verbs, word order, quizzes, and review scheduling
-- Typed placeholder routes for modules planned after Phase 2
+- Unit tests for time, normalization, storage, numbers, dates, verbs, word order, grammar rules, answer differences, quizzes, and review scheduling
+- Typed placeholder routes for modules planned after Phase 4
 
 ## Local development
 

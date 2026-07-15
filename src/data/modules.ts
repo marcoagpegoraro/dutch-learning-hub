@@ -148,7 +148,7 @@ const placeholderModules: Array<
   ],
 ];
 
-const phase2ModuleIds = new Set([
+const availableModuleIds = new Set([
   'word-order',
   'articles',
   'verbs',
@@ -156,12 +156,23 @@ const phase2ModuleIds = new Set([
   'numbers',
   'dates',
   'missing-word',
+  'modal-verbs',
+  'negation',
+  'separable-verbs',
+  'perfect-tense',
+  'prepositions',
+  'find-the-mistake',
+  'translation',
+  'listening',
+  'conversations',
+  'picture-description',
+  'pronunciation',
 ]);
 
 export const learningModules: LearningModule[] = [
   timeModule,
   ...placeholderModules.map(([id, title, description, icon, category]): LearningModule => {
-    const available = phase2ModuleIds.has(id);
+    const available = availableModuleIds.has(id);
     return {
       id,
       title,
