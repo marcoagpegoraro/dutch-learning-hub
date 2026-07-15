@@ -43,6 +43,7 @@ export function createDefaultProgress(): ProgressState {
     questionHistory: [],
     masteredItems: [],
     achievements: [],
+    activityRewards: [],
   };
 }
 
@@ -120,6 +121,19 @@ function sanitizeProgress(value: unknown): ProgressState {
       : [],
     achievements: Array.isArray(value.achievements)
       ? value.achievements.filter((item): item is string => typeof item === 'string')
+      : [],
+    activityRewards: Array.isArray(value.activityRewards)
+      ? value.activityRewards
+          .filter(
+            (item): item is Record<string, unknown> =>
+              isRecord(item) && typeof item.id === 'string' && typeof item.earnedAt === 'string',
+          )
+          .map((item) => ({
+            id: item.id as string,
+            xpEarned: finiteNonNegative(item.xpEarned),
+            earnedAt: item.earnedAt as string,
+          }))
+          .slice(-250)
       : [],
   };
 }

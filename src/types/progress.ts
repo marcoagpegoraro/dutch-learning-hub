@@ -26,6 +26,12 @@ export interface QuestionAttempt {
   answeredAt: string;
 }
 
+export interface ActivityReward {
+  id: string;
+  xpEarned: number;
+  earnedAt: string;
+}
+
 export interface ProgressState {
   totalXp: number;
   currentStreak: number;
@@ -37,6 +43,7 @@ export interface ProgressState {
   questionHistory: QuestionAttempt[];
   masteredItems: string[];
   achievements: string[];
+  activityRewards: ActivityReward[];
 }
 
 export interface ReviewItem {

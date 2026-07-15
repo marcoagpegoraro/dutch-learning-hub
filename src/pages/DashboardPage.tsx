@@ -2,7 +2,9 @@ import { Link } from 'react-router-dom';
 import { useAppState } from '../app/AppStateContext';
 import { ModuleCard } from '../components/ModuleCard';
 import { learningModules } from '../data/modules';
+import { a1Course, courseCheckpointId } from '../data/a1Course';
 import { getAccuracy, localDateKey } from '../services/progress';
+import { getDailySummary } from '../services/dailyGoals';
 
 export function DashboardPage() {
   const { state } = useAppState();
@@ -12,7 +14,7 @@ export function DashboardPage() {
   const todayAttempts = history.filter(
     (attempt) => localDateKey(new Date(attempt.answeredAt)) === today,
   );
-  const todayXp = todayAttempts.reduce((sum, attempt) => sum + attempt.xpEarned, 0);
+  const todayXp = getDailySummary(state).xp;
   const goalPercent = Math.min(100, Math.round((todayXp / state.settings.dailyGoal) * 100));
   const recentActivity = [...history].reverse().slice(0, 4);
   const moduleStats = Object.entries(state.progress.moduleStats)
@@ -24,6 +26,9 @@ export function DashboardPage() {
   const recommended =
     (weakest && learningModules.find((module) => module.id === weakest[0])) ??
     learningModules.find((module) => module.id === 'articles')!;
+  const courseDone = a1Course.filter((unit) =>
+    state.progress.completedLessons.includes(courseCheckpointId(unit.id)),
+  ).length;
 
   return (
     <div className="container py-4 py-lg-5">
@@ -37,8 +42,8 @@ export function DashboardPage() {
             <p className="lead text-secondary mb-4">
               A focused daily practice is enough to keep moving. Ready for another short lesson?
             </p>
-            <Link className="btn btn-primary btn-lg" to={recommended.route}>
-              Continue learning <i className="bi bi-arrow-right ms-2" aria-hidden="true" />
+            <Link className="btn btn-primary btn-lg" to="/course">
+              Continue A1 course <i className="bi bi-arrow-right ms-2" aria-hidden="true" />
             </Link>
           </div>
           <div className="col-lg-4">
@@ -64,6 +69,9 @@ export function DashboardPage() {
                   ? 'Daily goal complete — uitstekend!'
                   : `${state.settings.dailyGoal - todayXp} XP to reach today’s goal.`}
               </p>
+              <Link className="small" to="/goals">
+                View all daily goals
+              </Link>
             </div>
           </div>
         </div>
@@ -94,6 +102,24 @@ export function DashboardPage() {
           label="Accuracy"
           accent="purple"
         />
+      </section>
+
+      <section className="card border-0 shadow-sm mb-5 course-dashboard-card">
+        <div className="card-body p-4 d-flex flex-column flex-md-row align-items-md-center gap-3">
+          <span className="module-icon">
+            <i className="bi bi-signpost-split" />
+          </span>
+          <div className="flex-grow-1">
+            <span className="eyebrow">Guided path</span>
+            <h2 className="h4 fw-bold mb-1">A1 Dutch course</h2>
+            <p className="text-secondary mb-2">{courseDone} of 16 units complete</p>
+            <div className="progress">
+              <div className="progress-bar" style={{ width: `${(courseDone / 16) * 100}%` }} />
+            </div>
+            <Link className="stretched-link" aria-label="Open A1 Dutch course" to="/course" />
+          </div>
+          <i className="bi bi-chevron-right fs-4 text-primary" />
+        </div>
       </section>
 
       <div className="row g-4 mb-5">
@@ -181,7 +207,9 @@ export function DashboardPage() {
                       className={`bi ${attempt.correct ? 'bi-check-circle text-success' : 'bi-x-circle text-danger'} me-2`}
                       aria-hidden="true"
                     />
-                    Time practice · <span lang="nl">{attempt.correctAnswer}</span>
+                    {learningModules.find((module) => module.id === attempt.moduleId)?.title ??
+                      'A1 course'}{' '}
+                    · <span lang="nl">{attempt.correctAnswer}</span>
                   </span>
                   <span className="text-secondary text-nowrap small">{attempt.xpEarned} XP</span>
                 </div>

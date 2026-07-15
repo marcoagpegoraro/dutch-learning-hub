@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { useAppState } from '../app/AppStateContext';
 import { learningModules } from '../data/modules';
 import { getAccuracy, localDateKey } from '../services/progress';
+import { getDailySummary } from '../services/dailyGoals';
 import type { Difficulty } from '../types/exercise';
 
 export function ProgressPage() {
@@ -12,7 +13,7 @@ export function ProgressPage() {
   const todayAttempts = history.filter(
     (attempt) => localDateKey(new Date(attempt.answeredAt)) === today,
   );
-  const todayXp = todayAttempts.reduce((sum, attempt) => sum + attempt.xpEarned, 0);
+  const todayXp = getDailySummary(state).xp;
 
   return (
     <div className="container py-4 py-lg-5">

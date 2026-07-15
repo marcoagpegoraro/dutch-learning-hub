@@ -1,3 +1,5 @@
+import { PwaInstallCard } from '../components/PwaInstallCard';
+
 export function AboutPage() {
   return (
     <div className="container py-4 py-lg-5">
@@ -11,10 +13,10 @@ export function AboutPage() {
           </p>
           <section className="card border-0 shadow-sm mt-4">
             <div className="card-body p-4 p-md-5">
-              <h2 className="h4 fw-bold">Phases 1–4</h2>
+              <h2 className="h4 fw-bold">Complete A1 learning hub</h2>
               <p>
-                The foundation, grammar, listening, conversation, picture, and experimental
-                pronunciation exercises run without an application backend. No account is required.
+                Guided lessons, grammar, listening, conversation, picture, pronunciation and
+                gamified challenges run without an application backend. No account is required.
               </p>
               <h2 className="h4 fw-bold mt-4">Privacy</h2>
               <p className="mb-0">
@@ -23,6 +25,9 @@ export function AboutPage() {
               </p>
             </div>
           </section>
+          <div className="mt-4">
+            <PwaInstallCard />
+          </div>
         </div>
       </div>
     </div>

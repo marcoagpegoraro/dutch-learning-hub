@@ -14,6 +14,7 @@ import { PrepositionsPractice } from '../modules/prepositions/PrepositionsPracti
 import { PronunciationPractice } from '../modules/pronunciation/PronunciationPractice';
 import { SeparableVerbsPractice } from '../modules/separable-verbs/SeparableVerbsPractice';
 import { ConversationPractice } from '../modules/conversations/ConversationPractice';
+import { BossBattlePractice } from '../modules/boss-battle/BossBattlePractice';
 import { TimePractice } from '../modules/time/TimePractice';
 import { TranslationPractice } from '../modules/translation/TranslationPractice';
 import { VerbsPractice } from '../modules/verbs/VerbsPractice';
@@ -27,6 +28,9 @@ import { NotFoundPage, PlaceholderModulePage } from '../pages/PlaceholderModuleP
 import { ProgressPage } from '../pages/ProgressPage';
 import { ReviewPage } from '../pages/ReviewPage';
 import { SettingsPage } from '../pages/SettingsPage';
+import { CoursePage } from '../pages/CoursePage';
+import { CourseUnitPage } from '../pages/CourseUnitPage';
+import { DailyGoalsPage } from '../pages/DailyGoalsPage';
 import { AppStateProvider } from './AppStateContext';
 
 export function App() {
@@ -37,6 +41,9 @@ export function App() {
           <Route element={<AppShell />}>
             <Route index element={<DashboardPage />} />
             <Route path="learn" element={<LearnPage />} />
+            <Route path="course" element={<CoursePage />} />
+            <Route path="course/:unitId" element={<CourseUnitPage />} />
+            <Route path="goals" element={<DailyGoalsPage />} />
             <Route path="review" element={<ReviewPage />} />
             <Route path="progress" element={<ProgressPage />} />
             <Route path="achievements" element={<AchievementsPage />} />
@@ -61,6 +68,7 @@ export function App() {
             <Route path="practice/conversations" element={<ConversationPractice />} />
             <Route path="practice/picture-description" element={<PictureDescriptionPractice />} />
             <Route path="practice/pronunciation" element={<PronunciationPractice />} />
+            <Route path="practice/boss-battle" element={<BossBattlePractice />} />
             <Route path="modules/:moduleId" element={<PlaceholderModulePage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Route>

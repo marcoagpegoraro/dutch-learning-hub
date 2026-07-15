@@ -1,6 +1,7 @@
 /* eslint-disable react-refresh/only-export-components -- provider and its hook form one public API */
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
-import { recordAttempt, type AttemptInput } from '../services/progress';
+import { completeActivity, recordAttempt, type AttemptInput } from '../services/progress';
+import { getUnlockedAchievementIds } from '../data/achievements';
 import { updateReviewSchedule, type ReviewOutcome } from '../services/reviewScheduling';
 import {
   createDefaultState,
@@ -16,6 +17,7 @@ interface AppStateContextValue {
   updateSettings: (settings: Partial<AppSettings>) => void;
   updateDisplayName: (name: string) => void;
   addAttempt: (attempt: AttemptInput) => void;
+  completeActivity: (activityId: string, xp?: number) => void;
   reviewMistake: (itemId: string, outcome: ReviewOutcome) => void;
   resetState: () => void;
   importState: (json: string) => void;
@@ -32,6 +34,19 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
     document.documentElement.dataset.reducedMotion = String(state.settings.reducedMotion);
   }, [state]);
 
+  useEffect(() => {
+    const unlocked = getUnlockedAchievementIds(state);
+    if (unlocked.some((id) => !state.progress.achievements.includes(id))) {
+      setState((current) => ({
+        ...current,
+        progress: {
+          ...current.progress,
+          achievements: Array.from(new Set([...current.progress.achievements, ...unlocked])),
+        },
+      }));
+    }
+  }, [state]);
+
   const value = useMemo<AppStateContextValue>(
     () => ({
       state,
@@ -46,6 +61,8 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
           profile: { ...current.profile, displayName: displayName.trim().slice(0, 80) },
         })),
       addAttempt: (attempt) => setState((current) => recordAttempt(current, attempt)),
+      completeActivity: (activityId, xp) =>
+        setState((current) => completeActivity(current, activityId, xp)),
       reviewMistake: (itemId, outcome) =>
         setState((current) => ({
           ...current,

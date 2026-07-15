@@ -1,10 +1,12 @@
 import { Outlet } from 'react-router-dom';
 import { AppNavbar } from './AppNavbar';
+import { OnlineStatus } from './OnlineStatus';
 
 export function AppShell() {
   return (
     <div className="d-flex flex-column min-vh-100">
       <AppNavbar />
+      <OnlineStatus />
       <main className="flex-grow-1">
         <Outlet />
       </main>

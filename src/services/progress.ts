@@ -101,3 +101,22 @@ export function recordAttempt(state: AppState, input: AttemptInput): AppState {
 export function getAccuracy(correct: number, attempted: number): number {
   return attempted ? Math.round((correct / attempted) * 100) : 0;
 }
+
+export function completeActivity(state: AppState, activityId: string, xp = 0): AppState {
+  if (state.progress.completedLessons.includes(activityId)) return state;
+  return {
+    ...state,
+    progress: {
+      ...state.progress,
+      totalXp: state.progress.totalXp + Math.max(0, xp),
+      completedLessons: [...state.progress.completedLessons, activityId],
+      activityRewards:
+        xp > 0
+          ? [
+              ...state.progress.activityRewards,
+              { id: activityId, xpEarned: xp, earnedAt: new Date().toISOString() },
+            ].slice(-250)
+          : state.progress.activityRewards,
+    },
+  };
+}

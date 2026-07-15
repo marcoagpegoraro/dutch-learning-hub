@@ -167,6 +167,7 @@ const availableModuleIds = new Set([
   'conversations',
   'picture-description',
   'pronunciation',
+  'boss-battle',
 ]);
 
 export const learningModules: LearningModule[] = [

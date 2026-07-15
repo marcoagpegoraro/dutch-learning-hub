@@ -3,7 +3,9 @@ import { useAppState } from '../app/AppStateContext';
 
 const navItems = [
   ['/', 'Dashboard', 'bi-grid'],
+  ['/course', 'A1 Course', 'bi-signpost-split'],
   ['/learn', 'Learn', 'bi-mortarboard'],
+  ['/goals', 'Daily goals', 'bi-bullseye'],
   ['/review', 'Review mistakes', 'bi-arrow-repeat'],
   ['/progress', 'Progress', 'bi-graph-up-arrow'],
   ['/achievements', 'Achievements', 'bi-trophy'],

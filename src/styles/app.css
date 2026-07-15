@@ -688,6 +688,79 @@ html[data-reduced-motion='true'] *::after {
   animation-iteration-count: 1 !important;
 }
 
+.course-path {
+  display: grid;
+  gap: 1rem;
+}
+
+.course-unit {
+  position: relative;
+}
+
+.course-number {
+  display: grid;
+  width: 3.25rem;
+  height: 3.25rem;
+  flex: 0 0 3.25rem;
+  place-items: center;
+  border-radius: 50%;
+  background: #e8f0ff;
+  color: #155eef;
+  font-size: 1.1rem;
+  font-weight: 800;
+}
+
+.course-number.complete {
+  background: #d1fadf;
+  color: #067647;
+}
+.course-progress {
+  height: 0.4rem;
+  max-width: 28rem;
+}
+.course-lesson-done {
+  border: 1px solid #a6f4c5 !important;
+}
+.achievement-card.locked {
+  filter: grayscale(1);
+  opacity: 0.62;
+}
+.achievement-card.unlocked {
+  border: 1px solid #a6f4c5 !important;
+}
+.goal-complete {
+  border: 1px solid #a6f4c5 !important;
+  background: #f3fff7;
+}
+.course-dashboard-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.boss-card {
+  border-top: 0.35rem solid #155eef !important;
+}
+.boss-medium {
+  border-color: #f79009 !important;
+}
+.boss-hard {
+  border-color: #d92d20 !important;
+}
+.boss-icon {
+  font-size: 4rem;
+  color: #155eef;
+}
+.boss-arena {
+  background: linear-gradient(145deg, #eaf1ff, #fff4e8);
+}
+.battle-health {
+  height: 0.8rem;
+}
+.offline-banner {
+  background: #101828;
+  color: #fff;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
