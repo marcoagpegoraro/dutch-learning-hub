@@ -49,10 +49,17 @@ export function TimePractice() {
     xp: 0,
   });
   const inputRef = useRef<HTMLInputElement>(null);
+  const nextQuestionRef = useRef<HTMLButtonElement>(null);
   const sessionTarget = 10;
 
   useEffect(() => {
-    if (!feedback) inputRef.current?.focus();
+    if (feedback) {
+      nextQuestionRef.current?.focus();
+      return;
+    }
+
+    inputRef.current?.focus();
+    inputRef.current?.select();
   }, [feedback, question]);
 
   function nextQuestion(nextDifficulty = difficulty, nextClockType = clockType) {
@@ -204,7 +211,12 @@ export function TimePractice() {
 
               <div className="d-flex flex-wrap gap-2 mt-3">
                 {feedback ? (
-                  <button className="btn btn-primary" type="button" onClick={() => nextQuestion()}>
+                  <button
+                    ref={nextQuestionRef}
+                    className="btn btn-primary"
+                    type="button"
+                    onClick={() => nextQuestion()}
+                  >
                     Next question <i className="bi bi-arrow-right ms-1" aria-hidden="true" />
                   </button>
                 ) : (
