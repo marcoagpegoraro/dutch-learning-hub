@@ -367,6 +367,46 @@ select {
   white-space: pre-line;
 }
 
+.word-list-card {
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.word-list-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0.8rem 1.8rem rgb(31 43 70 / 12%) !important;
+}
+
+.word-list-drill {
+  max-width: 760px;
+  margin: auto;
+}
+
+.word-list-prompt {
+  margin: 0;
+  font-size: clamp(2rem, 6vw, 3.75rem);
+  font-weight: 800;
+  line-height: 1.15;
+}
+
+.word-list-answer {
+  max-width: 540px;
+}
+
+.word-list-complete-icon {
+  display: grid;
+  width: 4.25rem;
+  height: 4.25rem;
+  margin: auto;
+  place-items: center;
+  border-radius: 50%;
+  background: #dff5e8;
+  color: #08783f;
+  font-size: 2rem;
+  font-weight: 800;
+}
+
 .answer-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));

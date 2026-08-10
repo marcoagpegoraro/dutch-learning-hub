@@ -21,6 +21,7 @@ import { TranslationPractice } from '../modules/translation/TranslationPractice'
 import { VerbsPractice } from '../modules/verbs/VerbsPractice';
 import { VocabularyPractice } from '../modules/vocabulary/VocabularyPractice';
 import { WordOrderPractice } from '../modules/word-order/WordOrderPractice';
+import { WordListsPractice } from '../modules/word-lists/WordListsPractice';
 import { AboutPage } from '../pages/AboutPage';
 import { AchievementsPage } from '../pages/AchievementsPage';
 import { DashboardPage } from '../pages/DashboardPage';
@@ -54,6 +55,7 @@ export function App() {
             <Route path="practice/articles" element={<ArticlesPractice />} />
             <Route path="practice/body" element={<BodyPractice />} />
             <Route path="practice/vocabulary" element={<VocabularyPractice />} />
+            <Route path="practice/word-lists" element={<WordListsPractice />} />
             <Route path="practice/numbers" element={<NumbersPractice />} />
             <Route path="practice/dates" element={<DatesPractice />} />
             <Route path="practice/verbs" element={<VerbsPractice />} />

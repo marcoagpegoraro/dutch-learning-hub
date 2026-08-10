@@ -105,6 +105,13 @@ const placeholderModules: Array<
     'vocabulary',
   ],
   [
+    'word-lists',
+    'Word List Drill',
+    'Memorise a whole list in both directions, or create and save your own.',
+    'bi-card-list',
+    'vocabulary',
+  ],
+  [
     'conversations',
     'Conversation Simulator',
     'Work through useful, predefined everyday conversations.',
@@ -161,6 +168,7 @@ const availableModuleIds = new Set([
   'verbs',
   'vocabulary',
   'body',
+  'word-lists',
   'numbers',
   'dates',
   'missing-word',
