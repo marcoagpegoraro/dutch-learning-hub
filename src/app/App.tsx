@@ -1,6 +1,7 @@
 import { HashRouter, Route, Routes } from 'react-router-dom';
 import { AppShell } from '../components/AppShell';
 import { ArticlesPractice } from '../modules/articles/ArticlesPractice';
+import { BodyPractice } from '../modules/body/BodyPractice';
 import { DatesPractice } from '../modules/dates/DatesPractice';
 import { FindTheMistakePractice } from '../modules/find-the-mistake/FindTheMistakePractice';
 import { ListeningPractice } from '../modules/listening/ListeningPractice';
@@ -51,6 +52,7 @@ export function App() {
             <Route path="about" element={<AboutPage />} />
             <Route path="practice/time" element={<TimePractice />} />
             <Route path="practice/articles" element={<ArticlesPractice />} />
+            <Route path="practice/body" element={<BodyPractice />} />
             <Route path="practice/vocabulary" element={<VocabularyPractice />} />
             <Route path="practice/numbers" element={<NumbersPractice />} />
             <Route path="practice/dates" element={<DatesPractice />} />

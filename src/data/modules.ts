@@ -98,6 +98,13 @@ const placeholderModules: Array<
     'vocabulary',
   ],
   [
+    'body',
+    'Body Vocabulary',
+    'Learn body parts in Dutch, including whether each word uses de or het.',
+    'bi-person-arms-up',
+    'vocabulary',
+  ],
+  [
     'conversations',
     'Conversation Simulator',
     'Work through useful, predefined everyday conversations.',
@@ -153,6 +160,7 @@ const availableModuleIds = new Set([
   'articles',
   'verbs',
   'vocabulary',
+  'body',
   'numbers',
   'dates',
   'missing-word',
