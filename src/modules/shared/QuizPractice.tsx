@@ -8,7 +8,7 @@ import { calculateXp } from '../../services/scoring';
 import type { Difficulty, ExerciseDifficulty } from '../../types/exercise';
 import {
   answersForQuestion,
-  isQuizAnswerCorrect,
+  evaluateQuizAnswer,
   pickQuizQuestion,
   type QuizQuestion,
 } from './quizUtils';
@@ -39,6 +39,7 @@ interface SessionScore {
 interface Feedback {
   correct: boolean;
   xp: number;
+  needsAccent: boolean;
 }
 
 export function QuizPractice({
@@ -109,7 +110,7 @@ export function QuizPractice({
     nextQuestion(nextDifficulty);
   }
 
-  function completeAttempt(correct: boolean, submittedAnswer: string) {
+  function completeAttempt(correct: boolean, submittedAnswer: string, needsAccent = false) {
     const nextStreak = correct ? session.streak + 1 : 0;
     const progressDifficulty: Difficulty = difficulty === 'very-hard' ? 'hard' : difficulty;
     const xp = calculateXp(progressDifficulty, { correct, streak: nextStreak });
@@ -131,7 +132,7 @@ export function QuizPractice({
       answered: current.answered + 1,
       xp: current.xp + xp,
     }));
-    setFeedback({ correct, xp });
+    setFeedback({ correct, xp, needsAccent });
   }
 
   function submitAnswer(event: FormEvent) {
@@ -141,7 +142,8 @@ export function QuizPractice({
       setInvalid(true);
       return;
     }
-    completeAttempt(isQuizAnswerCorrect(question, answer), answer);
+    const result = evaluateQuizAnswer(question, answer);
+    completeAttempt(result.correct, answer, question.type === 'text' && result.needsAccent);
   }
 
   function toggleHint() {
@@ -241,6 +243,7 @@ export function QuizPractice({
                         question.explanation ?? 'Keep practising to make this pattern automatic.'
                       }
                       xpEarned={feedback.xp}
+                      needsAccent={feedback.needsAccent}
                     />
                     {showAnswerDiff && !feedback.correct && answer !== '(skipped)' && (
                       <AnswerDiff expected={answersForQuestion(question)[0]} actual={answer} />

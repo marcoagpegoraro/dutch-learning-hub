@@ -1,13 +1,14 @@
 import { useState, type FormEvent } from 'react';
 import { Link } from 'react-router-dom';
 import { useAppState } from '../app/AppStateContext';
-import { isAcceptedAnswer } from '../services/answerNormalization';
+import { evaluateAcceptedAnswer } from '../services/answerNormalization';
 
 export function ReviewPage() {
   const { state, reviewMistake } = useAppState();
   const [includeFuture, setIncludeFuture] = useState(false);
   const [answer, setAnswer] = useState('');
   const [message, setMessage] = useState('');
+  const [messageNeedsAccent, setMessageNeedsAccent] = useState(false);
   const [invalid, setInvalid] = useState(false);
   const now = Date.now();
   const allItems = [...state.review.items].sort((a, b) => a.dueAt.localeCompare(b.dueAt));
@@ -21,13 +22,16 @@ export function ReviewPage() {
       setInvalid(true);
       return;
     }
-    const correct = isAcceptedAnswer(answer, [current.correctAnswer]);
-    reviewMistake(current.id, correct ? 'correct' : 'again');
+    const result = evaluateAcceptedAnswer(answer, [current.correctAnswer]);
+    reviewMistake(current.id, result.correct ? 'correct' : 'again');
     setMessage(
-      correct
-        ? `Correct — “${current.correctAnswer}” is scheduled for a longer interval.`
+      result.correct
+        ? result.needsAccent
+          ? `Correct — add the accent or diaeresis in “${current.correctAnswer}” next time.`
+          : `Correct — “${current.correctAnswer}” is scheduled for a longer interval.`
         : `Review again soon. The answer is “${current.correctAnswer}”.`,
     );
+    setMessageNeedsAccent(result.needsAccent);
     setAnswer('');
     setInvalid(false);
   }
@@ -36,6 +40,7 @@ export function ReviewPage() {
     if (!current) return;
     reviewMistake(current.id, 'known');
     setMessage(`Marked “${current.correctAnswer}” as known.`);
+    setMessageNeedsAccent(false);
     setAnswer('');
   }
 
@@ -47,7 +52,11 @@ export function ReviewPage() {
         Practise due mistakes with intervals of 1, 3, 7, 14, and 30 days.
       </p>
       {message && (
-        <div className="alert alert-info" role="status" aria-live="polite">
+        <div
+          className={`alert ${messageNeedsAccent ? 'alert-warning' : 'alert-info'}`}
+          role="status"
+          aria-live="polite"
+        >
           {message}
         </div>
       )}
@@ -101,6 +110,7 @@ export function ReviewPage() {
                           setMessage(
                             `“${current.correctAnswer}” will return later in this session.`,
                           );
+                          setMessageNeedsAccent(false);
                           setAnswer('');
                         }}
                       >

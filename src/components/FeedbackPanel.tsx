@@ -3,6 +3,7 @@ interface FeedbackPanelProps {
   correctAnswer: string;
   explanation: string;
   xpEarned: number;
+  needsAccent?: boolean;
 }
 
 export function FeedbackPanel({
@@ -10,10 +11,11 @@ export function FeedbackPanel({
   correctAnswer,
   explanation,
   xpEarned,
+  needsAccent = false,
 }: FeedbackPanelProps) {
   return (
     <div
-      className={`feedback-panel mt-4 ${correct ? 'feedback-correct' : 'feedback-wrong'}`}
+      className={`feedback-panel mt-4 ${correct ? (needsAccent ? 'feedback-accent' : 'feedback-correct') : 'feedback-wrong'}`}
       role="status"
       aria-live="polite"
     >
@@ -23,10 +25,17 @@ export function FeedbackPanel({
           aria-hidden="true"
         />
         <div>
-          <h2 className="h5 fw-bold mb-1">{correct ? 'Correct!' : 'Not quite yet'}</h2>
+          <h2 className="h5 fw-bold mb-1">
+            {correct ? (needsAccent ? 'Correct — check the accents' : 'Correct!') : 'Not quite yet'}
+          </h2>
           <p className="mb-1">
             The answer is <strong lang="nl">{correctAnswer}</strong>.
           </p>
+          {needsAccent && (
+            <p className="small mb-1">
+              Your answer was accepted; add the accent or dieresis next time.
+            </p>
+          )}
           <p className="small mb-0">{explanation}</p>
           {xpEarned > 0 && <span className="badge text-bg-success mt-2">+{xpEarned} XP</span>}
         </div>

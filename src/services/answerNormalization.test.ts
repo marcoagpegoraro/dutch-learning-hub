@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { isAcceptedAnswer, normalizeAnswer } from './answerNormalization';
+import { evaluateAcceptedAnswer, isAcceptedAnswer, normalizeAnswer } from './answerNormalization';
 
 describe('normalizeAnswer', () => {
   it('trims, lowercases, and collapses whitespace', () => {
@@ -30,5 +30,17 @@ describe('isAcceptedAnswer', () => {
 
   it('does not accept an unconfigured semantically different answer', () => {
     expect(isAcceptedAnswer('twintig over elf', ['tien voor half twaalf'])).toBe(false);
+  });
+
+  it('accepts a missing accent while flagging the spelling detail', () => {
+    expect(
+      evaluateAcceptedAnswer('drieduizenddriehonderddrieenzeventig', [
+        'drieduizenddriehonderddrieënzeventig',
+      ]),
+    ).toEqual({
+      correct: true,
+      needsAccent: true,
+      matchingAnswer: 'drieduizenddriehonderddrieënzeventig',
+    });
   });
 });

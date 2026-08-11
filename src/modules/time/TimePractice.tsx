@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, type FormEvent } from 'react';
 import { useAppState } from '../../app/AppStateContext';
 import { ExerciseShell } from '../../components/ExerciseShell';
 import { FeedbackPanel } from '../../components/FeedbackPanel';
-import { isAcceptedAnswer } from '../../services/answerNormalization';
+import { evaluateAcceptedAnswer } from '../../services/answerNormalization';
 import { getAccuracy } from '../../services/progress';
 import { calculateXp } from '../../services/scoring';
 import type { Difficulty } from '../../types/exercise';
@@ -21,6 +21,7 @@ interface SessionScore {
 interface Feedback {
   correct: boolean;
   xp: number;
+  needsAccent: boolean;
 }
 
 function pickVisibleClock(clockType: ClockType): Exclude<ClockType, 'random'> {
@@ -70,7 +71,7 @@ export function TimePractice() {
     setInvalid(false);
   }
 
-  function completeAttempt(correct: boolean, submittedAnswer: string) {
+  function completeAttempt(correct: boolean, submittedAnswer: string, needsAccent = false) {
     const nextStreak = correct ? session.streak + 1 : 0;
     const xp = calculateXp(difficulty, { correct, streak: nextStreak, firstAttempt: true });
     addAttempt({
@@ -90,7 +91,7 @@ export function TimePractice() {
       answered: current.answered + 1,
       xp: current.xp + xp,
     }));
-    setFeedback({ correct, xp });
+    setFeedback({ correct, xp, needsAccent });
   }
 
   function submitAnswer(event: FormEvent) {
@@ -100,7 +101,8 @@ export function TimePractice() {
       setInvalid(true);
       return;
     }
-    completeAttempt(isAcceptedAnswer(answer, question.acceptedAnswers), answer);
+    const result = evaluateAcceptedAnswer(answer, question.acceptedAnswers);
+    completeAttempt(result.correct, answer, result.needsAccent);
   }
 
   function skipQuestion() {
@@ -206,6 +208,7 @@ export function TimePractice() {
                   correctAnswer={question.acceptedAnswers[0]}
                   explanation={question.explanation}
                   xpEarned={feedback.xp}
+                  needsAccent={feedback.needsAccent}
                 />
               )}
 

@@ -324,6 +324,11 @@ select {
   color: #095c35;
 }
 
+.feedback-accent {
+  background: #fff3cd;
+  color: #664d03;
+}
+
 .feedback-wrong {
   background: #fce8e8;
   color: #842029;

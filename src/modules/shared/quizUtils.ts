@@ -1,4 +1,4 @@
-import { isAcceptedAnswer } from '../../services/answerNormalization';
+import { evaluateAcceptedAnswer, isAcceptedAnswer } from '../../services/answerNormalization';
 import type { Difficulty, MultipleChoiceQuestion, TextQuestion } from '../../types/exercise';
 
 export type QuizQuestion = TextQuestion | MultipleChoiceQuestion;
@@ -9,6 +9,12 @@ export function answersForQuestion(question: QuizQuestion): string[] {
 
 export function isQuizAnswerCorrect(question: QuizQuestion, answer: string): boolean {
   return isAcceptedAnswer(answer, answersForQuestion(question), {
+    normalizeHyphens: question.tags.includes('normalize-hyphens'),
+  });
+}
+
+export function evaluateQuizAnswer(question: QuizQuestion, answer: string) {
+  return evaluateAcceptedAnswer(answer, answersForQuestion(question), {
     normalizeHyphens: question.tags.includes('normalize-hyphens'),
   });
 }
