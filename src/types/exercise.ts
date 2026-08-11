@@ -1,4 +1,5 @@
 export type Difficulty = 'easy' | 'medium' | 'hard';
+export type ExerciseDifficulty = Difficulty | 'very-hard';
 
 export type ModuleStatus = 'available' | 'coming-soon';
 

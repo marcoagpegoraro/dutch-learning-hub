@@ -1,20 +1,20 @@
 import type { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
-import type { Difficulty } from '../types/exercise';
+import type { ExerciseDifficulty } from '../types/exercise';
 
-interface ExerciseShellProps {
+interface ExerciseShellProps<TDifficulty extends ExerciseDifficulty = ExerciseDifficulty> {
   title: string;
   subtitle: string;
-  difficulty: Difficulty;
-  onDifficultyChange: (difficulty: Difficulty) => void;
+  difficulty: TDifficulty;
+  onDifficultyChange: (difficulty: TDifficulty) => void;
   progressLabel: string;
   progressPercent: number;
   controls?: ReactNode;
-  difficultyLabels?: Record<Difficulty, string>;
+  difficultyLabels?: Partial<Record<ExerciseDifficulty, string>>;
   children: ReactNode;
 }
 
-export function ExerciseShell({
+export function ExerciseShell<TDifficulty extends ExerciseDifficulty>({
   title,
   subtitle,
   difficulty,
@@ -28,7 +28,7 @@ export function ExerciseShell({
     hard: 'Hard — production and fewer hints',
   },
   children,
-}: ExerciseShellProps) {
+}: ExerciseShellProps<TDifficulty>) {
   return (
     <div className="container py-4 py-lg-5">
       <div className="d-flex flex-column flex-lg-row justify-content-between gap-3 align-items-lg-end mb-4">
@@ -55,11 +55,14 @@ export function ExerciseShell({
                 id="exerciseDifficulty"
                 className="form-select"
                 value={difficulty}
-                onChange={(event) => onDifficultyChange(event.target.value as Difficulty)}
+                onChange={(event) => onDifficultyChange(event.target.value as TDifficulty)}
               >
                 <option value="easy">{difficultyLabels.easy}</option>
                 <option value="medium">{difficultyLabels.medium}</option>
                 <option value="hard">{difficultyLabels.hard}</option>
+                {difficultyLabels['very-hard'] && (
+                  <option value="very-hard">{difficultyLabels['very-hard']}</option>
+                )}
               </select>
             </div>
             <div className="col-12 col-md-4">{controls}</div>

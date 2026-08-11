@@ -5,7 +5,7 @@ import { ExerciseShell } from '../../components/ExerciseShell';
 import { FeedbackPanel } from '../../components/FeedbackPanel';
 import { getAccuracy } from '../../services/progress';
 import { calculateXp } from '../../services/scoring';
-import type { Difficulty } from '../../types/exercise';
+import type { Difficulty, ExerciseDifficulty } from '../../types/exercise';
 import {
   answersForQuestion,
   isQuizAnswerCorrect,
@@ -19,11 +19,11 @@ interface QuizPracticeProps {
   subtitle: string;
   questions: QuizQuestion[];
   inputPlaceholder?: string;
-  difficultyLabels?: Record<Difficulty, string>;
+  difficultyLabels?: Partial<Record<ExerciseDifficulty, string>>;
   showAnswerDiff?: boolean;
   renderPromptAddon?: (question: QuizQuestion) => ReactNode;
   getNextQuestion?: (
-    difficulty: Difficulty,
+    difficulty: ExerciseDifficulty,
     context: { previousQuestion?: QuizQuestion; wasCorrect?: boolean },
   ) => QuizQuestion;
 }
@@ -53,7 +53,9 @@ export function QuizPractice({
   getNextQuestion,
 }: QuizPracticeProps) {
   const { state, updateSettings, addAttempt } = useAppState();
-  const [difficulty, setDifficulty] = useState<Difficulty>(state.settings.defaultDifficulty);
+  const [difficulty, setDifficulty] = useState<ExerciseDifficulty>(
+    state.settings.defaultDifficulty,
+  );
   const [question, setQuestion] = useState<QuizQuestion>(() =>
     getNextQuestion
       ? getNextQuestion(state.settings.defaultDifficulty, {})
@@ -90,27 +92,32 @@ export function QuizPractice({
     setQuestion((current) =>
       getNextQuestion
         ? getNextQuestion(nextDifficulty, { previousQuestion: current, wasCorrect })
-        : pickQuizQuestion(questions, nextDifficulty, current.id),
+        : pickQuizQuestion(
+            questions,
+            nextDifficulty === 'very-hard' ? 'hard' : nextDifficulty,
+            current.id,
+          ),
     );
     setAnswer('');
     setInvalid(false);
     setFeedback(null);
   }
 
-  function changeDifficulty(nextDifficulty: Difficulty) {
+  function changeDifficulty(nextDifficulty: ExerciseDifficulty) {
     setDifficulty(nextDifficulty);
-    updateSettings({ defaultDifficulty: nextDifficulty });
+    updateSettings({ defaultDifficulty: nextDifficulty === 'very-hard' ? 'hard' : nextDifficulty });
     nextQuestion(nextDifficulty);
   }
 
   function completeAttempt(correct: boolean, submittedAnswer: string) {
     const nextStreak = correct ? session.streak + 1 : 0;
-    const xp = calculateXp(difficulty, { correct, streak: nextStreak });
+    const progressDifficulty: Difficulty = difficulty === 'very-hard' ? 'hard' : difficulty;
+    const xp = calculateXp(progressDifficulty, { correct, streak: nextStreak });
     const correctAnswer = answersForQuestion(question)[0];
     addAttempt({
       questionId: question.id,
       moduleId,
-      difficulty,
+      difficulty: progressDifficulty,
       prompt: question.prompt,
       submittedAnswer,
       correctAnswer,

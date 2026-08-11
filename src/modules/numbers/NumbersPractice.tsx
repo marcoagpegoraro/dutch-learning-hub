@@ -17,6 +17,7 @@ export function NumbersPractice() {
         easy: 'Easy — recognise 0–20',
         medium: 'Medium — type numbers to 100',
         hard: 'Hard — hundreds and thousands',
+        'very-hard': 'Very hard — up to ten million',
       }}
     />
   );

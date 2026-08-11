@@ -36,4 +36,14 @@ describe('number question scheduler', () => {
       acceptedAnswers: expect.arrayContaining(['driehonderdzevenenveertig']),
     });
   });
+
+  it('supports a very-hard range through ten million', () => {
+    const question = createNumberQuestion(10_000_000, 'very-hard');
+    expect(question).toMatchObject({
+      id: 'numbers-very-hard-10000000',
+      difficulty: 'hard',
+      type: 'text',
+      acceptedAnswers: expect.arrayContaining(['tien miljoen']),
+    });
+  });
 });

@@ -1,4 +1,4 @@
-import type { Difficulty } from '../../types/exercise';
+import type { ExerciseDifficulty } from '../../types/exercise';
 import type { QuizQuestion } from '../shared/quizUtils';
 import { numberToDutch, numberToDutchSpaced } from './numberWords';
 
@@ -23,10 +23,13 @@ interface DifficultySchedule {
   turns: number;
 }
 
-const ranges: Record<Difficulty, NumberRange> = {
+type NumberDifficulty = ExerciseDifficulty;
+
+const ranges: Record<NumberDifficulty, NumberRange> = {
   easy: { min: 0, max: 20 },
   medium: { min: 21, max: 100 },
   hard: { min: 101, max: 9999 },
+  'very-hard': { min: 10_000, max: 10_000_000 },
 };
 
 const retryDelay = 2;
@@ -39,6 +42,12 @@ function numberFromQuestion(question: QuizQuestion | undefined): number | null {
   if (!question?.id.startsWith('numbers-')) return null;
   const value = Number(question.id.split('-').at(-1));
   return Number.isInteger(value) ? value : null;
+}
+
+function difficultyFromQuestion(question: QuizQuestion | undefined): NumberDifficulty | null {
+  if (!question?.id.startsWith('numbers-')) return null;
+  if (question.id.startsWith('numbers-very-hard-')) return 'very-hard';
+  return question.difficulty;
 }
 
 function createEasyQuestion(value: number, random: () => number): QuizQuestion {
@@ -67,7 +76,7 @@ function createEasyQuestion(value: number, random: () => number): QuizQuestion {
 
 export function createNumberQuestion(
   value: number,
-  difficulty: Difficulty,
+  difficulty: NumberDifficulty,
   random: () => number = Math.random,
 ): QuizQuestion {
   if (difficulty === 'easy') return createEasyQuestion(value, random);
@@ -76,16 +85,25 @@ export function createNumberQuestion(
   return {
     id: `numbers-${difficulty}-${value}`,
     moduleId: 'numbers',
-    difficulty,
+    difficulty: difficulty === 'very-hard' ? 'hard' : difficulty,
     type: 'text',
     prompt: `Write ${formattedNumber(value)} in Dutch words.`,
     acceptedAnswers: [dutch, spaced, spaced.replaceAll(' ', '-')],
     hint:
       difficulty === 'medium'
         ? 'Dutch puts the unit before the tens: vier-en-twintig.'
-        : 'Build thousands, hundreds, then the final two-digit number.',
+        : difficulty === 'very-hard'
+          ? 'Build millions, thousands, hundreds, then the final two-digit number.'
+          : 'Build thousands, hundreds, then the final two-digit number.',
     explanation: `${formattedNumber(value)} is written ${dutch}. Dutch number words are normally written together.`,
-    tags: [difficulty === 'medium' ? '21–100' : 'hundreds & thousands', 'normalize-hyphens'],
+    tags: [
+      difficulty === 'medium'
+        ? '21–100'
+        : difficulty === 'very-hard'
+          ? 'ten-thousands & millions'
+          : 'hundreds & thousands',
+      'normalize-hyphens',
+    ],
   };
 }
 
@@ -105,15 +123,16 @@ function pickNewValue(range: NumberRange, shown: Set<number>, random: () => numb
 }
 
 export function createNumberQuestionScheduler(random: () => number = Math.random) {
-  const schedules: Record<Difficulty, DifficultySchedule> = {
+  const schedules: Record<NumberDifficulty, DifficultySchedule> = {
     easy: { shown: new Set(), retries: [], turns: 0 },
     medium: { shown: new Set(), retries: [], turns: 0 },
     hard: { shown: new Set(), retries: [], turns: 0 },
+    'very-hard': { shown: new Set(), retries: [], turns: 0 },
   };
 
   return {
-    next(difficulty: Difficulty, context: SchedulerContext = {}): QuizQuestion {
-      const previousDifficulty = context.previousQuestion?.difficulty;
+    next(difficulty: NumberDifficulty, context: SchedulerContext = {}): QuizQuestion {
+      const previousDifficulty = difficultyFromQuestion(context.previousQuestion);
       const previousValue = numberFromQuestion(context.previousQuestion);
       if (context.wasCorrect === false && previousDifficulty && previousValue !== null) {
         const previousSchedule = schedules[previousDifficulty];

@@ -34,8 +34,8 @@ const tensWords: Record<number, string> = {
 };
 
 export function numberToDutch(value: number): string {
-  if (!Number.isInteger(value) || value < 0 || value > 9999) {
-    throw new RangeError('Number must be an integer from 0 to 9999.');
+  if (!Number.isInteger(value) || value < 0 || value > 10_000_000) {
+    throw new RangeError('Number must be an integer from 0 to 10,000,000.');
   }
   if (value <= 20) return smallNumbers[value];
   if (value < 100) {
@@ -51,6 +51,12 @@ export function numberToDutch(value: number): string {
     const prefix = hundreds === 1 ? 'honderd' : `${smallNumbers[hundreds]}honderd`;
     return remainder ? `${prefix}${numberToDutch(remainder)}` : prefix;
   }
+  if (value >= 1_000_000) {
+    const millions = Math.floor(value / 1_000_000);
+    const remainder = value % 1_000_000;
+    const prefix = `${numberToDutch(millions)} miljoen`;
+    return remainder ? `${prefix} ${numberToDutch(remainder)}` : prefix;
+  }
   const thousands = Math.floor(value / 1000);
   const remainder = value % 1000;
   const prefix = thousands === 1 ? 'duizend' : `${numberToDutch(thousands)}duizend`;
@@ -58,8 +64,8 @@ export function numberToDutch(value: number): string {
 }
 
 export function numberToDutchSpaced(value: number): string {
-  if (!Number.isInteger(value) || value < 0 || value > 9999) {
-    throw new RangeError('Number must be an integer from 0 to 9999.');
+  if (!Number.isInteger(value) || value < 0 || value > 10_000_000) {
+    throw new RangeError('Number must be an integer from 0 to 10,000,000.');
   }
   if (value <= 20) return smallNumbers[value];
   if (value < 100) {
@@ -71,6 +77,12 @@ export function numberToDutchSpaced(value: number): string {
     const hundreds = Math.floor(value / 100);
     const remainder = value % 100;
     const prefix = hundreds === 1 ? 'honderd' : `${smallNumbers[hundreds]}honderd`;
+    return remainder ? `${prefix} ${numberToDutchSpaced(remainder)}` : prefix;
+  }
+  if (value >= 1_000_000) {
+    const millions = Math.floor(value / 1_000_000);
+    const remainder = value % 1_000_000;
+    const prefix = `${numberToDutchSpaced(millions)} miljoen`;
     return remainder ? `${prefix} ${numberToDutchSpaced(remainder)}` : prefix;
   }
   const thousands = Math.floor(value / 1000);

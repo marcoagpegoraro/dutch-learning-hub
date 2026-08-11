@@ -14,6 +14,8 @@ describe('numberToDutch', () => {
     [1000, 'duizend'],
     [2026, 'tweeduizendzesentwintig'],
     [9999, 'negenduizendnegenhonderdnegenennegentig'],
+    [1_000_000, 'een miljoen'],
+    [10_000_000, 'tien miljoen'],
   ])('converts %i to Dutch', (value, expected) => {
     expect(numberToDutch(value)).toBe(expected);
   });
@@ -25,7 +27,7 @@ describe('numberToDutch', () => {
 
   it('rejects unsupported values', () => {
     expect(() => numberToDutch(-1)).toThrow(RangeError);
-    expect(() => numberToDutch(10_000)).toThrow(RangeError);
+    expect(() => numberToDutch(10_000_001)).toThrow(RangeError);
     expect(() => numberToDutch(2.5)).toThrow(RangeError);
   });
 });
