@@ -26,15 +26,21 @@ function WordListDrill({ list, onExit }: { list: WordList; onExit: () => void })
   const [invalid, setInvalid] = useState(false);
   const [productionFeedback, setProductionFeedback] = useState<ProductionFeedback>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const advanceRef = useRef<HTMLButtonElement>(null);
   const entry = list.entries[index];
   const total = list.entries.length;
 
   useEffect(() => {
+    if (phase === 'recognize' || productionFeedback) {
+      advanceRef.current?.focus();
+      return;
+    }
+
     if (phase === 'produce' && !productionFeedback) {
       inputRef.current?.focus();
       inputRef.current?.select();
     }
-  }, [index, phase, productionFeedback]);
+  }, [index, phase, productionFeedback, translationShown]);
 
   function resetRecognition() {
     setIndex(0);
@@ -151,12 +157,22 @@ function WordListDrill({ list, onExit }: { list: WordList; onExit: () => void })
             )}
             <div className="d-flex justify-content-center flex-wrap gap-2 mt-4">
               {translationShown ? (
-                <button className="btn btn-primary" type="button" onClick={resetRecognition}>
+                <button
+                  ref={advanceRef}
+                  className="btn btn-primary"
+                  type="button"
+                  onClick={resetRecognition}
+                >
                   Start this round again
                 </button>
               ) : (
                 <>
-                  <button className="btn btn-primary" type="button" onClick={advanceRecognition}>
+                  <button
+                    ref={advanceRef}
+                    className="btn btn-primary"
+                    type="button"
+                    onClick={advanceRecognition}
+                  >
                     I know it <i className="bi bi-arrow-right ms-1" aria-hidden="true" />
                   </button>
                   <button
@@ -207,7 +223,12 @@ function WordListDrill({ list, onExit }: { list: WordList; onExit: () => void })
             )}
             <div className="d-flex justify-content-center flex-wrap gap-2 mt-4">
               {productionFeedback ? (
-                <button className="btn btn-primary" type="button" onClick={resetProduction}>
+                <button
+                  ref={advanceRef}
+                  className="btn btn-primary"
+                  type="button"
+                  onClick={resetProduction}
+                >
                   Start this round again
                 </button>
               ) : (

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useAppState } from '../../app/AppStateContext';
 import { ExerciseShell } from '../../components/ExerciseShell';
 import { calculateXp } from '../../services/scoring';
@@ -21,6 +21,11 @@ export function PictureDescriptionPractice() {
   const [revealed, setRevealed] = useState(false);
   const [marked, setMarked] = useState<{ communicates: boolean; xp: number } | null>(null);
   const [completed, setCompleted] = useState(0);
+  const nextTaskRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (marked) nextTaskRef.current?.focus();
+  }, [marked]);
 
   function nextTask(nextDifficulty = difficulty) {
     setTask(pickTask(nextDifficulty, task.id));
@@ -160,6 +165,7 @@ export function PictureDescriptionPractice() {
                     ? `Nice work. +${marked.xp} XP`
                     : 'Good reflection—use a sample as a pattern and try again later.'}
                   <button
+                    ref={nextTaskRef}
                     className="btn btn-primary btn-sm d-block mt-2"
                     type="button"
                     onClick={() => nextTask()}

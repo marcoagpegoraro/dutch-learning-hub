@@ -64,10 +64,19 @@ export function QuizPractice({
     xp: 0,
   });
   const textInput = useRef<HTMLInputElement>(null);
+  const nextQuestionRef = useRef<HTMLButtonElement>(null);
   const sessionTarget = 10;
 
   useEffect(() => {
-    if (!feedback && question.type === 'text') textInput.current?.focus();
+    if (feedback) {
+      nextQuestionRef.current?.focus();
+      return;
+    }
+
+    if (question.type === 'text') {
+      textInput.current?.focus();
+      textInput.current?.select();
+    }
   }, [feedback, question]);
 
   function nextQuestion(nextDifficulty = difficulty) {
@@ -230,6 +239,7 @@ export function QuizPractice({
                 <div className="d-flex flex-wrap gap-2 mt-4">
                   {feedback ? (
                     <button
+                      ref={nextQuestionRef}
                       className="btn btn-primary"
                       type="button"
                       onClick={() => nextQuestion()}

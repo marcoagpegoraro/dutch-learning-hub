@@ -55,8 +55,13 @@ export function PronunciationPractice() {
   const [error, setError] = useState('');
   const [saved, setSaved] = useState(false);
   const [completed, setCompleted] = useState(0);
+  const nextPhraseRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => () => recognitionRef.current?.abort(), []);
+
+  useEffect(() => {
+    if (saved) nextPhraseRef.current?.focus();
+  }, [saved]);
 
   function nextPhrase(nextDifficulty = difficulty) {
     recognitionRef.current?.abort();
@@ -203,7 +208,12 @@ export function PronunciationPractice() {
                 </button>
               )}
               {saved && (
-                <button className="btn btn-primary mt-3" type="button" onClick={() => nextPhrase()}>
+                <button
+                  ref={nextPhraseRef}
+                  className="btn btn-primary mt-3"
+                  type="button"
+                  onClick={() => nextPhrase()}
+                >
                   Next phrase
                 </button>
               )}

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAppState } from '../../app/AppStateContext';
 import { answersForQuestion, isQuizAnswerCorrect, type QuizQuestion } from '../shared/quizUtils';
@@ -12,7 +12,13 @@ export function BossBattlePractice() {
   const [index, setIndex] = useState(0);
   const [answer, setAnswer] = useState('');
   const [feedback, setFeedback] = useState<{ correct: boolean; damage: number } | null>(null);
+  const nextTurnRef = useRef<HTMLButtonElement>(null);
   const question: QuizQuestion | undefined = boss?.questions[index % boss.questions.length];
+
+  useEffect(() => {
+    if (feedback) nextTurnRef.current?.focus();
+  }, [feedback]);
+
   function start(nextBoss: GrammarBoss) {
     setBoss(nextBoss);
     setBattle({ bossHealth: nextBoss.bossHealth, playerHealth: nextBoss.playerHealth, streak: 0 });
@@ -157,6 +163,7 @@ export function BossBattlePractice() {
                 <div className="mt-3">
                   {feedback ? (
                     <button
+                      ref={nextTurnRef}
                       className="btn btn-primary"
                       onClick={() => {
                         setIndex((i) => i + 1);

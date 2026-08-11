@@ -1,4 +1,4 @@
-import { useState, type DragEvent } from 'react';
+import { useEffect, useRef, useState, type DragEvent } from 'react';
 import { useAppState } from '../../app/AppStateContext';
 import { ExerciseShell } from '../../components/ExerciseShell';
 import { FeedbackPanel } from '../../components/FeedbackPanel';
@@ -37,9 +37,14 @@ export function WordOrderPractice() {
     answered: 0,
     xp: 0,
   });
+  const nextQuestionRef = useRef<HTMLButtonElement>(null);
   const tokens: TokenChoice[] = question.tokens.map((value, id) => ({ id, value }));
   const chosen = chosenIds.map((id) => tokens[id]);
   const available = tokens.filter((token) => !chosenIds.includes(token.id));
+
+  useEffect(() => {
+    if (feedback) nextQuestionRef.current?.focus();
+  }, [feedback]);
 
   function nextQuestion(nextDifficulty = difficulty) {
     setQuestion(pickOrderingQuestion(wordOrderQuestions, nextDifficulty, question.id));
@@ -242,7 +247,12 @@ export function WordOrderPractice() {
               )}
               <div className="d-flex flex-wrap gap-2 mt-4">
                 {feedback ? (
-                  <button className="btn btn-primary" type="button" onClick={() => nextQuestion()}>
+                  <button
+                    ref={nextQuestionRef}
+                    className="btn btn-primary"
+                    type="button"
+                    onClick={() => nextQuestion()}
+                  >
                     Next question <i className="bi bi-arrow-right ms-1" aria-hidden="true" />
                   </button>
                 ) : (

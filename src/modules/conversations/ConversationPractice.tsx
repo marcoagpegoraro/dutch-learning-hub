@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useAppState } from '../../app/AppStateContext';
 import { ExerciseShell } from '../../components/ExerciseShell';
 import { useSpeechSynthesis } from '../../hooks/useSpeechSynthesis';
@@ -29,9 +29,14 @@ export function ConversationPractice() {
   const [finished, setFinished] = useState(false);
   const [answered, setAnswered] = useState(0);
   const [sessionXp, setSessionXp] = useState(0);
+  const continueRef = useRef<HTMLButtonElement>(null);
 
   const currentStep = scenario && stepId ? findConversationStep(scenario, stepId) : null;
   const availableScenarios = conversationScenarios.filter((item) => item.difficulty === difficulty);
+
+  useEffect(() => {
+    if (feedback) continueRef.current?.focus();
+  }, [feedback]);
 
   function changeDifficulty(next: Difficulty) {
     setDifficulty(next);
@@ -224,6 +229,7 @@ export function ConversationPractice() {
                             <span className="badge text-bg-success me-2">+{feedback.xp} XP</span>
                           )}
                           <button
+                            ref={continueRef}
                             className="btn btn-primary btn-sm"
                             type="button"
                             onClick={continueDialogue}
