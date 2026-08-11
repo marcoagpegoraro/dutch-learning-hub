@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 import { QuizPractice } from '../shared/QuizPractice';
+import { NumberAnswerHint } from './NumberAnswerHint';
 import { createNumberQuestionScheduler } from './numberQuestions';
 
 export function NumbersPractice() {
@@ -12,6 +13,11 @@ export function NumbersPractice() {
       subtitle="Practise fresh Dutch numbers, with missed numbers returning later for another try."
       questions={[]}
       getNextQuestion={(difficulty, context) => scheduler.current.next(difficulty, context)}
+      renderIncorrectFeedback={(question, answer) =>
+        question.type === 'text' ? (
+          <NumberAnswerHint expected={question.acceptedAnswers[0]} actual={answer} />
+        ) : null
+      }
       inputPlaceholder="Write the number in Dutch"
       difficultyLabels={{
         easy: 'Easy — recognise 0–20',

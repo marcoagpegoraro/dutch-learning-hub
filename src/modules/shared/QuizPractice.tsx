@@ -22,6 +22,7 @@ interface QuizPracticeProps {
   difficultyLabels?: Partial<Record<ExerciseDifficulty, string>>;
   showAnswerDiff?: boolean;
   renderPromptAddon?: (question: QuizQuestion) => ReactNode;
+  renderIncorrectFeedback?: (question: QuizQuestion, submittedAnswer: string) => ReactNode;
   getNextQuestion?: (
     difficulty: ExerciseDifficulty,
     context: { previousQuestion?: QuizQuestion; wasCorrect?: boolean },
@@ -51,6 +52,7 @@ export function QuizPractice({
   difficultyLabels,
   showAnswerDiff = false,
   renderPromptAddon,
+  renderIncorrectFeedback,
   getNextQuestion,
 }: QuizPracticeProps) {
   const { state, updateSettings, addAttempt } = useAppState();
@@ -248,6 +250,9 @@ export function QuizPractice({
                     {showAnswerDiff && !feedback.correct && answer !== '(skipped)' && (
                       <AnswerDiff expected={answersForQuestion(question)[0]} actual={answer} />
                     )}
+                    {!feedback.correct &&
+                      answer !== '(skipped)' &&
+                      renderIncorrectFeedback?.(question, answer)}
                   </>
                 )}
 
