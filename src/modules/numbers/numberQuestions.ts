@@ -1,66 +1,140 @@
+import type { Difficulty } from '../../types/exercise';
 import type { QuizQuestion } from '../shared/quizUtils';
 import { numberToDutch, numberToDutchSpaced } from './numberWords';
 
-const easyValues = [0, 5, 11, 16, 20, 24];
-const mediumValues = [32, 47, 58, 76, 99, 100];
-const hardValues = [125, 342, 999, 2026, 4500, 9999];
+interface SchedulerContext {
+  previousQuestion?: QuizQuestion;
+  wasCorrect?: boolean;
+}
 
-export function buildNumberQuestions(): QuizQuestion[] {
-  const easy: QuizQuestion[] = easyValues.map((value, index) => {
-    const alternatives = easyValues
-      .filter((item) => item !== value)
-      .slice(0, 3)
-      .map(numberToDutch);
-    return {
-      id: `numbers-easy-${value}`,
-      moduleId: 'numbers',
-      difficulty: 'easy',
-      type: 'multiple-choice',
-      prompt: `Which Dutch word means ${value}?`,
-      options: [numberToDutch(value), ...alternatives].sort(),
-      correctOption: numberToDutch(value),
-      hint:
-        index < 3
-          ? 'Say the number slowly and compare each option.'
-          : 'Numbers up to twenty have individual forms.',
-      explanation: `${value} is ${numberToDutch(value)} in Dutch.`,
-      tags: ['0–20', 'recognition'],
-    };
-  });
-  const typed = [
-    ...mediumValues.map((value) => ({ value, difficulty: 'medium' as const })),
-    ...hardValues.map((value) => ({ value, difficulty: 'hard' as const })),
-  ];
-  return [
-    ...easy,
-    ...typed.map(({ value, difficulty }): QuizQuestion => ({
-      id: `numbers-${difficulty}-${value}`,
-      moduleId: 'numbers',
-      difficulty,
-      type: 'text',
-      prompt: `Write ${value.toLocaleString('nl-NL')} in Dutch words.`,
-      acceptedAnswers: [
-        numberToDutch(value),
-        numberToDutchSpaced(value),
-        numberToDutchSpaced(value).replaceAll(' ', '-'),
-      ],
-      hint:
-        difficulty === 'medium'
-          ? 'For 24, Dutch puts the unit before the tens: vier-en-twintig.'
-          : 'Build thousands, hundreds, then the final two-digit number.',
-      explanation: `${value.toLocaleString('nl-NL')} is written ${numberToDutch(value)}. Dutch number words are normally written together.`,
-      tags: [difficulty === 'medium' ? '0–100' : 'hundreds & thousands', 'normalize-hyphens'],
-    })),
-    {
-      id: 'numbers-price-12-50',
-      moduleId: 'numbers',
-      difficulty: 'hard',
-      type: 'text',
-      prompt: 'Write €12,50 as you would say the price in Dutch.',
-      acceptedAnswers: ['twaalf euro vijftig', 'twaalf euro en vijftig cent'],
-      hint: 'Say the euros first, then the cents.',
-      explanation: '€12,50 can be said as twaalf euro vijftig or twaalf euro en vijftig cent.',
-      tags: ['prices'],
+interface NumberRange {
+  min: number;
+  max: number;
+}
+
+interface Retry {
+  value: number;
+  readyAt: number;
+}
+
+interface DifficultySchedule {
+  shown: Set<number>;
+  retries: Retry[];
+  turns: number;
+}
+
+const ranges: Record<Difficulty, NumberRange> = {
+  easy: { min: 0, max: 20 },
+  medium: { min: 21, max: 100 },
+  hard: { min: 101, max: 9999 },
+};
+
+const retryDelay = 2;
+
+function formattedNumber(value: number): string {
+  return value.toLocaleString('nl-NL');
+}
+
+function numberFromQuestion(question: QuizQuestion | undefined): number | null {
+  if (!question?.id.startsWith('numbers-')) return null;
+  const value = Number(question.id.split('-').at(-1));
+  return Number.isInteger(value) ? value : null;
+}
+
+function createEasyQuestion(value: number, random: () => number): QuizQuestion {
+  const distractors: number[] = [];
+  const candidates = Array.from({ length: 21 }, (_, index) => index).filter(
+    (candidate) => candidate !== value,
+  );
+  while (distractors.length < 3) {
+    const index = Math.floor(random() * candidates.length);
+    distractors.push(candidates.splice(index, 1)[0]);
+  }
+  const correctOption = numberToDutch(value);
+  return {
+    id: `numbers-easy-${value}`,
+    moduleId: 'numbers',
+    difficulty: 'easy',
+    type: 'multiple-choice',
+    prompt: `Which Dutch word means ${value}?`,
+    options: [correctOption, ...distractors.map(numberToDutch)].sort(),
+    correctOption,
+    hint: 'Say the number slowly and compare each option.',
+    explanation: `${value} is ${correctOption} in Dutch.`,
+    tags: ['0–20', 'recognition'],
+  };
+}
+
+export function createNumberQuestion(
+  value: number,
+  difficulty: Difficulty,
+  random: () => number = Math.random,
+): QuizQuestion {
+  if (difficulty === 'easy') return createEasyQuestion(value, random);
+  const dutch = numberToDutch(value);
+  const spaced = numberToDutchSpaced(value);
+  return {
+    id: `numbers-${difficulty}-${value}`,
+    moduleId: 'numbers',
+    difficulty,
+    type: 'text',
+    prompt: `Write ${formattedNumber(value)} in Dutch words.`,
+    acceptedAnswers: [dutch, spaced, spaced.replaceAll(' ', '-')],
+    hint:
+      difficulty === 'medium'
+        ? 'Dutch puts the unit before the tens: vier-en-twintig.'
+        : 'Build thousands, hundreds, then the final two-digit number.',
+    explanation: `${formattedNumber(value)} is written ${dutch}. Dutch number words are normally written together.`,
+    tags: [difficulty === 'medium' ? '21–100' : 'hundreds & thousands', 'normalize-hyphens'],
+  };
+}
+
+function pickNewValue(range: NumberRange, shown: Set<number>, random: () => number): number {
+  const capacity = range.max - range.min + 1;
+  if (shown.size >= capacity) shown.clear();
+
+  for (let attempt = 0; attempt < 30; attempt += 1) {
+    const value = range.min + Math.floor(random() * capacity);
+    if (!shown.has(value)) return value;
+  }
+
+  for (let value = range.min; value <= range.max; value += 1) {
+    if (!shown.has(value)) return value;
+  }
+  return range.min;
+}
+
+export function createNumberQuestionScheduler(random: () => number = Math.random) {
+  const schedules: Record<Difficulty, DifficultySchedule> = {
+    easy: { shown: new Set(), retries: [], turns: 0 },
+    medium: { shown: new Set(), retries: [], turns: 0 },
+    hard: { shown: new Set(), retries: [], turns: 0 },
+  };
+
+  return {
+    next(difficulty: Difficulty, context: SchedulerContext = {}): QuizQuestion {
+      const previousDifficulty = context.previousQuestion?.difficulty;
+      const previousValue = numberFromQuestion(context.previousQuestion);
+      if (context.wasCorrect === false && previousDifficulty && previousValue !== null) {
+        const previousSchedule = schedules[previousDifficulty];
+        previousSchedule.retries = previousSchedule.retries.filter(
+          (retry) => retry.value !== previousValue,
+        );
+        previousSchedule.retries.push({
+          value: previousValue,
+          readyAt: previousSchedule.turns + retryDelay + 1,
+        });
+      }
+
+      const schedule = schedules[difficulty];
+      schedule.turns += 1;
+      const retryIndex = schedule.retries.findIndex((retry) => retry.readyAt <= schedule.turns);
+      const value =
+        retryIndex >= 0
+          ? schedule.retries.splice(retryIndex, 1)[0].value
+          : pickNewValue(ranges[difficulty], schedule.shown, random);
+      schedule.shown.add(value);
+      return createNumberQuestion(value, difficulty, random);
     },
-  ];
+  };
 }

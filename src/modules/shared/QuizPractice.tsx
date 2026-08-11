@@ -22,6 +22,10 @@ interface QuizPracticeProps {
   difficultyLabels?: Record<Difficulty, string>;
   showAnswerDiff?: boolean;
   renderPromptAddon?: (question: QuizQuestion) => ReactNode;
+  getNextQuestion?: (
+    difficulty: Difficulty,
+    context: { previousQuestion?: QuizQuestion; wasCorrect?: boolean },
+  ) => QuizQuestion;
 }
 
 interface SessionScore {
@@ -46,11 +50,14 @@ export function QuizPractice({
   difficultyLabels,
   showAnswerDiff = false,
   renderPromptAddon,
+  getNextQuestion,
 }: QuizPracticeProps) {
   const { state, updateSettings, addAttempt } = useAppState();
   const [difficulty, setDifficulty] = useState<Difficulty>(state.settings.defaultDifficulty);
   const [question, setQuestion] = useState<QuizQuestion>(() =>
-    pickQuizQuestion(questions, state.settings.defaultDifficulty),
+    getNextQuestion
+      ? getNextQuestion(state.settings.defaultDifficulty, {})
+      : pickQuizQuestion(questions, state.settings.defaultDifficulty),
   );
   const [answer, setAnswer] = useState('');
   const [showHint, setShowHint] = useState(state.settings.showHints);
@@ -79,8 +86,12 @@ export function QuizPractice({
     }
   }, [feedback, question]);
 
-  function nextQuestion(nextDifficulty = difficulty) {
-    setQuestion(pickQuizQuestion(questions, nextDifficulty, question.id));
+  function nextQuestion(nextDifficulty = difficulty, wasCorrect = feedback?.correct) {
+    setQuestion((current) =>
+      getNextQuestion
+        ? getNextQuestion(nextDifficulty, { previousQuestion: current, wasCorrect })
+        : pickQuizQuestion(questions, nextDifficulty, current.id),
+    );
     setAnswer('');
     setInvalid(false);
     setFeedback(null);
