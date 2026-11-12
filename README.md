@@ -12,6 +12,7 @@ Phases 1–4 of a static, modular Dutch-learning application. The original clock
 - Core A1 exercises for de/het, vocabulary, numbers, dates, present-tense verbs, word order, and missing words
 - Drag-and-drop plus click-to-build, keyboard-accessible word-order questions
 - Functional mistake review with 1, 3, 7, 14, and 30-day intervals
+- Questions & Answers: 30 original English-prompt scenarios, 60 question/answer exercises, three practice modes, saved mastery, Dutch audio, and Portuguese guides for questions, omdat, om … te, want, daarom, dat, als, en/maar, perfectum, hoewel, terwijl, voordat, nadat, zodat, and indirect of
 - Expanded grammar exercises for modal verbs, niet/geen, separable verbs, perfect tense, and prepositions
 - Sentence-correction and curated English/Portuguese translation exercises
 - Word-level answer differences for corrections and translations

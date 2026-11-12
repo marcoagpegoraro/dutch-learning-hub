@@ -56,6 +56,13 @@ const placeholderModules: Array<
     'grammar',
   ],
   [
+    'questions-answers',
+    'Questions & Answers',
+    'Ask and answer from English prompts: questions, omdat, om … te, and other useful structures.',
+    'bi-chat-left-text',
+    'skills',
+  ],
+  [
     'translation',
     'Translation Trainer',
     'Translate curated English or Portuguese prompts into Dutch.',
@@ -78,7 +85,7 @@ const placeholderModules: Array<
   ],
   [
     'perfect-tense',
-    'Perfect Tense Builder',
+    'Perfectum (Perfect Tense)',
     'Choose the auxiliary and build complete past sentences.',
     'bi-hammer',
     'grammar',
@@ -179,6 +186,7 @@ const availableModuleIds = new Set([
   'prepositions',
   'find-the-mistake',
   'translation',
+  'questions-answers',
   'listening',
   'conversations',
   'picture-description',

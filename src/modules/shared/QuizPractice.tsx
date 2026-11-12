@@ -26,6 +26,9 @@ interface QuizPracticeProps {
   difficultyLabels?: Partial<Record<ExerciseDifficulty, string>>;
   showAnswerDiff?: boolean;
   excludeMastered?: boolean;
+  controls?: ReactNode;
+  introduction?: ReactNode;
+  completionLabel?: string;
   renderPromptAddon?: (question: QuizQuestion) => ReactNode;
   renderIncorrectFeedback?: (question: QuizQuestion, submittedAnswer: string) => ReactNode;
   getNextQuestion?: (
@@ -57,6 +60,9 @@ export function QuizPractice({
   difficultyLabels,
   showAnswerDiff = false,
   excludeMastered = false,
+  controls,
+  introduction,
+  completionLabel = 'translation phrases',
   renderPromptAddon,
   renderIncorrectFeedback,
   getNextQuestion,
@@ -221,20 +227,22 @@ export function QuizPractice({
         difficulty={difficulty}
         onDifficultyChange={changeDifficulty}
         difficultyLabels={difficultyLabels}
+        controls={controls}
         progressLabel={`${completedCount} / ${total} mastered`}
         progressPercent={total ? (completedCount / total) * 100 : 100}
       >
+        {introduction}
         <section className="card border-0 shadow-sm">
           <div className="card-body p-4 p-md-5 text-center" role="status">
             <i className="bi bi-check-circle-fill display-4 text-success" aria-hidden="true" />
             <h2 className="h3 fw-bold mt-3">
               {allComplete
-                ? 'All translation phrases complete!'
+                ? `All ${completionLabel} complete!`
                 : `${difficultyLabels?.[difficulty]?.split(' — ')[0] ?? difficulty} complete!`}
             </h2>
             <p className="text-secondary">
               {allComplete
-                ? 'You have correctly translated every available phrase in all difficulties. Your results are saved.'
+                ? `You have correctly translated all available ${completionLabel} in all difficulties. Your results are saved.`
                 : `You have correctly translated all ${total} phrases in this difficulty. Your correct answers are saved and will not repeat.`}
             </p>
             {nextDifficulty ? (
@@ -270,6 +278,7 @@ export function QuizPractice({
       difficulty={difficulty}
       onDifficultyChange={changeDifficulty}
       difficultyLabels={difficultyLabels}
+      controls={controls}
       progressLabel={
         excludeMastered
           ? `${completedCount} / ${total} mastered`
@@ -283,6 +292,7 @@ export function QuizPractice({
           : Math.min(100, (session.answered / sessionTarget) * 100)
       }
     >
+      {introduction}
       <div className="row g-4 justify-content-center">
         <div className="col-12 col-lg-8">
           <section className="card border-0 shadow-sm">

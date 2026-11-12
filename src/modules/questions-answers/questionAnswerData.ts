@@ -1,0 +1,561 @@
+import type { Difficulty, TextQuestion } from '../../types/exercise';
+
+export const structureGuides = {
+  statement: {
+    title: 'Respostas completas',
+    meaning: 'Dizer quem você é, onde mora ou o que faz',
+    rule: 'Quando a resposta começa pelo sujeito, o verbo conjugado vem em seguida. Escreva a frase inteira solicitada em inglês.',
+    pattern: 'sujeito + verbo + resto',
+    dutch: 'Ik woon in Delft.',
+    portuguese: 'Eu moro em Delft.',
+    source: 'https://zichtbaarnederlands.nl/en/syntax/word_order',
+  },
+  'short-answer': {
+    title: 'Responder sim ou não',
+    meaning: 'ja = sim; nee = não',
+    rule: 'Depois de ja ou nee, formule a resposta completa. Com ik, use a forma verbal de primeira pessoa.',
+    pattern: 'Ja/Nee, sujeito + verbo + resto',
+    dutch: 'Ja, ik werk vandaag.',
+    portuguese: 'Sim, eu trabalho hoje.',
+    source: 'https://zichtbaarnederlands.nl/en/syntax/word_order',
+  },
+  'yes-no': {
+    title: 'Perguntas de sim/não',
+    meaning: 'Você trabalha? Você pode ajudar?',
+    rule: 'Comece pelo verbo conjugado e depois coloque o sujeito. O inglês “do/does” não vira uma palavra extra aqui. Com jij/je após o verbo, o -t acrescentado à raiz desaparece.',
+    pattern: 'verbo + sujeito + resto?',
+    dutch: 'Werk jij vandaag?',
+    portuguese: 'Você trabalha hoje?',
+    source: 'https://www.dutchgrammar.com/nl/?n=WordOrder.04',
+  },
+  'wh-question': {
+    title: 'Palavras para perguntar',
+    meaning:
+      'wie = quem; wat = o quê; waar = onde; wanneer = quando; waarom = por quê; hoe = como; hoeveel = quanto',
+    rule: 'Nas perguntas deste treino, coloque a expressão interrogativa, o verbo e o sujeito, nessa ordem.',
+    pattern: 'palavra interrogativa + verbo + sujeito + resto?',
+    dutch: 'Waar woon jij?',
+    portuguese: 'Onde você mora?',
+    source: 'https://zichtbaarnederlands.nl/en/syntax/word_order',
+  },
+  omdat: {
+    title: 'Omdat · motivo',
+    meaning: 'porque / because',
+    rule: 'Na parte iniciada por omdat, o verbo conjugado vai para o final. Para começar, pratique com um verbo nessa parte.',
+    pattern: 'frase + omdat + sujeito + resto + verbo',
+    dutch: 'Ik fiets omdat het droog is.',
+    portuguese: 'Vou de bicicleta porque está seco.',
+    source: 'https://www.taaltaal.nl/knowledge/dutch/want-or-omdat',
+  },
+  'om-te': {
+    title: 'Om … te · finalidade',
+    meaning: 'para / in order to',
+    rule: 'Indica um objetivo. Te vem antes do infinitivo, sem um sujeito novo nessa parte. Em verbos separáveis, fica entre as partes: op te bellen.',
+    pattern: 'frase + om + complemento + te + infinitivo',
+    dutch: 'Ik spaar om een fiets te kopen.',
+    portuguese: 'Eu economizo para comprar uma bicicleta.',
+    source: 'https://zichtbaarnederlands.nl/en/syntax/te',
+  },
+  want: {
+    title: 'Want · explicar um motivo',
+    meaning: 'porque / because',
+    rule: 'Após want, mantenha sujeito e verbo na ordem de uma frase principal. Compare com omdat, que muda a posição do verbo.',
+    pattern: 'frase + want + sujeito + verbo + resto',
+    dutch: 'Ik eet nu, want ik heb honger.',
+    portuguese: 'Como agora porque estou com fome.',
+    source: 'https://www.taaltaal.nl/knowledge/dutch/want-or-omdat',
+  },
+  daarom: {
+    title: 'Daarom · consequência',
+    meaning: 'por isso / that is why',
+    rule: 'Se daarom abrir a frase principal, o verbo vem antes do sujeito.',
+    pattern: 'Daarom + verbo + sujeito + resto',
+    dutch: 'Daarom neem ik een jas mee.',
+    portuguese: 'Por isso, levo um casaco.',
+    source: 'https://www.taaltaal.nl/knowledge/dutch/want-or-omdat',
+  },
+  dat: {
+    title: 'Dat · dizer o que você pensa',
+    meaning: 'que / that',
+    rule: 'Depois de dat, coloque o sujeito e deixe o verbo no final dessa parte.',
+    pattern: 'Ik denk + dat + sujeito + resto + verbo',
+    dutch: 'Ik denk dat de winkel open is.',
+    portuguese: 'Acho que a loja está aberta.',
+    source: 'https://zichtbaarnederlands.nl/en/syntax/word_order',
+  },
+  als: {
+    title: 'Als · condição',
+    meaning: 'se / quando, em uma situação recorrente',
+    rule: 'Als leva o verbo para o final da sua parte. Se essa parte vier primeiro, a frase principal começa pelo verbo.',
+    pattern: 'Als + sujeito + resto + verbo, verbo + sujeito + resto',
+    dutch: 'Als ik tijd heb, lees ik.',
+    portuguese: 'Quando tenho tempo, eu leio.',
+    source: 'https://zichtbaarnederlands.nl/en/syntax/word_order',
+  },
+  'en-maar': {
+    title: 'En / maar · juntar ou contrastar',
+    meaning: 'e / mas',
+    rule: 'En adiciona uma ideia; maar apresenta contraste. Ambos ligam frases sem mandar o verbo para o final.',
+    pattern: 'frase + en/maar + sujeito + verbo + resto',
+    dutch: 'Ik wil fietsen, maar het regent.',
+    portuguese: 'Quero ir de bicicleta, mas está chovendo.',
+    source: 'https://zichtbaarnederlands.nl/en/syntax/word_order',
+  },
+  perfectum: {
+    title: 'Perfectum · perguntar sobre o passado',
+    meaning: 'hebben/zijn + particípio',
+    rule: 'Na pergunta, o auxiliar fica antes do sujeito. Na resposta que começa pelo sujeito, ele vem depois. O particípio fica no final da frase principal. Hebben ou zijn depende do verbo e do uso.',
+    pattern: 'Heb/Ben + jij + resto + particípio?',
+    dutch: 'Ben jij naar de winkel gegaan?',
+    portuguese: 'Você foi à loja?',
+    source: 'https://zichtbaarnederlands.nl/en/syntax/word_order',
+  },
+  hoewel: {
+    title: 'Hoewel · concessão',
+    meaning: 'embora / although',
+    rule: 'Use para algo que acontece apesar de outra situação. O verbo da parte com hoewel fica no final.',
+    pattern: 'frase + hoewel + sujeito + resto + verbo',
+    dutch: 'Ik fiets hoewel het koud is.',
+    portuguese: 'Vou de bicicleta embora esteja frio.',
+    source: 'https://zichtbaarnederlands.nl/en/syntax/word_order',
+  },
+  terwijl: {
+    title: 'Terwijl · simultaneidade',
+    meaning: 'enquanto / while',
+    rule: 'Liga duas ações simultâneas. O verbo da parte com terwijl vai para o final.',
+    pattern: 'frase + terwijl + sujeito + resto + verbo',
+    dutch: 'Zij leest terwijl ik kook.',
+    portuguese: 'Ela lê enquanto eu cozinho.',
+    source: 'https://zichtbaarnederlands.nl/en/syntax/word_order',
+  },
+  voordat: {
+    title: 'Voordat · antes',
+    meaning: 'antes de / before',
+    rule: 'Apresenta uma ação que acontece depois da ação principal. O verbo da parte com voordat vai para o final.',
+    pattern: 'frase + voordat + sujeito + resto + verbo',
+    dutch: 'Ik eet voordat ik vertrek.',
+    portuguese: 'Como antes de sair.',
+    source: 'https://zichtbaarnederlands.nl/en/syntax/word_order',
+  },
+  nadat: {
+    title: 'Nadat · depois',
+    meaning: 'depois que / after',
+    rule: 'Apresenta a ação anterior. Neste treino, ela aparece no perfectum. Os dois verbos ficam juntos no final da parte com nadat; as duas ordens de auxiliar e particípio são aceitas.',
+    pattern: 'frase + nadat + sujeito + resto + auxiliar/particípio',
+    dutch: 'Ik rust nadat ik heb gewerkt.',
+    portuguese: 'Descanso depois de ter trabalhado.',
+    source: 'https://zichtbaarnederlands.nl/en/syntax/word_order',
+  },
+  zodat: {
+    title: 'Zodat · resultado ou objetivo',
+    meaning: 'de modo que / para que / so that',
+    rule: 'Permite um sujeito próprio nessa parte. Aqui treinamos um objetivo com outra pessoa: eu faço algo para que você consiga fazer outra coisa.',
+    pattern: 'frase + zodat + sujeito + resto + verbos',
+    dutch: 'Ik praat zacht zodat jij kunt slapen.',
+    portuguese: 'Falo baixo para que você possa dormir.',
+    source: 'https://zichtbaarnederlands.nl/en/syntax/word_order',
+  },
+  'indirect-of': {
+    title: 'Of · pergunta indireta',
+    meaning: 'se / whether',
+    rule: 'Dentro de “você sabe se…?”, of introduz uma parte com o verbo no final. Aqui não significa “ou”.',
+    pattern: 'Weet jij + of + sujeito + resto + verbo?',
+    dutch: 'Weet jij of de winkel open is?',
+    portuguese: 'Você sabe se a loja está aberta?',
+    source: 'https://zichtbaarnederlands.nl/en/syntax/word_order',
+  },
+} as const;
+
+export type StructureId = keyof typeof structureGuides;
+export type PracticeTask = 'question' | 'answer';
+export interface QuestionAnswerScenario {
+  id: string;
+  difficulty: Difficulty;
+  englishQuestion: string;
+  englishAnswer: string;
+  dutchQuestions: string[];
+  dutchAnswers: string[];
+  questionTopic: StructureId;
+  answerTopic: StructureId;
+  explanation?: string;
+}
+export interface QuestionAnswerExercise extends TextQuestion {
+  scenarioId: string;
+  task: PracticeTask;
+  topic: StructureId;
+}
+
+// These are original, bounded translation exercises, not an open-ended language grader.
+export const questionAnswerScenarios: QuestionAnswerScenario[] = [
+  {
+    id: 'name',
+    difficulty: 'easy',
+    englishQuestion: 'What is your name?',
+    englishAnswer: 'My name is Sofia.',
+    dutchQuestions: ['Hoe heet jij?', 'Wat is jouw naam?', 'Wat is je naam?'],
+    dutchAnswers: ['Ik heet Sofia.', 'Mijn naam is Sofia.'],
+    questionTopic: 'wh-question',
+    answerTopic: 'statement',
+  },
+  {
+    id: 'home',
+    difficulty: 'easy',
+    englishQuestion: 'Where do you live?',
+    englishAnswer: 'I live in Rotterdam.',
+    dutchQuestions: ['Waar woon jij?'],
+    dutchAnswers: ['Ik woon in Rotterdam.'],
+    questionTopic: 'wh-question',
+    answerTopic: 'statement',
+  },
+  {
+    id: 'coffee',
+    difficulty: 'easy',
+    englishQuestion: 'Do you drink coffee?',
+    englishAnswer: 'Yes, I drink coffee.',
+    dutchQuestions: ['Drink jij koffie?'],
+    dutchAnswers: ['Ja, ik drink koffie.'],
+    questionTopic: 'yes-no',
+    answerTopic: 'short-answer',
+  },
+  {
+    id: 'work-time',
+    difficulty: 'easy',
+    englishQuestion: 'When do you start work?',
+    englishAnswer: 'I start work at nine o’clock.',
+    dutchQuestions: ['Wanneer begin jij met werken?', 'Wanneer begin jij te werken?'],
+    dutchAnswers: ['Ik begin om negen uur met werken.', 'Ik begin om negen uur te werken.'],
+    questionTopic: 'wh-question',
+    answerTopic: 'statement',
+  },
+  {
+    id: 'age',
+    difficulty: 'easy',
+    englishQuestion: 'How old are you?',
+    englishAnswer: 'I am twenty-eight years old.',
+    dutchQuestions: ['Hoe oud ben jij?'],
+    dutchAnswers: ['Ik ben achtentwintig jaar oud.', 'Ik ben achtentwintig.'],
+    questionTopic: 'wh-question',
+    answerTopic: 'statement',
+  },
+  {
+    id: 'language',
+    difficulty: 'easy',
+    englishQuestion: 'Do you speak Dutch?',
+    englishAnswer: 'Yes, I speak a little Dutch.',
+    dutchQuestions: ['Spreek jij Nederlands?'],
+    dutchAnswers: ['Ja, ik spreek een beetje Nederlands.'],
+    questionTopic: 'yes-no',
+    answerTopic: 'short-answer',
+  },
+  {
+    id: 'help',
+    difficulty: 'easy',
+    englishQuestion: 'Can you help me?',
+    englishAnswer: 'Yes, I can help you.',
+    dutchQuestions: ['Kun jij mij helpen?', 'Kan jij mij helpen?'],
+    dutchAnswers: ['Ja, ik kan jou helpen.', 'Ja, ik kan je helpen.'],
+    questionTopic: 'yes-no',
+    answerTopic: 'short-answer',
+  },
+  {
+    id: 'station',
+    difficulty: 'easy',
+    englishQuestion: 'Where is the station?',
+    englishAnswer: 'The station is next to the supermarket.',
+    dutchQuestions: ['Waar is het station?'],
+    dutchAnswers: ['Het station is naast de supermarkt.', 'Het station ligt naast de supermarkt.'],
+    questionTopic: 'wh-question',
+    answerTopic: 'statement',
+  },
+  {
+    id: 'price',
+    difficulty: 'easy',
+    englishQuestion: 'How much does the bread cost?',
+    englishAnswer: 'The bread costs two euros.',
+    dutchQuestions: ['Hoeveel kost het brood?'],
+    dutchAnswers: ['Het brood kost twee euro.'],
+    questionTopic: 'wh-question',
+    answerTopic: 'statement',
+  },
+  {
+    id: 'transport',
+    difficulty: 'easy',
+    englishQuestion: 'How do you go to work?',
+    englishAnswer: 'I go to work by bicycle.',
+    dutchQuestions: ['Hoe ga jij naar je werk?', 'Hoe ga jij naar het werk?'],
+    dutchAnswers: [
+      'Ik ga met de fiets naar mijn werk.',
+      'Ik ga met de fiets naar het werk.',
+      'Ik fiets naar mijn werk.',
+      'Ik fiets naar het werk.',
+    ],
+    questionTopic: 'wh-question',
+    answerTopic: 'statement',
+  },
+  {
+    id: 'sick',
+    difficulty: 'medium',
+    englishQuestion: 'Why are you staying home?',
+    englishAnswer: 'I am staying home because I am sick.',
+    dutchQuestions: ['Waarom blijf jij thuis?'],
+    dutchAnswers: ['Ik blijf thuis omdat ik ziek ben.'],
+    questionTopic: 'wh-question',
+    answerTopic: 'omdat',
+  },
+  {
+    id: 'learn-purpose',
+    difficulty: 'medium',
+    englishQuestion: 'Why are you learning Dutch?',
+    englishAnswer: 'I am learning Dutch to find work.',
+    dutchQuestions: ['Waarom leer jij Nederlands?'],
+    dutchAnswers: ['Ik leer Nederlands om werk te vinden.'],
+    questionTopic: 'wh-question',
+    answerTopic: 'om-te',
+  },
+  {
+    id: 'early-bed',
+    difficulty: 'medium',
+    englishQuestion: 'Why are you going to bed early?',
+    englishAnswer: 'I am going to bed early because I am tired.',
+    dutchQuestions: ['Waarom ga jij vroeg naar bed?'],
+    dutchAnswers: ['Ik ga vroeg naar bed, want ik ben moe.'],
+    questionTopic: 'wh-question',
+    answerTopic: 'want',
+  },
+  {
+    id: 'consequence',
+    difficulty: 'medium',
+    englishQuestion: 'Are you sick?',
+    englishAnswer: 'I am sick. That is why I am staying home.',
+    dutchQuestions: ['Ben jij ziek?'],
+    dutchAnswers: ['Ik ben ziek. Daarom blijf ik thuis.', 'Ik ben ziek, daarom blijf ik thuis.'],
+    questionTopic: 'yes-no',
+    answerTopic: 'daarom',
+  },
+  {
+    id: 'opinion',
+    difficulty: 'medium',
+    englishQuestion: 'What do you think?',
+    englishAnswer: 'I think that the train is late.',
+    dutchQuestions: ['Wat denk jij?'],
+    dutchAnswers: ['Ik denk dat de trein te laat is.'],
+    questionTopic: 'wh-question',
+    answerTopic: 'dat',
+  },
+  {
+    id: 'rain-condition',
+    difficulty: 'medium',
+    englishQuestion: 'When do you take the bus?',
+    englishAnswer: 'I take the bus when it rains.',
+    dutchQuestions: ['Wanneer neem jij de bus?'],
+    dutchAnswers: ['Ik neem de bus als het regent.'],
+    questionTopic: 'wh-question',
+    answerTopic: 'als',
+  },
+  {
+    id: 'contrast',
+    difficulty: 'medium',
+    englishQuestion: 'Are you coming today?',
+    englishAnswer: 'I want to come, but I have to work.',
+    dutchQuestions: ['Kom jij vandaag?'],
+    dutchAnswers: ['Ik wil komen, maar ik moet werken.'],
+    questionTopic: 'yes-no',
+    answerTopic: 'en-maar',
+  },
+  {
+    id: 'evening',
+    difficulty: 'medium',
+    englishQuestion: 'What do you do in the evening?',
+    englishAnswer: 'I cook and my partner washes the dishes.',
+    dutchQuestions: [
+      'Wat doe jij in de avond?',
+      'Wat doe jij ’s avonds?',
+      "Wat doe jij 's avonds?",
+    ],
+    dutchAnswers: ['Ik kook en mijn partner wast af.'],
+    questionTopic: 'wh-question',
+    answerTopic: 'en-maar',
+  },
+  {
+    id: 'yesterday',
+    difficulty: 'medium',
+    englishQuestion: 'What did you do yesterday?',
+    englishAnswer: 'I worked yesterday.',
+    dutchQuestions: ['Wat heb jij gisteren gedaan?'],
+    dutchAnswers: ['Ik heb gisteren gewerkt.', 'Gisteren heb ik gewerkt.'],
+    questionTopic: 'perfectum',
+    answerTopic: 'perfectum',
+  },
+  {
+    id: 'permission',
+    difficulty: 'medium',
+    englishQuestion: 'May I ask you something?',
+    englishAnswer: 'Yes, you may ask something.',
+    dutchQuestions: ['Mag ik jou iets vragen?', 'Mag ik je iets vragen?'],
+    dutchAnswers: ['Ja, jij mag iets vragen.'],
+    questionTopic: 'yes-no',
+    answerTopic: 'short-answer',
+  },
+  {
+    id: 'although',
+    difficulty: 'hard',
+    englishQuestion: 'Why are you going outside?',
+    englishAnswer: 'I am going outside although it is raining.',
+    dutchQuestions: ['Waarom ga jij naar buiten?'],
+    dutchAnswers: ['Ik ga naar buiten hoewel het regent.'],
+    questionTopic: 'wh-question',
+    answerTopic: 'hoewel',
+  },
+  {
+    id: 'while',
+    difficulty: 'hard',
+    englishQuestion: 'What do you do while you cook?',
+    englishAnswer: 'I listen to music while I cook.',
+    dutchQuestions: ['Wat doe jij terwijl jij kookt?'],
+    dutchAnswers: ['Ik luister naar muziek terwijl ik kook.'],
+    questionTopic: 'wh-question',
+    answerTopic: 'terwijl',
+  },
+  {
+    id: 'before-bed',
+    difficulty: 'hard',
+    englishQuestion: 'When do you brush your teeth?',
+    englishAnswer: 'I brush my teeth before I go to bed.',
+    dutchQuestions: ['Wanneer poets jij je tanden?'],
+    dutchAnswers: ['Ik poets mijn tanden voordat ik naar bed ga.'],
+    questionTopic: 'wh-question',
+    answerTopic: 'voordat',
+  },
+  {
+    id: 'after-food',
+    difficulty: 'hard',
+    englishQuestion: 'When do you wash the dishes?',
+    englishAnswer: 'I wash the dishes after I have eaten.',
+    dutchQuestions: ['Wanneer was jij af?'],
+    dutchAnswers: ['Ik was af nadat ik heb gegeten.', 'Ik was af nadat ik gegeten heb.'],
+    questionTopic: 'wh-question',
+    answerTopic: 'nadat',
+  },
+  {
+    id: 'so-that',
+    difficulty: 'hard',
+    englishQuestion: 'Why do you speak slowly?',
+    englishAnswer: 'I speak slowly so that you can understand me.',
+    dutchQuestions: ['Waarom spreek jij langzaam?'],
+    dutchAnswers: [
+      'Ik spreek langzaam zodat jij mij kunt begrijpen.',
+      'Ik spreek langzaam zodat jij mij kan begrijpen.',
+    ],
+    questionTopic: 'wh-question',
+    answerTopic: 'zodat',
+  },
+  {
+    id: 'phone-purpose',
+    difficulty: 'hard',
+    englishQuestion: 'Why are you using your phone?',
+    englishAnswer: 'I am using my phone to call my mother.',
+    dutchQuestions: ['Waarom gebruik jij je telefoon?'],
+    dutchAnswers: ['Ik gebruik mijn telefoon om mijn moeder op te bellen.'],
+    questionTopic: 'wh-question',
+    answerTopic: 'om-te',
+    explanation: 'Opbellen é separável. Com te, escreva op te bellen, com espaços.',
+  },
+  {
+    id: 'whether',
+    difficulty: 'hard',
+    englishQuestion: 'Do you know whether the train is running?',
+    englishAnswer: 'I do not know whether the train is running.',
+    dutchQuestions: ['Weet jij of de trein rijdt?'],
+    dutchAnswers: ['Ik weet niet of de trein rijdt.'],
+    questionTopic: 'indirect-of',
+    answerTopic: 'indirect-of',
+  },
+  {
+    id: 'condition-first',
+    difficulty: 'hard',
+    englishQuestion: 'What do you do when you are sick?',
+    englishAnswer: 'When I am sick, I stay home.',
+    dutchQuestions: ['Wat doe jij als jij ziek bent?'],
+    dutchAnswers: ['Als ik ziek ben, blijf ik thuis.'],
+    questionTopic: 'wh-question',
+    answerTopic: 'als',
+    explanation:
+      'A parte com als ocupa a primeira posição. Depois da vírgula, vem blijf ik, e não ik blijf.',
+  },
+  {
+    id: 'missed-train',
+    difficulty: 'hard',
+    englishQuestion: 'Why did you miss the train?',
+    englishAnswer: 'I missed the train because I left too late.',
+    dutchQuestions: ['Waarom heb jij de trein gemist?'],
+    dutchAnswers: [
+      'Ik heb de trein gemist omdat ik te laat ben vertrokken.',
+      'Ik heb de trein gemist omdat ik te laat vertrokken ben.',
+    ],
+    questionTopic: 'perfectum',
+    answerTopic: 'omdat',
+    explanation:
+      'A pergunta usa heb + gemist. Na resposta, vertrekken usa zijn: ben vertrokken. As duas ordens desse grupo verbal são aceitas na parte com omdat.',
+  },
+  {
+    id: 'neighbours-purpose',
+    difficulty: 'hard',
+    englishQuestion: 'Why do you want to learn Dutch?',
+    englishAnswer: 'I want to learn Dutch to be able to talk to my neighbours.',
+    dutchQuestions: ['Waarom wil jij Nederlands leren?'],
+    dutchAnswers: ['Ik wil Nederlands leren om met mijn buren te kunnen praten.'],
+    questionTopic: 'wh-question',
+    answerTopic: 'om-te',
+    explanation:
+      'Aqui te vem antes de kunnen; praten continua no infinitivo: te kunnen praten. Depois de wil, não acrescente te antes de leren.',
+  },
+];
+
+function acceptedVariants(answers: string[]): string[] {
+  let variants = [...answers];
+  for (const [full, short] of [
+    ['jij', 'je'],
+    ['wij', 'we'],
+    ['zij', 'ze'],
+    ['mij', 'me'],
+  ]) {
+    variants = variants.flatMap((answer) => [
+      answer,
+      answer.replace(new RegExp(`\\b${full}\\b`, 'gi'), short),
+    ]);
+  }
+  return [...new Set(variants.flatMap((answer) => [answer, answer.replaceAll(',', '')]))];
+}
+
+export function buildQuestionAnswerExercises(
+  scenarios = questionAnswerScenarios,
+): QuestionAnswerExercise[] {
+  return scenarios.flatMap((scenario) =>
+    (['question', 'answer'] as const).map((task) => {
+      const topic = task === 'question' ? scenario.questionTopic : scenario.answerTopic;
+      const guide = structureGuides[topic];
+      return {
+        id: `questions-answers-${scenario.id}-${task}`,
+        moduleId: 'questions-answers',
+        difficulty: scenario.difficulty,
+        type: 'text',
+        scenarioId: scenario.id,
+        task,
+        topic,
+        prompt:
+          task === 'question'
+            ? `Ask in Dutch: “${scenario.englishQuestion}”`
+            : `Answer in Dutch: “${scenario.englishAnswer}”`,
+        acceptedAnswers: acceptedVariants(
+          task === 'question' ? scenario.dutchQuestions : scenario.dutchAnswers,
+        ),
+        hint:
+          task === 'question'
+            ? `Use informal je/jij (not u). ${guide.pattern}`
+            : `Use ${guide.title}. ${guide.pattern}`,
+        explanation: `${guide.rule}${scenario.explanation && task === 'answer' ? ` ${scenario.explanation}` : ''}`,
+        tags: [task === 'question' ? 'ask a question' : 'give an answer', topic, 'English → Dutch'],
+      };
+    }),
+  );
+}

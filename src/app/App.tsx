@@ -1,3 +1,4 @@
+import { QuestionsAnswersPractice } from '../modules/questions-answers/QuestionsAnswersPractice';
 import { HashRouter, Route, Routes } from 'react-router-dom';
 import { AppShell } from '../components/AppShell';
 import { ArticlesPractice } from '../modules/articles/ArticlesPractice';
@@ -70,6 +71,7 @@ export function App() {
               <Route path="practice/prepositions" element={<PrepositionsPractice />} />
               <Route path="practice/find-the-mistake" element={<FindTheMistakePractice />} />
               <Route path="practice/translation" element={<TranslationPractice />} />
+              <Route path="practice/questions-answers" element={<QuestionsAnswersPractice />} />
               <Route path="practice/listening" element={<ListeningPractice />} />
               <Route path="practice/conversations" element={<ConversationPractice />} />
               <Route path="practice/picture-description" element={<PictureDescriptionPractice />} />

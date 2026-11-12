@@ -125,7 +125,10 @@ function sanitizeProgress(value: unknown): ProgressState {
           ? value.masteredItems.filter((item): item is string => typeof item === 'string')
           : []),
         ...sanitizeQuestionHistory(value.questionHistory)
-          .filter((attempt) => attempt.moduleId === 'translation' && attempt.correct)
+          .filter(
+            (attempt) =>
+              ['translation', 'questions-answers'].includes(attempt.moduleId) && attempt.correct,
+          )
           .map((attempt) => attempt.questionId),
       ]),
     ),

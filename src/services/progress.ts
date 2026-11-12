@@ -71,7 +71,7 @@ export function recordAttempt(state: AppState, input: AttemptInput): AppState {
     progress: {
       ...state.progress,
       masteredItems:
-        input.moduleId === 'translation' && input.correct
+        ['translation', 'questions-answers'].includes(input.moduleId) && input.correct
           ? Array.from(new Set([...state.progress.masteredItems, input.questionId]))
           : state.progress.masteredItems,
       totalXp: state.progress.totalXp + input.xpEarned,
