@@ -1,3 +1,4 @@
+import { DutchAudio } from '../../components/DutchAudio';
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAppState } from '../../app/AppStateContext';
@@ -123,23 +124,32 @@ export function BossBattlePractice() {
                   <span className="small text-secondary">Question {index + 1}</span>
                 </div>
                 <h2 className="h4 fw-bold my-3">{question.prompt}</h2>
+                {question.dutchAudio && (
+                  <div className="mb-3">
+                    <DutchAudio text={question.dutchAudio} />
+                  </div>
+                )}
                 {question.type === 'multiple-choice' ? (
                   <div className="answer-grid">
                     {question.options.map((option) => (
-                      <label
-                        className={`answer-choice ${answer === option ? 'selected' : ''}`}
-                        key={option}
-                      >
-                        <input
-                          type="radio"
-                          className="form-check-input"
-                          name="boss-answer"
-                          checked={answer === option}
-                          disabled={Boolean(feedback)}
-                          onChange={() => setAnswer(option)}
-                        />
-                        <span>{option}</span>
-                      </label>
+                      <div key={option}>
+                        <label className={`answer-choice ${answer === option ? 'selected' : ''}`}>
+                          <input
+                            type="radio"
+                            className="form-check-input"
+                            name="boss-answer"
+                            checked={answer === option}
+                            disabled={Boolean(feedback)}
+                            onChange={() => setAnswer(option)}
+                          />
+                          <span>{option}</span>
+                        </label>
+                        {question.answerLanguage !== 'en' && (
+                          <div className="mt-1">
+                            <DutchAudio text={option} compact />
+                          </div>
+                        )}
+                      </div>
                     ))}
                   </div>
                 ) : (
@@ -158,6 +168,11 @@ export function BossBattlePractice() {
                     {feedback.correct
                       ? `Hit! ${feedback.damage} damage.`
                       : `The boss hits you. Correct answer: ${answersForQuestion(question)[0]}`}
+                    <div className="mt-2">
+                      <DutchAudio
+                        text={question.dutchAnswerAudio ?? answersForQuestion(question)[0]}
+                      />
+                    </div>
                   </div>
                 )}
                 <div className="mt-3">

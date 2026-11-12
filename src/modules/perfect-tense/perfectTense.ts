@@ -80,6 +80,8 @@ export function buildPerfectTenseQuestions(): QuizQuestion[] {
     difficulty: 'easy',
     type: 'multiple-choice',
     prompt: `Choose the auxiliary for “${verb.infinitive}” in the perfect tense.`,
+    dutchAudio: verb.infinitive,
+    dutchAnswerAudio: verb.example,
     options: ['hebben', 'zijn'],
     correctOption: verb.auxiliary,
     hint: 'Most verbs use hebben; movement or change-of-state verbs often use zijn.',
@@ -92,6 +94,8 @@ export function buildPerfectTenseQuestions(): QuizQuestion[] {
     difficulty: 'medium',
     type: 'text',
     prompt: `Type the past participle of “${verb.infinitive}”.`,
+    dutchAudio: verb.infinitive,
+    dutchAnswerAudio: verb.example,
     acceptedAnswers: [verb.participle],
     hint: verb.participle.startsWith('ge')
       ? 'Many participles use ge- + stem + -d/-t.'

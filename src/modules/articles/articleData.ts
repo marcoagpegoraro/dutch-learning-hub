@@ -220,6 +220,8 @@ export function buildArticleQuestions(nouns = articleNouns): MultipleChoiceQuest
     difficulty: item.difficulty,
     type: 'multiple-choice',
     prompt: `${item.emoji} ___ ${item.noun} (${item.meaning})`,
+    dutchAudio: item.noun,
+    dutchAnswerAudio: `${item.article} ${item.noun}. ${item.example}`,
     options: ['de', 'het'],
     correctOption: item.article,
     hint:

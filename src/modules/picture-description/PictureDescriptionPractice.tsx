@@ -1,3 +1,4 @@
+import { DutchAudio } from '../../components/DutchAudio';
 import { useEffect, useRef, useState } from 'react';
 import { useAppState } from '../../app/AppStateContext';
 import { ExerciseShell } from '../../components/ExerciseShell';
@@ -92,7 +93,7 @@ export function PictureDescriptionPractice() {
                     lang="nl"
                     key={keyword}
                   >
-                    {keyword}
+                    {keyword} <DutchAudio text={keyword} compact />
                   </span>
                 ))}
               </div>
@@ -108,6 +109,11 @@ export function PictureDescriptionPractice() {
                 disabled={Boolean(marked)}
                 placeholder="Schrijf hier wat je ziet…"
               />
+              {answer.trim() && (
+                <div className="mt-2">
+                  <DutchAudio text={answer} />
+                </div>
+              )}
               {!revealed && (
                 <button
                   className="btn btn-primary mt-3"
@@ -126,7 +132,7 @@ export function PictureDescriptionPractice() {
                   </div>
                   {task.samples.map((sample) => (
                     <p className="mb-1 mt-2" lang="nl" key={sample}>
-                      {sample}
+                      {sample} <DutchAudio text={sample} compact />
                     </p>
                   ))}
                   <p className="small text-secondary mb-0 mt-2">

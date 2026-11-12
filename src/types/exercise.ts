@@ -18,6 +18,9 @@ export interface BaseQuestion {
   moduleId: string;
   difficulty: Difficulty;
   prompt: string;
+  dutchAudio?: string;
+  dutchAnswerAudio?: string;
+  answerLanguage?: 'nl' | 'en';
   hint?: string;
   explanation?: string;
   tags: string[];

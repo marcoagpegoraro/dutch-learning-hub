@@ -119,9 +119,16 @@ function sanitizeProgress(value: unknown): ProgressState {
       ? value.completedLessons.filter((item): item is string => typeof item === 'string')
       : [],
     questionHistory: sanitizeQuestionHistory(value.questionHistory),
-    masteredItems: Array.isArray(value.masteredItems)
-      ? value.masteredItems.filter((item): item is string => typeof item === 'string')
-      : [],
+    masteredItems: Array.from(
+      new Set([
+        ...(Array.isArray(value.masteredItems)
+          ? value.masteredItems.filter((item): item is string => typeof item === 'string')
+          : []),
+        ...sanitizeQuestionHistory(value.questionHistory)
+          .filter((attempt) => attempt.moduleId === 'translation' && attempt.correct)
+          .map((attempt) => attempt.questionId),
+      ]),
+    ),
     achievements: Array.isArray(value.achievements)
       ? value.achievements.filter((item): item is string => typeof item === 'string')
       : [],

@@ -79,6 +79,8 @@ export function buildSeparableVerbQuestions(): QuizQuestion[] {
     difficulty: 'easy',
     type: 'multiple-choice',
     prompt: `Which prefix separates from “${verb.id}” in a main clause?`,
+    dutchAudio: verb.id,
+    dutchAnswerAudio: verb.forms.main,
     options: Array.from(new Set([verb.prefix, 'be', 'ge', 'ver'])).slice(0, 4),
     correctOption: verb.prefix,
     hint: `The verb means “${verb.meaning}”.`,
@@ -92,6 +94,7 @@ export function buildSeparableVerbQuestions(): QuizQuestion[] {
       difficulty: 'medium',
       type: 'text',
       prompt: 'Complete: Ik sta om zeven uur ___.',
+      dutchAudio: 'Ik sta om zeven uur ….',
       acceptedAnswers: ['op'],
       hint: 'The infinitive is opstaan.',
       explanation: 'In a main clause, op moves to the end: Ik sta ... op.',
@@ -103,6 +106,7 @@ export function buildSeparableVerbQuestions(): QuizQuestion[] {
       difficulty: 'medium',
       type: 'text',
       prompt: 'Complete: De trein komt om acht uur ___.',
+      dutchAudio: 'De trein komt om acht uur ….',
       acceptedAnswers: ['aan'],
       hint: 'The infinitive is aankomen.',
       explanation: 'Aankomen separates as komt ... aan.',
@@ -114,6 +118,7 @@ export function buildSeparableVerbQuestions(): QuizQuestion[] {
       difficulty: 'medium',
       type: 'text',
       prompt: 'Complete: Neem je je paspoort ___?',
+      dutchAudio: 'Neem je je paspoort …?',
       acceptedAnswers: ['mee'],
       hint: 'The infinitive is meenemen.',
       explanation: 'In the question, meenemen separates: Neem ... mee?',
@@ -125,6 +130,7 @@ export function buildSeparableVerbQuestions(): QuizQuestion[] {
       difficulty: 'medium',
       type: 'text',
       prompt: 'Complete with one word: Ik moet de dokter ___.',
+      dutchAudio: 'Ik moet de dokter ….',
       acceptedAnswers: ['opbellen'],
       hint: 'After a modal, use the intact infinitive.',
       explanation: 'The infinitive stays together at the end: moet ... opbellen.',
@@ -136,6 +142,7 @@ export function buildSeparableVerbQuestions(): QuizQuestion[] {
       difficulty: 'medium',
       type: 'text',
       prompt: 'Complete with one word: Wij willen vanavond ___.',
+      dutchAudio: 'Wij willen vanavond ….',
       acceptedAnswers: ['uitgaan'],
       hint: 'After willen, use the intact infinitive.',
       explanation: 'Wij willen ... uitgaan: the verb does not separate after a modal.',
@@ -153,6 +160,7 @@ export function buildSeparableVerbQuestions(): QuizQuestion[] {
         form === 'perfect'
           ? `Write the perfect-tense sentence for “${verb.forms.main}”.`
           : `Write the omdat-clause for “${verb.forms.main}”.`,
+      dutchAudio: verb.forms.main,
       acceptedAnswers: [verb.forms[form]],
       hint:
         form === 'perfect'

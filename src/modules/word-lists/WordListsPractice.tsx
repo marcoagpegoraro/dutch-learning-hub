@@ -1,3 +1,4 @@
+import { DutchAudio } from '../../components/DutchAudio';
 import { useEffect, useRef, useState, type FormEvent } from 'react';
 import { useAppState } from '../../app/AppStateContext';
 import { isAcceptedAnswer, normalizeAnswer } from '../../services/answerNormalization';
@@ -33,6 +34,7 @@ function WordListDrill({
   const { state, updateWordLists, completeActivity } = useAppState();
   const [answer, setAnswer] = useState('');
   const [invalid, setInvalid] = useState(false);
+  const [lastDutch, setLastDutch] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
   const retryRef = useRef<HTMLButtonElement>(null);
   const session = state.wordLists.themes[list.id]?.session;
@@ -53,6 +55,7 @@ function WordListDrill({
   function practiseAgain() {
     updateWordLists((current) => startWordList(current, list, allLists, true));
     clearInput();
+    setLastDutch('');
   }
 
   if (!session || !entry) return <p role="status">Choose a theme to begin.</p>;
@@ -100,6 +103,7 @@ function WordListDrill({
     const correct = isAcceptedAnswer(answer, [expected]);
     updateWordLists((current) => answerWordList(current, list.id, correct ? 'correct' : 'wrong'));
     if (correct) {
+      setLastDutch(entry!.dutch);
       if (!toDutch && session!.index === session!.queue.length - 1)
         completeActivity(`word-list:${list.id}`, 25);
       clearInput();
@@ -135,12 +139,23 @@ function WordListDrill({
             Review from <strong>{source?.title}</strong> · past mistakes get priority.
           </div>
         )}
+        {lastDutch && (
+          <div className="small text-secondary mb-3">
+            Previous word: <span lang="nl">{lastDutch}</span>{' '}
+            <DutchAudio text={lastDutch} compact />
+          </div>
+        )}
         <form onSubmit={submit} noValidate>
           <div className="text-center mb-4">
             <p className="text-secondary small fw-semibold">{toDutch ? 'Portuguese' : 'Dutch'}</p>
             <h2 className="word-list-prompt" lang={toDutch ? 'pt-BR' : 'nl'}>
               {prompt}
             </h2>
+            {!toDutch && (
+              <div className="mt-3">
+                <DutchAudio text={entry.dutch} />
+              </div>
+            )}
           </div>
           {session.feedback ? (
             <div className="alert alert-warning" role="status">
@@ -148,6 +163,11 @@ function WordListDrill({
                 {session.feedback === 'wrong' ? 'Not quite. The answer is: ' : 'The answer is: '}
               </strong>
               <span lang={toDutch ? 'nl' : 'pt-BR'}>{expected}</span>
+              {toDutch && (
+                <div className="mt-2">
+                  <DutchAudio text={entry.dutch} />
+                </div>
+              )}
               <span className="d-block small mt-2">
                 {word?.review
                   ? 'Try this review word again. Your theme position is kept.'
@@ -626,7 +646,12 @@ function WordListCard({
                 <tbody>
                   {list.entries.map((entry) => (
                     <tr key={entry.id}>
-                      <td lang="nl">{entry.dutch}</td>
+                      <td>
+                        <span lang="nl">{entry.dutch}</span>
+                        <div className="mt-1">
+                          <DutchAudio text={entry.dutch} compact />
+                        </div>
+                      </td>
                       <td lang="pt-BR">{entry.portuguese}</td>
                     </tr>
                   ))}

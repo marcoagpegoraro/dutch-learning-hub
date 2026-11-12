@@ -49,6 +49,9 @@ export function buildModalVerbQuestions(): QuizQuestion[] {
     difficulty: 'easy',
     type: 'multiple-choice',
     prompt: `What does “${verb.id}” mean?`,
+    dutchAudio: verb.id,
+    dutchAnswerAudio: verb.id,
+    answerLanguage: 'en',
     options: [
       verb.meaning,
       meanings[(index + 1) % meanings.length],

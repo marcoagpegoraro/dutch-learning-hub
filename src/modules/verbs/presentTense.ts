@@ -136,6 +136,7 @@ export function buildPresentTenseQuestions(): QuizQuestion[] {
           difficulty: verb.difficulty,
           type: 'multiple-choice',
           prompt: `Complete: “${pronoun} ___” (${verb.infinitive} — ${verb.english})`,
+          dutchAudio: verb.infinitive,
           options: options.slice(0, 4),
           correctOption: correct,
           hint:
@@ -152,6 +153,7 @@ export function buildPresentTenseQuestions(): QuizQuestion[] {
         difficulty: verb.difficulty,
         type: 'text',
         prompt: `Complete with the present tense: “${pronoun} ___” (${verb.infinitive} — ${verb.english})`,
+        dutchAudio: verb.infinitive,
         acceptedAnswers: [correct],
         hint:
           verb.difficulty === 'hard'

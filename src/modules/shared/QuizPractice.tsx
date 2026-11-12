@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+import { DutchAudio } from '../../components/DutchAudio';
 import { useEffect, useRef, useState, type FormEvent, type ReactNode } from 'react';
 import { useAppState } from '../../app/AppStateContext';
 import { AnswerDiff } from '../../components/AnswerDiff';
@@ -10,6 +12,8 @@ import {
   answersForQuestion,
   evaluateQuizAnswer,
   pickQuizQuestion,
+  pickUnmasteredQuizQuestion,
+  remainingQuizQuestions,
   type QuizQuestion,
 } from './quizUtils';
 
@@ -21,6 +25,7 @@ interface QuizPracticeProps {
   inputPlaceholder?: string;
   difficultyLabels?: Partial<Record<ExerciseDifficulty, string>>;
   showAnswerDiff?: boolean;
+  excludeMastered?: boolean;
   renderPromptAddon?: (question: QuizQuestion) => ReactNode;
   renderIncorrectFeedback?: (question: QuizQuestion, submittedAnswer: string) => ReactNode;
   getNextQuestion?: (
@@ -51,6 +56,7 @@ export function QuizPractice({
   inputPlaceholder = 'Type your answer',
   difficultyLabels,
   showAnswerDiff = false,
+  excludeMastered = false,
   renderPromptAddon,
   renderIncorrectFeedback,
   getNextQuestion,
@@ -59,10 +65,16 @@ export function QuizPractice({
   const [difficulty, setDifficulty] = useState<ExerciseDifficulty>(
     state.settings.defaultDifficulty,
   );
-  const [question, setQuestion] = useState<QuizQuestion>(() =>
+  const [question, setQuestion] = useState<QuizQuestion | undefined>(() =>
     getNextQuestion
       ? getNextQuestion(state.settings.defaultDifficulty, {})
-      : pickQuizQuestion(questions, state.settings.defaultDifficulty),
+      : excludeMastered
+        ? pickUnmasteredQuizQuestion(
+            questions,
+            state.settings.defaultDifficulty,
+            state.progress.masteredItems,
+          )
+        : pickQuizQuestion(questions, state.settings.defaultDifficulty),
   );
   const [answer, setAnswer] = useState('');
   const [showHint, setShowHint] = useState(state.settings.showHints);
@@ -80,12 +92,12 @@ export function QuizPractice({
   const sessionTarget = 10;
 
   useEffect(() => {
-    if (feedback) {
+    if (feedback || !question) {
       nextQuestionRef.current?.focus();
       return;
     }
 
-    if (question.type === 'text') {
+    if (question?.type === 'text') {
       textInput.current?.focus();
       textInput.current?.select();
     }
@@ -95,11 +107,18 @@ export function QuizPractice({
     setQuestion((current) =>
       getNextQuestion
         ? getNextQuestion(nextDifficulty, { previousQuestion: current, wasCorrect })
-        : pickQuizQuestion(
-            questions,
-            nextDifficulty === 'very-hard' ? 'hard' : nextDifficulty,
-            current.id,
-          ),
+        : excludeMastered
+          ? pickUnmasteredQuizQuestion(
+              questions,
+              nextDifficulty === 'very-hard' ? 'hard' : nextDifficulty,
+              state.progress.masteredItems,
+              current?.id,
+            )
+          : pickQuizQuestion(
+              questions,
+              nextDifficulty === 'very-hard' ? 'hard' : nextDifficulty,
+              current?.id,
+            ),
     );
     setAnswer('');
     setInvalid(false);
@@ -113,6 +132,7 @@ export function QuizPractice({
   }
 
   function completeAttempt(correct: boolean, submittedAnswer: string, needsAccent = false) {
+    if (!question || feedback) return;
     const nextStreak = correct ? session.streak + 1 : 0;
     const progressDifficulty: Difficulty = difficulty === 'very-hard' ? 'hard' : difficulty;
     const xp = calculateXp(progressDifficulty, { correct, streak: nextStreak });
@@ -139,7 +159,7 @@ export function QuizPractice({
 
   function submitAnswer(event: FormEvent) {
     event.preventDefault();
-    if (feedback) return;
+    if (feedback || !question) return;
     if (!answer.trim()) {
       setInvalid(true);
       return;
@@ -156,6 +176,92 @@ export function QuizPractice({
 
   const attempts = session.correct + session.wrong;
   const moduleStats = state.progress.moduleStats[moduleId];
+  const progressDifficulty = difficulty === 'very-hard' ? 'hard' : difficulty;
+  const total = questions.filter((item) => item.difficulty === progressDifficulty).length;
+  const remaining = remainingQuizQuestions(
+    questions,
+    progressDifficulty,
+    state.progress.masteredItems,
+  );
+  const completedCount = total - remaining.length;
+  const levels: Difficulty[] = ['easy', 'medium', 'hard'];
+  const nextDifficulty = levels
+    .slice(levels.indexOf(progressDifficulty) + 1)
+    .find(
+      (level) => remainingQuizQuestions(questions, level, state.progress.masteredItems).length > 0,
+    );
+  const allComplete = questions.every((item) => state.progress.masteredItems.includes(item.id));
+
+  const completedPhrases = excludeMastered && completedCount > 0 && (
+    <details className="mt-3 text-start">
+      <summary className="text-primary">View completed phrases ({completedCount})</summary>
+      <ol className="mt-3 ps-3">
+        {questions
+          .filter(
+            (item) =>
+              item.difficulty === progressDifficulty &&
+              state.progress.masteredItems.includes(item.id),
+          )
+          .map((item) => (
+            <li className="mb-3" key={item.id}>
+              <span className="small text-secondary d-block">{item.prompt}</span>
+              <span lang="nl">{answersForQuestion(item)[0]}</span>{' '}
+              <DutchAudio text={answersForQuestion(item)[0]} compact />
+            </li>
+          ))}
+      </ol>
+    </details>
+  );
+
+  if (!question)
+    return (
+      <ExerciseShell
+        title={title}
+        subtitle={subtitle}
+        difficulty={difficulty}
+        onDifficultyChange={changeDifficulty}
+        difficultyLabels={difficultyLabels}
+        progressLabel={`${completedCount} / ${total} mastered`}
+        progressPercent={total ? (completedCount / total) * 100 : 100}
+      >
+        <section className="card border-0 shadow-sm">
+          <div className="card-body p-4 p-md-5 text-center" role="status">
+            <i className="bi bi-check-circle-fill display-4 text-success" aria-hidden="true" />
+            <h2 className="h3 fw-bold mt-3">
+              {allComplete
+                ? 'All translation phrases complete!'
+                : `${difficultyLabels?.[difficulty]?.split(' — ')[0] ?? difficulty} complete!`}
+            </h2>
+            <p className="text-secondary">
+              {allComplete
+                ? 'You have correctly translated every available phrase in all difficulties. Your results are saved.'
+                : `You have correctly translated all ${total} phrases in this difficulty. Your correct answers are saved and will not repeat.`}
+            </p>
+            {nextDifficulty ? (
+              <button
+                ref={nextQuestionRef}
+                className="btn btn-primary"
+                type="button"
+                onClick={() => changeDifficulty(nextDifficulty)}
+              >
+                Go to {difficultyLabels?.[nextDifficulty]?.split(' — ')[0] ?? nextDifficulty}{' '}
+                <i className="bi bi-arrow-right ms-1" aria-hidden="true" />
+              </button>
+            ) : (
+              <p className="text-secondary">
+                {allComplete
+                  ? 'Choose another exercise to keep learning.'
+                  : 'Choose another difficulty above to finish your remaining phrases.'}
+              </p>
+            )}
+            <Link className="btn btn-outline-primary ms-2" to="/learn">
+              Choose another exercise
+            </Link>
+            {completedPhrases}
+          </div>
+        </section>
+      </ExerciseShell>
+    );
 
   return (
     <ExerciseShell
@@ -164,8 +270,18 @@ export function QuizPractice({
       difficulty={difficulty}
       onDifficultyChange={changeDifficulty}
       difficultyLabels={difficultyLabels}
-      progressLabel={`${Math.min(session.answered, sessionTarget)} / ${sessionTarget}`}
-      progressPercent={Math.min(100, (session.answered / sessionTarget) * 100)}
+      progressLabel={
+        excludeMastered
+          ? `${completedCount} / ${total} mastered`
+          : `${Math.min(session.answered, sessionTarget)} / ${sessionTarget}`
+      }
+      progressPercent={
+        excludeMastered
+          ? total
+            ? (completedCount / total) * 100
+            : 100
+          : Math.min(100, (session.answered / sessionTarget) * 100)
+      }
     >
       <div className="row g-4 justify-content-center">
         <div className="col-12 col-lg-8">
@@ -182,31 +298,41 @@ export function QuizPractice({
               </div>
               <p className="text-secondary small fw-semibold text-uppercase mb-2">Question</p>
               <h2 className="quiz-prompt fw-bold mb-4">{question.prompt}</h2>
+              {question.dutchAudio && (
+                <div className="mb-3">
+                  <DutchAudio text={question.dutchAudio} />
+                </div>
+              )}
               {renderPromptAddon?.(question)}
 
               <form onSubmit={submitAnswer} noValidate>
                 {question.type === 'multiple-choice' ? (
-                  <fieldset disabled={Boolean(feedback)}>
+                  <fieldset>
                     <legend className="visually-hidden">Choose an answer</legend>
                     <div className="answer-grid">
                       {question.options.map((option) => (
-                        <label
-                          className={`answer-choice ${answer === option ? 'selected' : ''}`}
-                          key={option}
-                        >
-                          <input
-                            className="form-check-input"
-                            type="radio"
-                            name="quizAnswer"
-                            value={option}
-                            checked={answer === option}
-                            onChange={(event) => {
-                              setAnswer(event.target.value);
-                              setInvalid(false);
-                            }}
-                          />
-                          <span lang="nl">{option}</span>
-                        </label>
+                        <div key={option}>
+                          <label className={`answer-choice ${answer === option ? 'selected' : ''}`}>
+                            <input
+                              className="form-check-input"
+                              type="radio"
+                              disabled={Boolean(feedback)}
+                              name="quizAnswer"
+                              value={option}
+                              checked={answer === option}
+                              onChange={(event) => {
+                                setAnswer(event.target.value);
+                                setInvalid(false);
+                              }}
+                            />
+                            <span lang={question.answerLanguage ?? 'nl'}>{option}</span>
+                          </label>
+                          <div className="mt-1">
+                            {question.answerLanguage !== 'en' && (
+                              <DutchAudio text={option} compact />
+                            )}
+                          </div>
+                        </div>
                       ))}
                     </div>
                   </fieldset>
@@ -246,6 +372,8 @@ export function QuizPractice({
                       }
                       xpEarned={feedback.xp}
                       needsAccent={feedback.needsAccent}
+                      answerLanguage={question.answerLanguage}
+                      audioText={question.dutchAnswerAudio}
                     />
                     {showAnswerDiff && !feedback.correct && answer !== '(skipped)' && (
                       <AnswerDiff expected={answersForQuestion(question)[0]} actual={answer} />
@@ -270,7 +398,10 @@ export function QuizPractice({
                       type="button"
                       onClick={() => nextQuestion()}
                     >
-                      Next question <i className="bi bi-arrow-right ms-1" aria-hidden="true" />
+                      {excludeMastered && remaining.length === 0
+                        ? 'Finish difficulty'
+                        : 'Next question'}{' '}
+                      <i className="bi bi-arrow-right ms-1" aria-hidden="true" />
                     </button>
                   ) : (
                     <>
@@ -327,6 +458,7 @@ export function QuizPractice({
                   <span className="score-label">Accuracy</span>
                 </div>
               </div>
+              {completedPhrases}
               {moduleStats && (
                 <p className="text-secondary small mt-3 mb-0">
                   All-time: {moduleStats.correct}/{moduleStats.attempted} correct · {moduleStats.xp}{' '}

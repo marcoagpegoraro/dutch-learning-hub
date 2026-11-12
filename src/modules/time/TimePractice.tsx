@@ -1,3 +1,4 @@
+import { DutchAudio } from '../../components/DutchAudio';
 import { useEffect, useRef, useState, type FormEvent } from 'react';
 import { useAppState } from '../../app/AppStateContext';
 import { ExerciseShell } from '../../components/ExerciseShell';
@@ -287,16 +288,20 @@ export function TimePractice() {
               <h2 className="h5 fw-bold">Dutch clock guide</h2>
               <ul className="small mb-0 ps-3 time-guide">
                 <li>
-                  <strong>:00</strong> → <span lang="nl">elf uur</span>
+                  <strong>:00</strong> → <span lang="nl">elf uur</span>{' '}
+                  <DutchAudio text="elf uur" compact />
                 </li>
                 <li>
-                  <strong>:15</strong> → <span lang="nl">kwart over elf</span>
+                  <strong>:15</strong> → <span lang="nl">kwart over elf</span>{' '}
+                  <DutchAudio text="kwart over elf" compact />
                 </li>
                 <li>
-                  <strong>:30</strong> → <span lang="nl">half twaalf</span>
+                  <strong>:30</strong> → <span lang="nl">half twaalf</span>{' '}
+                  <DutchAudio text="half twaalf" compact />
                 </li>
                 <li>
-                  <strong>:45</strong> → <span lang="nl">kwart voor twaalf</span>
+                  <strong>:45</strong> → <span lang="nl">kwart voor twaalf</span>{' '}
+                  <DutchAudio text="kwart voor twaalf" compact />
                 </li>
                 <li>
                   <span lang="nl">Half twaalf</span> means 11:30.

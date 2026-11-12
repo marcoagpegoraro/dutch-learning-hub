@@ -70,6 +70,10 @@ export function recordAttempt(state: AppState, input: AttemptInput): AppState {
     ...state,
     progress: {
       ...state.progress,
+      masteredItems:
+        input.moduleId === 'translation' && input.correct
+          ? Array.from(new Set([...state.progress.masteredItems, input.questionId]))
+          : state.progress.masteredItems,
       totalXp: state.progress.totalXp + input.xpEarned,
       currentStreak: dailyStreak,
       longestStreak: Math.max(state.progress.longestStreak, dailyStreak),

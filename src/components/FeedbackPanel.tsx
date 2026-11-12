@@ -1,9 +1,12 @@
+import { DutchAudio } from './DutchAudio';
 interface FeedbackPanelProps {
   correct: boolean;
   correctAnswer: string;
   explanation: string;
   xpEarned: number;
   needsAccent?: boolean;
+  audioText?: string;
+  answerLanguage?: 'nl' | 'en';
 }
 
 export function FeedbackPanel({
@@ -12,6 +15,8 @@ export function FeedbackPanel({
   explanation,
   xpEarned,
   needsAccent = false,
+  audioText,
+  answerLanguage = 'nl',
 }: FeedbackPanelProps) {
   return (
     <div
@@ -29,8 +34,11 @@ export function FeedbackPanel({
             {correct ? (needsAccent ? 'Correct — check the accents' : 'Correct!') : 'Not quite yet'}
           </h2>
           <p className="mb-1">
-            The answer is <strong lang="nl">{correctAnswer}</strong>.
+            The answer is <strong lang={answerLanguage}>{correctAnswer}</strong>.
           </p>
+          {(audioText || answerLanguage === 'nl') && (
+            <DutchAudio text={audioText ?? correctAnswer} />
+          )}
           {needsAccent && (
             <p className="small mb-1">
               Your answer was accepted; add the accent or dieresis next time.

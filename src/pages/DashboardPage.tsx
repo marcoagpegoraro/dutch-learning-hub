@@ -1,3 +1,5 @@
+import { savedAnswerSpeech } from '../services/savedAnswerSpeech';
+import { DutchAudio } from '../components/DutchAudio';
 import { Link } from 'react-router-dom';
 import { useAppState } from '../app/AppStateContext';
 import { ModuleCard } from '../components/ModuleCard';
@@ -209,7 +211,8 @@ export function DashboardPage() {
                     />
                     {learningModules.find((module) => module.id === attempt.moduleId)?.title ??
                       'A1 course'}{' '}
-                    · <span lang="nl">{attempt.correctAnswer}</span>
+                    · <span lang="nl">{attempt.correctAnswer}</span>{' '}
+                    <DutchAudio text={savedAnswerSpeech(attempt)} compact />
                   </span>
                   <span className="text-secondary text-nowrap small">{attempt.xpEarned} XP</span>
                 </div>

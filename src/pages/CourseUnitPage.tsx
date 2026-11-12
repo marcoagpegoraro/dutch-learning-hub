@@ -1,3 +1,4 @@
+import { DutchAudio } from '../components/DutchAudio';
 import { useState } from 'react';
 import { Link, Navigate, useParams } from 'react-router-dom';
 import { useAppState } from '../app/AppStateContext';
@@ -66,6 +67,9 @@ export function CourseUnitPage() {
                   <p>{lesson.explanation}</p>
                   <div className="alert alert-light border" lang="nl">
                     {lesson.example}
+                    <div className="mt-2">
+                      <DutchAudio text={lesson.example} />
+                    </div>
                   </div>
                   <div className="d-flex gap-2">
                     <button
@@ -96,21 +100,23 @@ export function CourseUnitPage() {
             </div>
           ) : (
             <>
-              <fieldset disabled={!lessonsDone || Boolean(feedback)}>
+              <fieldset>
                 {unit.checkpoint.options.map((option) => (
-                  <label
-                    className={`answer-choice mb-2 ${answer === option ? 'selected' : ''}`}
-                    key={option}
-                  >
-                    <input
-                      className="form-check-input"
-                      type="radio"
-                      name="checkpoint"
-                      checked={answer === option}
-                      onChange={() => setAnswer(option)}
-                    />
-                    <span lang="nl">{option}</span>
-                  </label>
+                  <div key={option}>
+                    <label className={`answer-choice mb-2 ${answer === option ? 'selected' : ''}`}>
+                      <input
+                        className="form-check-input"
+                        type="radio"
+                        name="checkpoint"
+                        checked={answer === option}
+                        onChange={() => setAnswer(option)}
+                      />
+                      <span lang="nl">{option}</span>
+                    </label>
+                    <div className="mb-2">
+                      <DutchAudio text={option} compact />
+                    </div>
+                  </div>
                 ))}
               </fieldset>
               {feedback && (

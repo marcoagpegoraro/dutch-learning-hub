@@ -1,3 +1,5 @@
+import { savedAnswerSpeech } from '../services/savedAnswerSpeech';
+import { DutchAudio } from '../components/DutchAudio';
 import { Link } from 'react-router-dom';
 import { useAppState } from '../app/AppStateContext';
 import { learningModules } from '../data/modules';
@@ -165,7 +167,8 @@ export function ProgressPage() {
                       >
                         {attempt.correct ? 'Correct' : 'Review'}
                       </span>
-                      <span lang="nl">{attempt.correctAnswer}</span>
+                      <span lang="nl">{attempt.correctAnswer}</span>{' '}
+                      <DutchAudio text={savedAnswerSpeech(attempt)} compact />
                       <small className="text-secondary ms-2">({attempt.prompt})</small>
                     </div>
                     <small className="text-secondary text-nowrap">

@@ -6,7 +6,7 @@ export function TranslationPractice() {
     <QuizPractice
       moduleId="translation"
       title="Vertalen"
-      subtitle="Translate curated English and Portuguese prompts without pretending free-form alternatives are equivalent."
+      subtitle="Translate English and Portuguese into Dutch. Correct phrases are saved and removed from this difficulty’s queue."
       questions={translationQuestions}
       inputPlaceholder="Type the complete Dutch sentence"
       difficultyLabels={{
@@ -14,6 +14,7 @@ export function TranslationPractice() {
         medium: 'Medium — everyday sentences',
         hard: 'Hard — mixed grammar and word order',
       }}
+      excludeMastered
       showAnswerDiff
     />
   );

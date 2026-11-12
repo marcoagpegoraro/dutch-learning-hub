@@ -1,3 +1,4 @@
+import { DutchAudio } from '../../components/DutchAudio';
 import { useEffect, useRef, useState, type DragEvent } from 'react';
 import { useAppState } from '../../app/AppStateContext';
 import { ExerciseShell } from '../../components/ExerciseShell';
@@ -204,6 +205,11 @@ export function WordOrderPractice() {
                   <span className="text-secondary">Choose words below to build your answer…</span>
                 )}
               </div>
+              {chosen.length > 0 && (
+                <div className="mb-3">
+                  <DutchAudio text={chosen.map((token) => token.value).join(' ')} />
+                </div>
+              )}
               <div
                 className="word-bank mb-3"
                 aria-label="Available words"
@@ -214,19 +220,21 @@ export function WordOrderPractice() {
                 }}
               >
                 {available.map((token) => (
-                  <button
-                    className="btn btn-outline-primary word-token"
-                    type="button"
-                    key={token.id}
-                    onClick={() => chooseToken(token.id)}
-                    disabled={Boolean(feedback)}
-                    draggable={!feedback}
-                    onDragStart={(event) =>
-                      event.dataTransfer.setData('text/plain', `available:${token.id}`)
-                    }
-                  >
-                    <span lang="nl">{token.value}</span>
-                  </button>
+                  <span className="d-inline-flex flex-column gap-1" key={token.id}>
+                    <button
+                      className="btn btn-outline-primary word-token"
+                      type="button"
+                      onClick={() => chooseToken(token.id)}
+                      disabled={Boolean(feedback)}
+                      draggable={!feedback}
+                      onDragStart={(event) =>
+                        event.dataTransfer.setData('text/plain', `available:${token.id}`)
+                      }
+                    >
+                      <span lang="nl">{token.value}</span>
+                    </button>
+                    <DutchAudio text={token.value} compact />
+                  </span>
                 ))}
               </div>
               {invalid && (

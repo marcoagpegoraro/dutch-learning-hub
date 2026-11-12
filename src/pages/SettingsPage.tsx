@@ -150,7 +150,8 @@ export function SettingsPage() {
                 <label className="form-check-label" htmlFor="soundEnabled">
                   <strong>Enable sound</strong>
                   <span className="d-block small text-secondary">
-                    Controls listening playback, conversation audio, and pronunciation examples.
+                    Enables Dutch pronunciation throughout the app, including words, sentences,
+                    listening, and conversations.
                   </span>
                 </label>
               </div>

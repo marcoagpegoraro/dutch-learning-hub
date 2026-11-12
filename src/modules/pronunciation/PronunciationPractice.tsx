@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useAppState } from '../../app/AppStateContext';
 import { ExerciseShell } from '../../components/ExerciseShell';
-import { useSpeechSynthesis } from '../../hooks/useSpeechSynthesis';
+import { DutchAudio } from '../../components/DutchAudio';
 import { calculateXp } from '../../services/scoring';
 import type { Difficulty } from '../../types/exercise';
 import { pronunciationPhrases, recognitionMatchPercent } from './pronunciationData';
@@ -45,7 +45,6 @@ function pickPhrase(difficulty: Difficulty, previousId?: string) {
 
 export function PronunciationPractice() {
   const { state, updateSettings, addAttempt } = useAppState();
-  const speech = useSpeechSynthesis();
   const Recognition = recognitionConstructor();
   const recognitionRef = useRef<RecognitionLike | null>(null);
   const [difficulty, setDifficulty] = useState<Difficulty>(state.settings.defaultDifficulty);
@@ -139,23 +138,7 @@ export function PronunciationPractice() {
               </h2>
               <p className="text-secondary">Focus: {phrase.focus}</p>
               <div className="d-flex flex-wrap justify-content-center gap-2 my-4">
-                <button
-                  className="btn btn-outline-primary"
-                  type="button"
-                  disabled={!speech.supported || !state.settings.soundEnabled}
-                  onClick={() => speech.speak(phrase.phrase)}
-                >
-                  <i className="bi bi-volume-up me-2" aria-hidden="true" />
-                  Play example
-                </button>
-                <button
-                  className="btn btn-outline-primary"
-                  type="button"
-                  disabled={!speech.supported || !state.settings.soundEnabled}
-                  onClick={() => speech.speak(phrase.phrase, 0.68)}
-                >
-                  Play slowly
-                </button>
+                <DutchAudio text={phrase.phrase} />
                 <button
                   className={`btn ${listening ? 'btn-danger' : 'btn-primary'}`}
                   type="button"

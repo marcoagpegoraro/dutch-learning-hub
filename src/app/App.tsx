@@ -33,50 +33,53 @@ import { SettingsPage } from '../pages/SettingsPage';
 import { CoursePage } from '../pages/CoursePage';
 import { CourseUnitPage } from '../pages/CourseUnitPage';
 import { DailyGoalsPage } from '../pages/DailyGoalsPage';
+import { SpeechSynthesisProvider } from './SpeechSynthesisProvider';
 import { AppStateProvider } from './AppStateContext';
 
 export function App() {
   return (
     <AppStateProvider>
       <HashRouter>
-        <Routes>
-          <Route element={<AppShell />}>
-            <Route index element={<DashboardPage />} />
-            <Route path="learn" element={<LearnPage />} />
-            <Route path="course" element={<CoursePage />} />
-            <Route path="course/:unitId" element={<CourseUnitPage />} />
-            <Route path="goals" element={<DailyGoalsPage />} />
-            <Route path="review" element={<ReviewPage />} />
-            <Route path="progress" element={<ProgressPage />} />
-            <Route path="achievements" element={<AchievementsPage />} />
-            <Route path="settings" element={<SettingsPage />} />
-            <Route path="about" element={<AboutPage />} />
-            <Route path="practice/time" element={<TimePractice />} />
-            <Route path="practice/articles" element={<ArticlesPractice />} />
-            <Route path="practice/body" element={<BodyPractice />} />
-            <Route path="practice/vocabulary" element={<VocabularyPractice />} />
-            <Route path="practice/word-lists" element={<WordListsPractice />} />
-            <Route path="practice/numbers" element={<NumbersPractice />} />
-            <Route path="practice/dates" element={<DatesPractice />} />
-            <Route path="practice/verbs" element={<VerbsPractice />} />
-            <Route path="practice/word-order" element={<WordOrderPractice />} />
-            <Route path="practice/missing-word" element={<MissingWordPractice />} />
-            <Route path="practice/modal-verbs" element={<ModalVerbsPractice />} />
-            <Route path="practice/negation" element={<NegationPractice />} />
-            <Route path="practice/separable-verbs" element={<SeparableVerbsPractice />} />
-            <Route path="practice/perfect-tense" element={<PerfectTensePractice />} />
-            <Route path="practice/prepositions" element={<PrepositionsPractice />} />
-            <Route path="practice/find-the-mistake" element={<FindTheMistakePractice />} />
-            <Route path="practice/translation" element={<TranslationPractice />} />
-            <Route path="practice/listening" element={<ListeningPractice />} />
-            <Route path="practice/conversations" element={<ConversationPractice />} />
-            <Route path="practice/picture-description" element={<PictureDescriptionPractice />} />
-            <Route path="practice/pronunciation" element={<PronunciationPractice />} />
-            <Route path="practice/boss-battle" element={<BossBattlePractice />} />
-            <Route path="modules/:moduleId" element={<PlaceholderModulePage />} />
-            <Route path="*" element={<NotFoundPage />} />
-          </Route>
-        </Routes>
+        <SpeechSynthesisProvider>
+          <Routes>
+            <Route element={<AppShell />}>
+              <Route index element={<DashboardPage />} />
+              <Route path="learn" element={<LearnPage />} />
+              <Route path="course" element={<CoursePage />} />
+              <Route path="course/:unitId" element={<CourseUnitPage />} />
+              <Route path="goals" element={<DailyGoalsPage />} />
+              <Route path="review" element={<ReviewPage />} />
+              <Route path="progress" element={<ProgressPage />} />
+              <Route path="achievements" element={<AchievementsPage />} />
+              <Route path="settings" element={<SettingsPage />} />
+              <Route path="about" element={<AboutPage />} />
+              <Route path="practice/time" element={<TimePractice />} />
+              <Route path="practice/articles" element={<ArticlesPractice />} />
+              <Route path="practice/body" element={<BodyPractice />} />
+              <Route path="practice/vocabulary" element={<VocabularyPractice />} />
+              <Route path="practice/word-lists" element={<WordListsPractice />} />
+              <Route path="practice/numbers" element={<NumbersPractice />} />
+              <Route path="practice/dates" element={<DatesPractice />} />
+              <Route path="practice/verbs" element={<VerbsPractice />} />
+              <Route path="practice/word-order" element={<WordOrderPractice />} />
+              <Route path="practice/missing-word" element={<MissingWordPractice />} />
+              <Route path="practice/modal-verbs" element={<ModalVerbsPractice />} />
+              <Route path="practice/negation" element={<NegationPractice />} />
+              <Route path="practice/separable-verbs" element={<SeparableVerbsPractice />} />
+              <Route path="practice/perfect-tense" element={<PerfectTensePractice />} />
+              <Route path="practice/prepositions" element={<PrepositionsPractice />} />
+              <Route path="practice/find-the-mistake" element={<FindTheMistakePractice />} />
+              <Route path="practice/translation" element={<TranslationPractice />} />
+              <Route path="practice/listening" element={<ListeningPractice />} />
+              <Route path="practice/conversations" element={<ConversationPractice />} />
+              <Route path="practice/picture-description" element={<PictureDescriptionPractice />} />
+              <Route path="practice/pronunciation" element={<PronunciationPractice />} />
+              <Route path="practice/boss-battle" element={<BossBattlePractice />} />
+              <Route path="modules/:moduleId" element={<PlaceholderModulePage />} />
+              <Route path="*" element={<NotFoundPage />} />
+            </Route>
+          </Routes>
+        </SpeechSynthesisProvider>
       </HashRouter>
     </AppStateProvider>
   );

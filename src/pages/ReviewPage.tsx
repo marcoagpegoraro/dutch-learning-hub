@@ -1,3 +1,5 @@
+import { DutchAudio } from '../components/DutchAudio';
+import { savedAnswerSpeech } from '../services/savedAnswerSpeech';
 import { useState, type FormEvent } from 'react';
 import { Link } from 'react-router-dom';
 import { useAppState } from '../app/AppStateContext';
@@ -8,6 +10,7 @@ export function ReviewPage() {
   const [includeFuture, setIncludeFuture] = useState(false);
   const [answer, setAnswer] = useState('');
   const [message, setMessage] = useState('');
+  const [feedbackAudio, setFeedbackAudio] = useState('');
   const [messageNeedsAccent, setMessageNeedsAccent] = useState(false);
   const [invalid, setInvalid] = useState(false);
   const now = Date.now();
@@ -22,6 +25,7 @@ export function ReviewPage() {
       setInvalid(true);
       return;
     }
+    setFeedbackAudio(savedAnswerSpeech(current));
     const result = evaluateAcceptedAnswer(answer, [current.correctAnswer]);
     reviewMistake(current.id, result.correct ? 'correct' : 'again');
     setMessage(
@@ -38,6 +42,7 @@ export function ReviewPage() {
 
   function markKnown() {
     if (!current) return;
+    setFeedbackAudio(savedAnswerSpeech(current));
     reviewMistake(current.id, 'known');
     setMessage(`Marked “${current.correctAnswer}” as known.`);
     setMessageNeedsAccent(false);
@@ -58,6 +63,11 @@ export function ReviewPage() {
           aria-live="polite"
         >
           {message}
+          {feedbackAudio && (
+            <div className="mt-2">
+              <DutchAudio text={feedbackAudio} />
+            </div>
+          )}
         </div>
       )}
 
@@ -106,6 +116,7 @@ export function ReviewPage() {
                         className="btn btn-outline-secondary"
                         type="button"
                         onClick={() => {
+                          setFeedbackAudio(savedAnswerSpeech(current));
                           reviewMistake(current.id, 'again');
                           setMessage(
                             `“${current.correctAnswer}” will return later in this session.`,

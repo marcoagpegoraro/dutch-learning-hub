@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useAppState } from '../../app/AppStateContext';
 import { ExerciseShell } from '../../components/ExerciseShell';
-import { useSpeechSynthesis } from '../../hooks/useSpeechSynthesis';
+import { DutchAudio } from '../../components/DutchAudio';
 import { calculateXp } from '../../services/scoring';
 import type { Difficulty } from '../../types/exercise';
 import {
@@ -19,7 +19,6 @@ interface DialogueLine {
 
 export function ConversationPractice() {
   const { state, updateSettings, addAttempt } = useAppState();
-  const speech = useSpeechSynthesis();
   const [difficulty, setDifficulty] = useState<Difficulty>(state.settings.defaultDifficulty);
   const [scenario, setScenario] = useState<ConversationScenario | null>(null);
   const [stepId, setStepId] = useState('');
@@ -159,6 +158,9 @@ export function ConversationPractice() {
                       <p lang="nl" className="mb-0">
                         {line.text}
                       </p>
+                      <div className="mt-2">
+                        <DutchAudio text={line.text} compact />
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -183,16 +185,8 @@ export function ConversationPractice() {
                 ) : (
                   currentStep && (
                     <>
-                      <div className="d-flex flex-wrap gap-2 mb-3">
-                        <button
-                          className="btn btn-outline-primary"
-                          type="button"
-                          disabled={!speech.supported || !state.settings.soundEnabled}
-                          onClick={() => speech.speak(currentStep.message)}
-                        >
-                          <i className="bi bi-volume-up me-2" aria-hidden="true" />
-                          Hear this line
-                        </button>
+                      <div className="mb-3">
+                        <DutchAudio text={currentStep.message} />
                       </div>
                       {!feedback ? (
                         <div
@@ -201,15 +195,17 @@ export function ConversationPractice() {
                           aria-label="Choose your response"
                         >
                           {currentStep.choices.map((response) => (
-                            <button
-                              className="btn btn-light border text-start p-3"
-                              type="button"
-                              key={response.text}
-                              onClick={() => chooseResponse(response)}
-                              lang="nl"
-                            >
-                              {response.text}
-                            </button>
+                            <div className="d-flex align-items-center gap-2" key={response.text}>
+                              <button
+                                className="btn btn-light border text-start p-3 flex-grow-1"
+                                type="button"
+                                onClick={() => chooseResponse(response)}
+                                lang="nl"
+                              >
+                                {response.text}
+                              </button>
+                              <DutchAudio text={response.text} compact />
+                            </div>
                           ))}
                         </div>
                       ) : (

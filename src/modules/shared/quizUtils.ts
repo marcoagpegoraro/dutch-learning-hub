@@ -38,3 +38,28 @@ export function pickQuizQuestion(
     matching.length > 1 ? matching.filter((question) => question.id !== previousId) : matching;
   return candidates[Math.floor(random() * candidates.length)];
 }
+
+// A finite practice queue never falls back to another difficulty when this one is finished.
+export function remainingQuizQuestions(
+  questions: QuizQuestion[],
+  difficulty: Difficulty,
+  masteredIds: readonly string[],
+): QuizQuestion[] {
+  const mastered = new Set(masteredIds);
+  return questions.filter(
+    (question) => question.difficulty === difficulty && !mastered.has(question.id),
+  );
+}
+
+export function pickUnmasteredQuizQuestion(
+  questions: QuizQuestion[],
+  difficulty: Difficulty,
+  masteredIds: readonly string[],
+  previousId?: string,
+  random: () => number = Math.random,
+): QuizQuestion | undefined {
+  const remaining = remainingQuizQuestions(questions, difficulty, masteredIds);
+  const candidates =
+    remaining.length > 1 ? remaining.filter((question) => question.id !== previousId) : remaining;
+  return candidates[Math.floor(random() * candidates.length)];
+}
