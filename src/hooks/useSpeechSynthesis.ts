@@ -3,6 +3,9 @@ export { selectDutchVoice } from '../services/dutchSpeech';
 
 export interface SpeechState {
   supported: boolean;
+  voices: SpeechSynthesisVoice[];
+  voice?: SpeechSynthesisVoice;
+  refreshVoices: () => void;
   enabled: boolean;
   speaking: boolean;
   activeText: string;

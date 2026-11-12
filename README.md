@@ -17,6 +17,7 @@ Phases 1–4 of a static, modular Dutch-learning application. The original clock
 - Sentence-correction and curated English/Portuguese translation exercises
 - Word-level answer differences for corrections and translations
 - Dutch text-to-speech throughout exercises, word-list study sheets, corrections, course examples, conversations, picture descriptions, review, and history, with normal/slower playback and shared stop controls
+- Explicit Dutch-only voice selection with a persistent voice picker and pronunciation test in Settings; speech waits for an available Dutch voice instead of using the browser default
 - Speech-synthesis listening practice with normal and slower playback
 - Finite Vertalen queues that persist correctly translated phrases, show completed phrases, and guide learners to the next difficulty when finished
 - Eight predefined branching conversation scenarios

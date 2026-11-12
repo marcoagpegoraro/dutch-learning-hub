@@ -24,7 +24,10 @@ export function DutchAudio({ text, compact = false }: { text: string; compact?: 
         className="btn btn-sm btn-outline-primary"
         disabled={disabled}
         aria-label={`Hear Dutch: ${text}`}
-        title={reason ?? 'Hear Dutch'}
+        title={
+          reason ??
+          (speech.voice ? `Hear Dutch · ${speech.voice.name} (${speech.voice.lang})` : 'Hear Dutch')
+        }
         onClick={() => speech.speak(text)}
       >
         <i className={`bi ${active ? 'bi-soundwave' : 'bi-volume-up'}`} aria-hidden="true" />
@@ -73,6 +76,12 @@ export function SpeechStatus() {
                 ? 'Dutch audio is turned off.'
                 : `Playing Dutch: ${speech.activeText}`)}
         </span>
+        {speech.speaking && speech.voice && (
+          <span className="small">
+            {speech.voice.name} · {speech.voice.lang}
+          </span>
+        )}
+        {speech.error && <Link to="/settings">Escolher voz holandesa</Link>}
         {speech.speaking && (
           <button type="button" className="btn btn-sm btn-outline-primary" onClick={speech.stop}>
             Stop audio

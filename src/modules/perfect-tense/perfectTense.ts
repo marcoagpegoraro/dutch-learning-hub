@@ -7,6 +7,7 @@ interface PerfectVerb {
   participle: string;
   auxiliary: Auxiliary;
   example: string;
+  note?: string;
 }
 
 export const perfectVerbs: PerfectVerb[] = [
@@ -39,6 +40,7 @@ export const perfectVerbs: PerfectVerb[] = [
     participle: 'gezien',
     auxiliary: 'hebben',
     example: 'Ik heb die film gezien',
+    note: 'Die film significa “aquele filme”. Film usa de: de film → die film. É uma construção comum no holandês atual.',
   },
   {
     infinitive: 'gaan',
@@ -85,7 +87,7 @@ export function buildPerfectTenseQuestions(): QuizQuestion[] {
     options: ['hebben', 'zijn'],
     correctOption: verb.auxiliary,
     hint: 'Most verbs use hebben; movement or change-of-state verbs often use zijn.',
-    explanation: `${verb.infinitive} uses ${verb.auxiliary}: ${verb.example}.`,
+    explanation: `${verb.infinitive} uses ${verb.auxiliary}: ${verb.example}.${verb.note ? ` ${verb.note}` : ''}`,
     tags: ['auxiliary'],
   }));
   const medium = perfectVerbs.slice(1, 6).map((verb): QuizQuestion => ({
@@ -100,7 +102,7 @@ export function buildPerfectTenseQuestions(): QuizQuestion[] {
     hint: verb.participle.startsWith('ge')
       ? 'Many participles use ge- + stem + -d/-t.'
       : 'This participle is irregular.',
-    explanation: `The participle is ${verb.participle}: ${verb.example}.`,
+    explanation: `The participle is ${verb.participle}: ${verb.example}.${verb.note ? ` ${verb.note}` : ''}`,
     tags: ['participle'],
   }));
   const hard = perfectVerbs.slice(3).map((verb): QuizQuestion => ({
@@ -111,7 +113,7 @@ export function buildPerfectTenseQuestions(): QuizQuestion[] {
     prompt: `Write this complete perfect-tense sentence: ${verb.example.replace(/^(Ik|Zij|Wij|Hij|Mijn broer) (heb|heeft|hebben|zijn|is) /, '$1 ___ ')}`,
     acceptedAnswers: [verb.example],
     hint: `Use ${verb.auxiliary} and the participle ${verb.participle}.`,
-    explanation: `${verb.example}. The auxiliary is finite and the participle closes the sentence.`,
+    explanation: `${verb.example}. The auxiliary is finite and the participle closes the sentence.${verb.note ? ` ${verb.note}` : ''}`,
     tags: ['sentence building'],
   }));
   return [...easy, ...medium, ...hard];

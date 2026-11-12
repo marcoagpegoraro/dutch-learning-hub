@@ -1,4 +1,4 @@
-import { QuestionsAnswersPractice } from '../modules/questions-answers/QuestionsAnswersPractice';
+import { lazy, Suspense } from 'react';
 import { HashRouter, Route, Routes } from 'react-router-dom';
 import { AppShell } from '../components/AppShell';
 import { ArticlesPractice } from '../modules/articles/ArticlesPractice';
@@ -37,6 +37,12 @@ import { DailyGoalsPage } from '../pages/DailyGoalsPage';
 import { SpeechSynthesisProvider } from './SpeechSynthesisProvider';
 import { AppStateProvider } from './AppStateContext';
 
+const QuestionsAnswersPractice = lazy(() =>
+  import('../modules/questions-answers/QuestionsAnswersPractice').then((module) => ({
+    default: module.QuestionsAnswersPractice,
+  })),
+);
+
 export function App() {
   return (
     <AppStateProvider>
@@ -71,7 +77,20 @@ export function App() {
               <Route path="practice/prepositions" element={<PrepositionsPractice />} />
               <Route path="practice/find-the-mistake" element={<FindTheMistakePractice />} />
               <Route path="practice/translation" element={<TranslationPractice />} />
-              <Route path="practice/questions-answers" element={<QuestionsAnswersPractice />} />
+              <Route
+                path="practice/questions-answers"
+                element={
+                  <Suspense
+                    fallback={
+                      <div className="container py-5" role="status">
+                        Loading questions and answers…
+                      </div>
+                    }
+                  >
+                    <QuestionsAnswersPractice />
+                  </Suspense>
+                }
+              />
               <Route path="practice/listening" element={<ListeningPractice />} />
               <Route path="practice/conversations" element={<ConversationPractice />} />
               <Route path="practice/picture-description" element={<PictureDescriptionPractice />} />

@@ -7,6 +7,7 @@ export interface AppSettings {
   clockType: ClockType;
   showHints: boolean;
   soundEnabled: boolean;
+  dutchVoiceURI: string;
   reducedMotion: boolean;
   dailyGoal: number;
 }

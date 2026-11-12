@@ -1,3 +1,4 @@
+import { DutchVoiceSettings } from '../components/DutchVoiceSettings';
 import { useRef, useState, type ChangeEvent } from 'react';
 import { useAppState } from '../app/AppStateContext';
 import type { Difficulty } from '../types/exercise';
@@ -55,6 +56,7 @@ export function SettingsPage() {
 
       <div className="row g-4">
         <div className="col-12 col-lg-7">
+          <DutchVoiceSettings />
           <section className="card border-0 shadow-sm mb-4">
             <div className="card-body p-4">
               <h2 className="h4 fw-bold mb-4">Learning preferences</h2>

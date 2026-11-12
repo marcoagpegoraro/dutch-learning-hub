@@ -1,5 +1,11 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { createDutchUtterance, selectDutchVoice } from './dutchSpeech';
+import {
+  createDutchUtterance,
+  selectDutchVoice,
+  VOICES_NOT_READY,
+  NO_DUTCH_VOICE,
+  SELECTED_VOICE_UNAVAILABLE,
+} from './dutchSpeech';
 import { savedAnswerSpeech } from './savedAnswerSpeech';
 
 const voice = (lang: string) => ({ lang }) as SpeechSynthesisVoice;
@@ -34,12 +40,51 @@ describe('Dutch audio', () => {
     expect(selectDutchVoice([voice('nld'), voice('en-GB')])).toBeUndefined();
   });
 
-  it('requests a Dutch voice when voices load late, but never intentionally selects an English voice', () => {
-    vi.stubGlobal('window', { SpeechSynthesisUtterance: FakeUtterance });
-    expect(createDutchUtterance('goedemorgen', [])).toMatchObject({ lang: 'nl-NL', voice: null });
-    expect(() => createDutchUtterance('goedemorgen', [voice('en-US')])).toThrow(
-      'No Dutch voice is installed',
+  it('never constructs an utterance while voices are empty or only English is available', () => {
+    const constructor = vi.fn();
+    vi.stubGlobal('window', { SpeechSynthesisUtterance: constructor });
+    expect(() => createDutchUtterance('Ik heb die film gezien.', [])).toThrow(VOICES_NOT_READY);
+    expect(() => createDutchUtterance('Ik heb die film gezien.', [voice('en-US')])).toThrow(
+      NO_DUTCH_VOICE,
     );
+    expect(constructor).not.toHaveBeenCalled();
+  });
+
+  it('honours a saved Dutch voice and uses its actual regional language', () => {
+    vi.stubGlobal('window', { SpeechSynthesisUtterance: FakeUtterance });
+    const netherlands = { ...voice('nl-NL'), voiceURI: 'netherlands' };
+    const belgian = { ...voice('nl-BE'), voiceURI: 'belgian' };
+    const utterance = createDutchUtterance(
+      'Ik heb die film gezien.',
+      [netherlands, belgian],
+      0.68,
+      'belgian',
+    );
+    expect(utterance.voice).toBe(belgian);
+    expect(utterance.lang).toBe('nl-BE');
+    expect(utterance.rate).toBe(0.68);
+  });
+
+  it('rejects unavailable saved voices and English voice URIs without silently changing voice', () => {
+    const constructor = vi.fn();
+    vi.stubGlobal('window', { SpeechSynthesisUtterance: constructor });
+    const dutch = { ...voice('nl-NL'), voiceURI: 'dutch' };
+    const english = { ...voice('en-US'), voiceURI: 'english' };
+    expect(() => createDutchUtterance('gezien', [dutch, english], 0.92, 'english')).toThrow(
+      SELECTED_VOICE_UNAVAILABLE,
+    );
+    expect(() => createDutchUtterance('gezien', [dutch], 0.92, 'deleted-voice')).toThrow(
+      SELECTED_VOICE_UNAVAILABLE,
+    );
+    expect(constructor).not.toHaveBeenCalled();
+  });
+
+  it('plays only after a real Dutch voice becomes available following delayed voice loading', () => {
+    vi.stubGlobal('window', { SpeechSynthesisUtterance: FakeUtterance });
+    expect(() => createDutchUtterance('gezien', [])).toThrow(VOICES_NOT_READY);
+    const dutch = voice('nl-NL');
+    expect(createDutchUtterance('gezien', [dutch]).voice).toBe(dutch);
+    expect(createDutchUtterance('gezien', [dutch]).voice).not.toBeNull();
   });
 
   it('reads the Dutch source when a saved recognition answer is English', () => {

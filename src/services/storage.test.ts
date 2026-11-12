@@ -31,6 +31,19 @@ describe('app state storage', () => {
     expect(parseImportedState(JSON.stringify(state))).toEqual(state);
   });
 
+  it('persists the chosen Dutch voice and defaults old or malformed preferences to automatic', () => {
+    const state = createDefaultState();
+    state.settings.dutchVoiceURI = 'dutch-netherlands-voice';
+    expect(parseImportedState(JSON.stringify(state)).settings.dutchVoiceURI).toBe(
+      'dutch-netherlands-voice',
+    );
+    expect(validateAndMigrateState({ version: 1, settings: {} }).settings.dutchVoiceURI).toBe('');
+    expect(
+      validateAndMigrateState({ version: 1, settings: { dutchVoiceURI: 123 } }).settings
+        .dutchVoiceURI,
+    ).toBe('');
+  });
+
   it('rejects unrelated JSON imports', () => {
     expect(() => parseImportedState('{"hello":"world"}')).toThrow(
       'not a Dutch Learning Hub progress file',

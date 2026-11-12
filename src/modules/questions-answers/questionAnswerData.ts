@@ -399,11 +399,11 @@ export const questionAnswerScenarios: QuestionAnswerScenario[] = [
   {
     id: 'although',
     difficulty: 'hard',
-    englishQuestion: 'Why are you going outside?',
-    englishAnswer: 'I am going outside although it is raining.',
-    dutchQuestions: ['Waarom ga jij naar buiten?'],
-    dutchAnswers: ['Ik ga naar buiten hoewel het regent.'],
-    questionTopic: 'wh-question',
+    englishQuestion: 'Are you going outside?',
+    englishAnswer: 'Yes, I am going outside although it is raining.',
+    dutchQuestions: ['Ga jij naar buiten?'],
+    dutchAnswers: ['Ja, ik ga naar buiten hoewel het regent.'],
+    questionTopic: 'yes-no',
     answerTopic: 'hoewel',
   },
   {

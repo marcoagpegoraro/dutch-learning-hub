@@ -25,6 +25,7 @@ export function createDefaultSettings(): AppSettings {
     clockType: 'analog',
     showHints: false,
     soundEnabled: true,
+    dutchVoiceURI: '',
     reducedMotion: false,
     dailyGoal: 20,
   };
@@ -85,6 +86,7 @@ function sanitizeSettings(value: unknown): AppSettings {
     showHints: typeof value.showHints === 'boolean' ? value.showHints : defaults.showHints,
     soundEnabled:
       typeof value.soundEnabled === 'boolean' ? value.soundEnabled : defaults.soundEnabled,
+    dutchVoiceURI: typeof value.dutchVoiceURI === 'string' ? value.dutchVoiceURI.slice(0, 500) : '',
     reducedMotion:
       typeof value.reducedMotion === 'boolean' ? value.reducedMotion : defaults.reducedMotion,
     dailyGoal: Math.min(100, Math.max(5, finiteNonNegative(value.dailyGoal, defaults.dailyGoal))),
