@@ -872,3 +872,14 @@ html[data-reduced-motion='true'] *::after {
     font-size: 1.55rem;
   }
 }
+
+.word-list-sheet {
+  max-height: 18rem;
+  overflow-y: auto;
+}
+.word-list-prompt {
+  overflow-wrap: anywhere;
+}
+.word-list-card summary {
+  cursor: pointer;
+}

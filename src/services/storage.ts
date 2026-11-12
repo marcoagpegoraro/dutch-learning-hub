@@ -1,3 +1,5 @@
+import { createWordListsState } from '../modules/word-lists/wordListEngine';
+import { loadCustomWordLists, sanitizeWordListsState } from '../modules/word-lists/wordListStorage';
 import type { Difficulty } from '../types/exercise';
 import type {
   AppState,
@@ -50,6 +52,7 @@ export function createDefaultProgress(): ProgressState {
 export function createDefaultState(): AppState {
   return {
     version: APP_STATE_VERSION,
+    wordLists: createWordListsState(),
     profile: { displayName: 'Dutch learner', joinedAt: todayIso() },
     progress: createDefaultProgress(),
     review: { items: [] },
@@ -221,6 +224,7 @@ export function validateAndMigrateState(value: unknown): AppState {
   // Version 1 is intentionally tolerant: known fields are retained and invalid fields reset.
   return {
     version: APP_STATE_VERSION,
+    wordLists: sanitizeWordListsState(value.wordLists),
     profile: isRecord(value.profile)
       ? {
           displayName:
@@ -245,7 +249,11 @@ export function loadAppState(): AppState {
   if (typeof window === 'undefined') return createDefaultState();
   try {
     const stored = window.localStorage.getItem(STORAGE_KEY);
-    return stored ? validateAndMigrateState(JSON.parse(stored)) : createDefaultState();
+    const parsed: unknown = stored ? JSON.parse(stored) : null;
+    const state = validateAndMigrateState(parsed);
+    if (!isRecord(parsed) || !('wordLists' in parsed))
+      state.wordLists.customLists = loadCustomWordLists();
+    return state;
   } catch {
     return createDefaultState();
   }

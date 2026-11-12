@@ -20,6 +20,10 @@ Phases 1–4 of a static, modular Dutch-learning application. The original clock
 - Self-assessed picture-description practice with curated examples
 - Experimental pronunciation shadowing with explicit browser and scoring limitations
 - Easy, medium, and hard time generation
+- Themed word-list memorisation with 40 themes and 800 Dutch–Portuguese word pairs, searchable by theme or word
+- Study sheets, custom lists, Portuguese → Dutch followed by Dutch → Portuguese rounds, and restarts after revealing or missing a theme word
+- Saved theme completion, resumable sessions, repeatable reviews, and up to three interleaved earlier words prioritised by mistake count
+- Word-list sessions, word statistics, and custom lists included in progress backups, with migration of previously saved custom lists
 - Shared XP, streak, accuracy, history, and mistake tracking
 - Versioned and validated `localStorage` state at `dutch-learning-hub:v1`
 - Persistent settings plus progress export, import, and confirmed reset

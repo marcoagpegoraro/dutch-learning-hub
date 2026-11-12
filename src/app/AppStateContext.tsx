@@ -9,11 +9,14 @@ import {
   parseImportedState,
   saveAppState,
 } from '../services/storage';
+import type { WordListsState } from '../modules/word-lists/wordListEngine';
+import { CUSTOM_WORD_LISTS_STORAGE_KEY } from '../modules/word-lists/wordListStorage';
 import type { AppState } from '../types/progress';
 import type { AppSettings } from '../types/settings';
 
 interface AppStateContextValue {
   state: AppState;
+  updateWordLists: (update: (current: WordListsState) => WordListsState) => void;
   updateSettings: (settings: Partial<AppSettings>) => void;
   updateDisplayName: (name: string) => void;
   addAttempt: (attempt: AttemptInput) => void;
@@ -50,6 +53,8 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
   const value = useMemo<AppStateContextValue>(
     () => ({
       state,
+      updateWordLists: (update) =>
+        setState((current) => ({ ...current, wordLists: update(current.wordLists) })),
       updateSettings: (settings) =>
         setState((current) => ({
           ...current,
@@ -70,7 +75,14 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
             items: updateReviewSchedule(current.review.items, itemId, outcome),
           },
         })),
-      resetState: () => setState(createDefaultState()),
+      resetState: () => {
+        setState(createDefaultState());
+        try {
+          window.localStorage.removeItem(CUSTOM_WORD_LISTS_STORAGE_KEY);
+        } catch {
+          /* Storage may be disabled. */
+        }
+      },
       importState: (json) => setState(parseImportedState(json)),
       exportState: () => JSON.stringify(state, null, 2),
     }),

@@ -107,7 +107,7 @@ const placeholderModules: Array<
   [
     'word-lists',
     'Word List Drill',
-    'Memorise a whole list in both directions, or create and save your own.',
+    'Learn 40 themes in both directions, save completions, and revisit past mistakes.',
     'bi-card-list',
     'vocabulary',
   ],
