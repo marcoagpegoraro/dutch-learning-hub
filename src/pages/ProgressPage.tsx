@@ -1,3 +1,4 @@
+import { lazy, Suspense } from 'react';
 import { savedAnswerSpeech } from '../services/savedAnswerSpeech';
 import { DutchAudio } from '../components/DutchAudio';
 import { Link } from 'react-router-dom';
@@ -6,6 +7,10 @@ import { learningModules } from '../data/modules';
 import { getAccuracy, localDateKey } from '../services/progress';
 import { getDailySummary } from '../services/dailyGoals';
 import type { Difficulty } from '../types/exercise';
+
+const A2SkillSummary = lazy(() =>
+  import('../modules/a2/A2SkillSummary').then((m) => ({ default: m.A2SkillSummary })),
+);
 
 export function ProgressPage() {
   const { state } = useAppState();
@@ -104,6 +109,9 @@ export function ProgressPage() {
         </div>
       </div>
 
+      <Suspense fallback={<p>Carregando evidências A2…</p>}>
+        <A2SkillSummary />
+      </Suspense>
       <section className="card border-0 shadow-sm mb-5">
         <div className="card-body p-4">
           <h2 className="h4 fw-bold">Module progress</h2>

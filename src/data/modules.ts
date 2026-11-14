@@ -196,6 +196,16 @@ const availableModuleIds = new Set([
 
 export const learningModules: LearningModule[] = [
   timeModule,
+  {
+    id: 'a2-course',
+    title: 'Trilha A2',
+    description:
+      '12 unidades com leitura, áudio, escrita, gravação, interação e mediação. Progresso por habilidade e portfólio.',
+    icon: 'bi-compass',
+    category: 'skills',
+    status: 'available',
+    route: '/a2',
+  },
   ...placeholderModules.map(([id, title, description, icon, category]): LearningModule => {
     const available = availableModuleIds.has(id);
     return {

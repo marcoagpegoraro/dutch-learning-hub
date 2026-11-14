@@ -1,3 +1,4 @@
+import type { A2State } from '../modules/a2/types';
 /* eslint-disable react-refresh/only-export-components -- provider and its hook form one public API */
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
 import { completeActivity, recordAttempt, type AttemptInput } from '../services/progress';
@@ -16,13 +17,14 @@ import type { AppSettings } from '../types/settings';
 
 interface AppStateContextValue {
   state: AppState;
+  updateA2: (update: (current: A2State) => A2State) => void;
   updateWordLists: (update: (current: WordListsState) => WordListsState) => void;
   updateSettings: (settings: Partial<AppSettings>) => void;
   updateDisplayName: (name: string) => void;
   addAttempt: (attempt: AttemptInput) => void;
   completeActivity: (activityId: string, xp?: number) => void;
   reviewMistake: (itemId: string, outcome: ReviewOutcome) => void;
-  resetState: () => void;
+  resetState: () => Promise<void>;
   importState: (json: string) => void;
   exportState: () => string;
 }
@@ -53,6 +55,7 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
   const value = useMemo<AppStateContextValue>(
     () => ({
       state,
+      updateA2: (update) => setState((current) => ({ ...current, a2: update(current.a2) })),
       updateWordLists: (update) =>
         setState((current) => ({ ...current, wordLists: update(current.wordLists) })),
       updateSettings: (settings) =>
@@ -75,7 +78,9 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
             items: updateReviewSchedule(current.review.items, itemId, outcome),
           },
         })),
-      resetState: () => {
+      resetState: async () => {
+        if (typeof indexedDB !== 'undefined')
+          await (await import('../modules/a2/a2Recordings')).clearA2Recordings();
         setState(createDefaultState());
         try {
           window.localStorage.removeItem(CUSTOM_WORD_LISTS_STORAGE_KEY);

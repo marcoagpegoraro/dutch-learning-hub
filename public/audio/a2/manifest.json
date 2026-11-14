@@ -1,0 +1,1486 @@
+{
+  "kind": "synthetic-dutch-course-audio",
+  "linguisticReview": "pending",
+  "voices": {
+    "Xander": "nl-NL",
+    "Ellen": "nl-BE"
+  },
+  "assets": {
+    "audio/a2/transport-practice-conversation.m4a": {
+      "scriptHash": "b7af4aa5335c7156248b9d451bc6226f315aa2e24f984989cf19492f176a62f6",
+      "voices": [
+        "Ellen",
+        "Xander"
+      ],
+      "durationSeconds": 11.79,
+      "bytes": 75446
+    },
+    "audio/a2/transport-practice-announcement.m4a": {
+      "scriptHash": "b89c23a41ccf828f5e5a07b4ef421715cc91631d515ad0a21a6bf74b3b03949c",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 12.06,
+      "bytes": 77220
+    },
+    "audio/a2/transport-practice-turn-0.m4a": {
+      "scriptHash": "88ce1e7e87f6019eb3e98e19275d4a6773fb923d76dcf3d73554bd627ee6ce60",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 2.29,
+      "bytes": 17325
+    },
+    "audio/a2/transport-practice-turn-1.m4a": {
+      "scriptHash": "06d6aec50267c0206b3e897ecb0d42b79845f6ddc89a9cbd8461ac11309f9da6",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 2.28,
+      "bytes": 17632
+    },
+    "audio/a2/transport-practice-turn-2.m4a": {
+      "scriptHash": "c887a9c690804918713aab225f72889aa62b38e009d286b98a6513ab3dc63e9c",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 1.44,
+      "bytes": 11940
+    },
+    "audio/a2/transport-check-conversation.m4a": {
+      "scriptHash": "8f2decf00de361cc9d35997bbe3538675ccc60f64190dd21701f80305f7c4a19",
+      "voices": [
+        "Ellen",
+        "Xander"
+      ],
+      "durationSeconds": 12.16,
+      "bytes": 77727
+    },
+    "audio/a2/transport-check-announcement.m4a": {
+      "scriptHash": "ae6cf97dec9f1e9628183424d63241fb0a388965d236f5ae4aba6670a0962cfd",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 11.91,
+      "bytes": 76993
+    },
+    "audio/a2/transport-check-turn-0.m4a": {
+      "scriptHash": "88ce1e7e87f6019eb3e98e19275d4a6773fb923d76dcf3d73554bd627ee6ce60",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 2.29,
+      "bytes": 17325
+    },
+    "audio/a2/transport-check-turn-1.m4a": {
+      "scriptHash": "06d6aec50267c0206b3e897ecb0d42b79845f6ddc89a9cbd8461ac11309f9da6",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 2.28,
+      "bytes": 17632
+    },
+    "audio/a2/transport-check-turn-2.m4a": {
+      "scriptHash": "c887a9c690804918713aab225f72889aa62b38e009d286b98a6513ab3dc63e9c",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 1.44,
+      "bytes": 11940
+    },
+    "audio/a2/transport-review-conversation.m4a": {
+      "scriptHash": "f837feb15b7fa7fef2e21ad61753174708185df955bb7ebcd222690c5504eac4",
+      "voices": [
+        "Ellen",
+        "Xander"
+      ],
+      "durationSeconds": 12.03,
+      "bytes": 76733
+    },
+    "audio/a2/transport-review-announcement.m4a": {
+      "scriptHash": "1484436e3b1417835b6b5f5723c7b4eb4e058e00db520c9563b13189e40cc64c",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 12.15,
+      "bytes": 78652
+    },
+    "audio/a2/transport-review-turn-0.m4a": {
+      "scriptHash": "88ce1e7e87f6019eb3e98e19275d4a6773fb923d76dcf3d73554bd627ee6ce60",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 2.29,
+      "bytes": 17325
+    },
+    "audio/a2/transport-review-turn-1.m4a": {
+      "scriptHash": "06d6aec50267c0206b3e897ecb0d42b79845f6ddc89a9cbd8461ac11309f9da6",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 2.28,
+      "bytes": 17632
+    },
+    "audio/a2/transport-review-turn-2.m4a": {
+      "scriptHash": "c887a9c690804918713aab225f72889aa62b38e009d286b98a6513ab3dc63e9c",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 1.44,
+      "bytes": 11940
+    },
+    "audio/a2/contacts-practice-conversation.m4a": {
+      "scriptHash": "6d5b461280a329f4e4a99be61675c0330f6da0ed4b29c5a8bad372d2e28a8013",
+      "voices": [
+        "Ellen",
+        "Xander"
+      ],
+      "durationSeconds": 10.66,
+      "bytes": 68066
+    },
+    "audio/a2/contacts-practice-announcement.m4a": {
+      "scriptHash": "ca035be19f70daecad33be7b300853a5ab597ee154e842d66df2895625b0bdf5",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 11.21,
+      "bytes": 71315
+    },
+    "audio/a2/contacts-practice-turn-0.m4a": {
+      "scriptHash": "e131a456bad7edd1147314b91dff9c1806d9320c244370d9bcd39af58d8950af",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 2.36,
+      "bytes": 17671
+    },
+    "audio/a2/contacts-practice-turn-1.m4a": {
+      "scriptHash": "06d6aec50267c0206b3e897ecb0d42b79845f6ddc89a9cbd8461ac11309f9da6",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 2.28,
+      "bytes": 17632
+    },
+    "audio/a2/contacts-practice-turn-2.m4a": {
+      "scriptHash": "c887a9c690804918713aab225f72889aa62b38e009d286b98a6513ab3dc63e9c",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 1.44,
+      "bytes": 11940
+    },
+    "audio/a2/contacts-check-conversation.m4a": {
+      "scriptHash": "5b3288d08a85b3fcc7fa1de77ae87eec83d4b397605e01b288cf76e452847c63",
+      "voices": [
+        "Ellen",
+        "Xander"
+      ],
+      "durationSeconds": 10.97,
+      "bytes": 70011
+    },
+    "audio/a2/contacts-check-announcement.m4a": {
+      "scriptHash": "0b342806e604e9d67f3450f5163d21fa708619f9994c8327d3300c7023319011",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 11.55,
+      "bytes": 73690
+    },
+    "audio/a2/contacts-check-turn-0.m4a": {
+      "scriptHash": "e131a456bad7edd1147314b91dff9c1806d9320c244370d9bcd39af58d8950af",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 2.36,
+      "bytes": 17671
+    },
+    "audio/a2/contacts-check-turn-1.m4a": {
+      "scriptHash": "06d6aec50267c0206b3e897ecb0d42b79845f6ddc89a9cbd8461ac11309f9da6",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 2.28,
+      "bytes": 17632
+    },
+    "audio/a2/contacts-check-turn-2.m4a": {
+      "scriptHash": "c887a9c690804918713aab225f72889aa62b38e009d286b98a6513ab3dc63e9c",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 1.44,
+      "bytes": 11940
+    },
+    "audio/a2/contacts-review-conversation.m4a": {
+      "scriptHash": "fdc34feda712de4bf25eebd9af2353c4d6e4ff0b41110e7c0869033f50d7ca19",
+      "voices": [
+        "Ellen",
+        "Xander"
+      ],
+      "durationSeconds": 10.4,
+      "bytes": 66543
+    },
+    "audio/a2/contacts-review-announcement.m4a": {
+      "scriptHash": "eb94bc0a47666f264e00f957b1fded1de258d0b5c121cd5f8a2442a0b48054d0",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 10.89,
+      "bytes": 69344
+    },
+    "audio/a2/contacts-review-turn-0.m4a": {
+      "scriptHash": "e131a456bad7edd1147314b91dff9c1806d9320c244370d9bcd39af58d8950af",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 2.36,
+      "bytes": 17671
+    },
+    "audio/a2/contacts-review-turn-1.m4a": {
+      "scriptHash": "06d6aec50267c0206b3e897ecb0d42b79845f6ddc89a9cbd8461ac11309f9da6",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 2.28,
+      "bytes": 17632
+    },
+    "audio/a2/contacts-review-turn-2.m4a": {
+      "scriptHash": "c887a9c690804918713aab225f72889aa62b38e009d286b98a6513ab3dc63e9c",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 1.44,
+      "bytes": 11940
+    },
+    "audio/a2/appointments-practice-conversation.m4a": {
+      "scriptHash": "23d4b73f490a41d0d95f7252aec4459344a61adbb8cbab062203bb7b5fa02cce",
+      "voices": [
+        "Ellen",
+        "Xander"
+      ],
+      "durationSeconds": 11.57,
+      "bytes": 74100
+    },
+    "audio/a2/appointments-practice-announcement.m4a": {
+      "scriptHash": "934236cfd9fe6c9da0cf13df4579f71a46f61efffc350ba7bef7a4dd9ffe2af1",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 12.66,
+      "bytes": 79717
+    },
+    "audio/a2/appointments-practice-turn-0.m4a": {
+      "scriptHash": "f95642c398496f79a1f9aee05f1f52a44217be2ba38f2194f96e33d79ebba9e9",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 2.83,
+      "bytes": 20957
+    },
+    "audio/a2/appointments-practice-turn-1.m4a": {
+      "scriptHash": "06d6aec50267c0206b3e897ecb0d42b79845f6ddc89a9cbd8461ac11309f9da6",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 2.28,
+      "bytes": 17632
+    },
+    "audio/a2/appointments-practice-turn-2.m4a": {
+      "scriptHash": "c887a9c690804918713aab225f72889aa62b38e009d286b98a6513ab3dc63e9c",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 1.44,
+      "bytes": 11940
+    },
+    "audio/a2/appointments-check-conversation.m4a": {
+      "scriptHash": "632bfe12412bf83b1194b754c54313cc1baa5d79ed5b6a401429298493f544f7",
+      "voices": [
+        "Ellen",
+        "Xander"
+      ],
+      "durationSeconds": 11.97,
+      "bytes": 76159
+    },
+    "audio/a2/appointments-check-announcement.m4a": {
+      "scriptHash": "432eb5a1521822832254fc25cdbca94f21071d84d8466147016ba9f724161f0c",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 12.71,
+      "bytes": 81202
+    },
+    "audio/a2/appointments-check-turn-0.m4a": {
+      "scriptHash": "f95642c398496f79a1f9aee05f1f52a44217be2ba38f2194f96e33d79ebba9e9",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 2.83,
+      "bytes": 20957
+    },
+    "audio/a2/appointments-check-turn-1.m4a": {
+      "scriptHash": "06d6aec50267c0206b3e897ecb0d42b79845f6ddc89a9cbd8461ac11309f9da6",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 2.28,
+      "bytes": 17632
+    },
+    "audio/a2/appointments-check-turn-2.m4a": {
+      "scriptHash": "c887a9c690804918713aab225f72889aa62b38e009d286b98a6513ab3dc63e9c",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 1.44,
+      "bytes": 11940
+    },
+    "audio/a2/appointments-review-conversation.m4a": {
+      "scriptHash": "035603c5e2053e84e7633bbaeca26540805da09148ee7f7b44f175dfcfae698a",
+      "voices": [
+        "Ellen",
+        "Xander"
+      ],
+      "durationSeconds": 11.58,
+      "bytes": 74169
+    },
+    "audio/a2/appointments-review-announcement.m4a": {
+      "scriptHash": "6d14d986374b0dd42c246ac0d561eb08487e7ece90a6e1b923c7837708b704a8",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 12.4,
+      "bytes": 78767
+    },
+    "audio/a2/appointments-review-turn-0.m4a": {
+      "scriptHash": "f95642c398496f79a1f9aee05f1f52a44217be2ba38f2194f96e33d79ebba9e9",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 2.83,
+      "bytes": 20957
+    },
+    "audio/a2/appointments-review-turn-1.m4a": {
+      "scriptHash": "06d6aec50267c0206b3e897ecb0d42b79845f6ddc89a9cbd8461ac11309f9da6",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 2.28,
+      "bytes": 17632
+    },
+    "audio/a2/appointments-review-turn-2.m4a": {
+      "scriptHash": "c887a9c690804918713aab225f72889aa62b38e009d286b98a6513ab3dc63e9c",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 1.44,
+      "bytes": 11940
+    },
+    "audio/a2/home-practice-conversation.m4a": {
+      "scriptHash": "b00ef5b608c0db68752d79d1ecb7640f84d9d5e1b02acb6c180bdd1349f5085b",
+      "voices": [
+        "Ellen",
+        "Xander"
+      ],
+      "durationSeconds": 11.79,
+      "bytes": 75082
+    },
+    "audio/a2/home-practice-announcement.m4a": {
+      "scriptHash": "599024ad5455e5ae54159b83e2966b3bf0b7afb95b35c829895051ed2e02f348",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 10.59,
+      "bytes": 67164
+    },
+    "audio/a2/home-practice-turn-0.m4a": {
+      "scriptHash": "ba5a58b0f1ec4d321e8bb002802dc4d18a474eb0344efbe2d9fb0d4bc2c6ef9a",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 3.12,
+      "bytes": 22515
+    },
+    "audio/a2/home-practice-turn-1.m4a": {
+      "scriptHash": "06d6aec50267c0206b3e897ecb0d42b79845f6ddc89a9cbd8461ac11309f9da6",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 2.28,
+      "bytes": 17632
+    },
+    "audio/a2/home-practice-turn-2.m4a": {
+      "scriptHash": "c887a9c690804918713aab225f72889aa62b38e009d286b98a6513ab3dc63e9c",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 1.44,
+      "bytes": 11940
+    },
+    "audio/a2/home-check-conversation.m4a": {
+      "scriptHash": "5a8d3eae0ad4fa34da2b28e6e408053cbc508f30d7b18c81e92fde9248e2ede2",
+      "voices": [
+        "Ellen",
+        "Xander"
+      ],
+      "durationSeconds": 11.27,
+      "bytes": 71775
+    },
+    "audio/a2/home-check-announcement.m4a": {
+      "scriptHash": "6b17df861f4b04333896775dfbe84b597ecd657a9abc40a57ecbb35ee0cc3b4a",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 10.38,
+      "bytes": 65534
+    },
+    "audio/a2/home-check-turn-0.m4a": {
+      "scriptHash": "ba5a58b0f1ec4d321e8bb002802dc4d18a474eb0344efbe2d9fb0d4bc2c6ef9a",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 3.12,
+      "bytes": 22515
+    },
+    "audio/a2/home-check-turn-1.m4a": {
+      "scriptHash": "06d6aec50267c0206b3e897ecb0d42b79845f6ddc89a9cbd8461ac11309f9da6",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 2.28,
+      "bytes": 17632
+    },
+    "audio/a2/home-check-turn-2.m4a": {
+      "scriptHash": "c887a9c690804918713aab225f72889aa62b38e009d286b98a6513ab3dc63e9c",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 1.44,
+      "bytes": 11940
+    },
+    "audio/a2/home-review-conversation.m4a": {
+      "scriptHash": "eacbda11c7dcc81855a1c1c58985e8c6cccda50670b494f8448451cc712a1a2c",
+      "voices": [
+        "Ellen",
+        "Xander"
+      ],
+      "durationSeconds": 11.92,
+      "bytes": 75141
+    },
+    "audio/a2/home-review-announcement.m4a": {
+      "scriptHash": "cf5fc81f3d3eeef3d0af15162c01ef28840738c9764b2b3f0059e447dfce4fa9",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 10.74,
+      "bytes": 67639
+    },
+    "audio/a2/home-review-turn-0.m4a": {
+      "scriptHash": "ba5a58b0f1ec4d321e8bb002802dc4d18a474eb0344efbe2d9fb0d4bc2c6ef9a",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 3.12,
+      "bytes": 22515
+    },
+    "audio/a2/home-review-turn-1.m4a": {
+      "scriptHash": "06d6aec50267c0206b3e897ecb0d42b79845f6ddc89a9cbd8461ac11309f9da6",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 2.28,
+      "bytes": 17632
+    },
+    "audio/a2/home-review-turn-2.m4a": {
+      "scriptHash": "c887a9c690804918713aab225f72889aa62b38e009d286b98a6513ab3dc63e9c",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 1.44,
+      "bytes": 11940
+    },
+    "audio/a2/shopping-practice-conversation.m4a": {
+      "scriptHash": "413ecd5358859c81daa805b005c0b5759d4ffb56e579aebddb9eb0ab9caee169",
+      "voices": [
+        "Ellen",
+        "Xander"
+      ],
+      "durationSeconds": 10.71,
+      "bytes": 68703
+    },
+    "audio/a2/shopping-practice-announcement.m4a": {
+      "scriptHash": "35b7a31b14d76de2758055bce2b64e1c101f573c1373c7db11a38cfab980c01f",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 13.37,
+      "bytes": 86648
+    },
+    "audio/a2/shopping-practice-turn-0.m4a": {
+      "scriptHash": "5be9fe43d65bd33d3e1a0b713a1ba8dd6d163f6390f1197f002c166da0b1f908",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 2.63,
+      "bytes": 19516
+    },
+    "audio/a2/shopping-practice-turn-1.m4a": {
+      "scriptHash": "06d6aec50267c0206b3e897ecb0d42b79845f6ddc89a9cbd8461ac11309f9da6",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 2.28,
+      "bytes": 17632
+    },
+    "audio/a2/shopping-practice-turn-2.m4a": {
+      "scriptHash": "c887a9c690804918713aab225f72889aa62b38e009d286b98a6513ab3dc63e9c",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 1.44,
+      "bytes": 11940
+    },
+    "audio/a2/shopping-check-conversation.m4a": {
+      "scriptHash": "c1cf563abb39fc6b42519d52180a5059c55593a5be341e1f989e28ce8af67e4b",
+      "voices": [
+        "Ellen",
+        "Xander"
+      ],
+      "durationSeconds": 10.56,
+      "bytes": 67395
+    },
+    "audio/a2/shopping-check-announcement.m4a": {
+      "scriptHash": "4fcb8124e777718772ecdb70d8f7e98f3018ed1c5da13583e00d6e1569d27b88",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 13.3,
+      "bytes": 85195
+    },
+    "audio/a2/shopping-check-turn-0.m4a": {
+      "scriptHash": "5be9fe43d65bd33d3e1a0b713a1ba8dd6d163f6390f1197f002c166da0b1f908",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 2.63,
+      "bytes": 19516
+    },
+    "audio/a2/shopping-check-turn-1.m4a": {
+      "scriptHash": "06d6aec50267c0206b3e897ecb0d42b79845f6ddc89a9cbd8461ac11309f9da6",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 2.28,
+      "bytes": 17632
+    },
+    "audio/a2/shopping-check-turn-2.m4a": {
+      "scriptHash": "c887a9c690804918713aab225f72889aa62b38e009d286b98a6513ab3dc63e9c",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 1.44,
+      "bytes": 11940
+    },
+    "audio/a2/shopping-review-conversation.m4a": {
+      "scriptHash": "56aa7a5148214357a4e5323d2b163a9d240d4405bdd065355589c11fcafa0b95",
+      "voices": [
+        "Ellen",
+        "Xander"
+      ],
+      "durationSeconds": 10.89,
+      "bytes": 69461
+    },
+    "audio/a2/shopping-review-announcement.m4a": {
+      "scriptHash": "617cff5e701496fd10e2101d265afdca67b0080af159356549023b60d44dd1b6",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 13.2,
+      "bytes": 84964
+    },
+    "audio/a2/shopping-review-turn-0.m4a": {
+      "scriptHash": "5be9fe43d65bd33d3e1a0b713a1ba8dd6d163f6390f1197f002c166da0b1f908",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 2.63,
+      "bytes": 19516
+    },
+    "audio/a2/shopping-review-turn-1.m4a": {
+      "scriptHash": "06d6aec50267c0206b3e897ecb0d42b79845f6ddc89a9cbd8461ac11309f9da6",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 2.28,
+      "bytes": 17632
+    },
+    "audio/a2/shopping-review-turn-2.m4a": {
+      "scriptHash": "c887a9c690804918713aab225f72889aa62b38e009d286b98a6513ab3dc63e9c",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 1.44,
+      "bytes": 11940
+    },
+    "audio/a2/restaurant-practice-conversation.m4a": {
+      "scriptHash": "40acac5318fdbc7187c41761c24e1f57b4a560f58cb30afc46e3cb5141f8d128",
+      "voices": [
+        "Ellen",
+        "Xander"
+      ],
+      "durationSeconds": 12.0,
+      "bytes": 76696
+    },
+    "audio/a2/restaurant-practice-announcement.m4a": {
+      "scriptHash": "9eba8b8367e6a0f57efef00a9cc37061830742748afe77a8a637b0fb918cef19",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 12.44,
+      "bytes": 78715
+    },
+    "audio/a2/restaurant-practice-turn-0.m4a": {
+      "scriptHash": "1253722a3a5d949fe021047da5c84cf1cd01b162308ffc03ed39f7b772a70e23",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 2.52,
+      "bytes": 19575
+    },
+    "audio/a2/restaurant-practice-turn-1.m4a": {
+      "scriptHash": "06d6aec50267c0206b3e897ecb0d42b79845f6ddc89a9cbd8461ac11309f9da6",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 2.28,
+      "bytes": 17632
+    },
+    "audio/a2/restaurant-practice-turn-2.m4a": {
+      "scriptHash": "c887a9c690804918713aab225f72889aa62b38e009d286b98a6513ab3dc63e9c",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 1.44,
+      "bytes": 11940
+    },
+    "audio/a2/restaurant-check-conversation.m4a": {
+      "scriptHash": "be1c871c9f29e405ed8692359fbfd81e5b28fd65ebac65fea0bc0d9604bd007f",
+      "voices": [
+        "Ellen",
+        "Xander"
+      ],
+      "durationSeconds": 11.65,
+      "bytes": 74498
+    },
+    "audio/a2/restaurant-check-announcement.m4a": {
+      "scriptHash": "89a02a9900c99f759e8c96c60df46115475e6a8a326d2006402470dc2632c604",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 12.7,
+      "bytes": 80008
+    },
+    "audio/a2/restaurant-check-turn-0.m4a": {
+      "scriptHash": "1253722a3a5d949fe021047da5c84cf1cd01b162308ffc03ed39f7b772a70e23",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 2.52,
+      "bytes": 19575
+    },
+    "audio/a2/restaurant-check-turn-1.m4a": {
+      "scriptHash": "06d6aec50267c0206b3e897ecb0d42b79845f6ddc89a9cbd8461ac11309f9da6",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 2.28,
+      "bytes": 17632
+    },
+    "audio/a2/restaurant-check-turn-2.m4a": {
+      "scriptHash": "c887a9c690804918713aab225f72889aa62b38e009d286b98a6513ab3dc63e9c",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 1.44,
+      "bytes": 11940
+    },
+    "audio/a2/restaurant-review-conversation.m4a": {
+      "scriptHash": "c63c42916a7182eedb9955c4347bf66aa9f1fd0fe117127639d18e7336a9b588",
+      "voices": [
+        "Ellen",
+        "Xander"
+      ],
+      "durationSeconds": 11.94,
+      "bytes": 76377
+    },
+    "audio/a2/restaurant-review-announcement.m4a": {
+      "scriptHash": "359667d4f104fd4a4f02a0ce7304c5db084700071c03a156a2877195e5e9f0a4",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 12.56,
+      "bytes": 78806
+    },
+    "audio/a2/restaurant-review-turn-0.m4a": {
+      "scriptHash": "1253722a3a5d949fe021047da5c84cf1cd01b162308ffc03ed39f7b772a70e23",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 2.52,
+      "bytes": 19575
+    },
+    "audio/a2/restaurant-review-turn-1.m4a": {
+      "scriptHash": "06d6aec50267c0206b3e897ecb0d42b79845f6ddc89a9cbd8461ac11309f9da6",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 2.28,
+      "bytes": 17632
+    },
+    "audio/a2/restaurant-review-turn-2.m4a": {
+      "scriptHash": "c887a9c690804918713aab225f72889aa62b38e009d286b98a6513ab3dc63e9c",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 1.44,
+      "bytes": 11940
+    },
+    "audio/a2/health-practice-conversation.m4a": {
+      "scriptHash": "613be9f60f2526586521eefd8b3eb5e01d5e86e2cbad865e5374fe6222de2cfc",
+      "voices": [
+        "Ellen",
+        "Xander"
+      ],
+      "durationSeconds": 12.81,
+      "bytes": 81424
+    },
+    "audio/a2/health-practice-announcement.m4a": {
+      "scriptHash": "b693e8ac72493d8434f0dfe4e7da7c51bb2a15008963a1a1b5b58bfdf25a30c4",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 14.09,
+      "bytes": 89519
+    },
+    "audio/a2/health-practice-turn-0.m4a": {
+      "scriptHash": "edd24e94e2eb848decd35173374906d3222857ce29e157feea12786a4a1572b5",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 2.53,
+      "bytes": 19223
+    },
+    "audio/a2/health-practice-turn-1.m4a": {
+      "scriptHash": "06d6aec50267c0206b3e897ecb0d42b79845f6ddc89a9cbd8461ac11309f9da6",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 2.28,
+      "bytes": 17632
+    },
+    "audio/a2/health-practice-turn-2.m4a": {
+      "scriptHash": "c887a9c690804918713aab225f72889aa62b38e009d286b98a6513ab3dc63e9c",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 1.44,
+      "bytes": 11940
+    },
+    "audio/a2/health-check-conversation.m4a": {
+      "scriptHash": "3ee4097cbf222043386987120058f44cca721fff32eaa8415d5e40bef0a326a3",
+      "voices": [
+        "Ellen",
+        "Xander"
+      ],
+      "durationSeconds": 12.97,
+      "bytes": 82619
+    },
+    "audio/a2/health-check-announcement.m4a": {
+      "scriptHash": "86a5435427a30a803333843d527d0e409dfdcc9f7edcf7ef5b71f70315697d96",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 14.15,
+      "bytes": 90529
+    },
+    "audio/a2/health-check-turn-0.m4a": {
+      "scriptHash": "edd24e94e2eb848decd35173374906d3222857ce29e157feea12786a4a1572b5",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 2.53,
+      "bytes": 19223
+    },
+    "audio/a2/health-check-turn-1.m4a": {
+      "scriptHash": "06d6aec50267c0206b3e897ecb0d42b79845f6ddc89a9cbd8461ac11309f9da6",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 2.28,
+      "bytes": 17632
+    },
+    "audio/a2/health-check-turn-2.m4a": {
+      "scriptHash": "c887a9c690804918713aab225f72889aa62b38e009d286b98a6513ab3dc63e9c",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 1.44,
+      "bytes": 11940
+    },
+    "audio/a2/health-review-conversation.m4a": {
+      "scriptHash": "a611c593c1a79084e8268cf4b14ad844f7c852ef4e99dd69c31118951d4b7b7b",
+      "voices": [
+        "Ellen",
+        "Xander"
+      ],
+      "durationSeconds": 12.86,
+      "bytes": 81600
+    },
+    "audio/a2/health-review-announcement.m4a": {
+      "scriptHash": "44636548cd74c85f892195dc2d67e1379810017eae31e49a293a89f916082585",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 14.16,
+      "bytes": 90733
+    },
+    "audio/a2/health-review-turn-0.m4a": {
+      "scriptHash": "edd24e94e2eb848decd35173374906d3222857ce29e157feea12786a4a1572b5",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 2.53,
+      "bytes": 19223
+    },
+    "audio/a2/health-review-turn-1.m4a": {
+      "scriptHash": "06d6aec50267c0206b3e897ecb0d42b79845f6ddc89a9cbd8461ac11309f9da6",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 2.28,
+      "bytes": 17632
+    },
+    "audio/a2/health-review-turn-2.m4a": {
+      "scriptHash": "c887a9c690804918713aab225f72889aa62b38e009d286b98a6513ab3dc63e9c",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 1.44,
+      "bytes": 11940
+    },
+    "audio/a2/work-practice-conversation.m4a": {
+      "scriptHash": "2fe2b2a054c7de0a2a4f0a1d4449effd561814e9b14666e91410c5c0c69aa3fe",
+      "voices": [
+        "Ellen",
+        "Xander"
+      ],
+      "durationSeconds": 10.72,
+      "bytes": 69108
+    },
+    "audio/a2/work-practice-announcement.m4a": {
+      "scriptHash": "c8ffae3761c1b3de4e2dc7fa42fda916a4797258ea441fe18ef9c9a6e1d78a32",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 15.21,
+      "bytes": 95132
+    },
+    "audio/a2/work-practice-turn-0.m4a": {
+      "scriptHash": "c011e77e595e8c1b0f4a6ee3c6c3367d62a0c47b2e2086606204741337198578",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 3.06,
+      "bytes": 22468
+    },
+    "audio/a2/work-practice-turn-1.m4a": {
+      "scriptHash": "06d6aec50267c0206b3e897ecb0d42b79845f6ddc89a9cbd8461ac11309f9da6",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 2.28,
+      "bytes": 17632
+    },
+    "audio/a2/work-practice-turn-2.m4a": {
+      "scriptHash": "c887a9c690804918713aab225f72889aa62b38e009d286b98a6513ab3dc63e9c",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 1.44,
+      "bytes": 11940
+    },
+    "audio/a2/work-check-conversation.m4a": {
+      "scriptHash": "bea585bf32723bd7e76d18b03308b89b4ae2ed514ed589e41d284e59ab9c22aa",
+      "voices": [
+        "Ellen",
+        "Xander"
+      ],
+      "durationSeconds": 10.14,
+      "bytes": 64929
+    },
+    "audio/a2/work-check-announcement.m4a": {
+      "scriptHash": "13d515144a3c62db747bbddecc5cfc428f4585e8037f698fb36a76ed10f14c8b",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 15.0,
+      "bytes": 94122
+    },
+    "audio/a2/work-check-turn-0.m4a": {
+      "scriptHash": "c011e77e595e8c1b0f4a6ee3c6c3367d62a0c47b2e2086606204741337198578",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 3.06,
+      "bytes": 22468
+    },
+    "audio/a2/work-check-turn-1.m4a": {
+      "scriptHash": "06d6aec50267c0206b3e897ecb0d42b79845f6ddc89a9cbd8461ac11309f9da6",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 2.28,
+      "bytes": 17632
+    },
+    "audio/a2/work-check-turn-2.m4a": {
+      "scriptHash": "c887a9c690804918713aab225f72889aa62b38e009d286b98a6513ab3dc63e9c",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 1.44,
+      "bytes": 11940
+    },
+    "audio/a2/work-review-conversation.m4a": {
+      "scriptHash": "c8e829ba86f3ad8cf503e04b497707378af8d159bf6c5214360c1617ef795293",
+      "voices": [
+        "Ellen",
+        "Xander"
+      ],
+      "durationSeconds": 10.05,
+      "bytes": 64628
+    },
+    "audio/a2/work-review-announcement.m4a": {
+      "scriptHash": "554710d5ce94390753c54c8a5a592d416fd8a87995696fa7ab767e9430221b27",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 14.98,
+      "bytes": 93631
+    },
+    "audio/a2/work-review-turn-0.m4a": {
+      "scriptHash": "c011e77e595e8c1b0f4a6ee3c6c3367d62a0c47b2e2086606204741337198578",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 3.06,
+      "bytes": 22468
+    },
+    "audio/a2/work-review-turn-1.m4a": {
+      "scriptHash": "06d6aec50267c0206b3e897ecb0d42b79845f6ddc89a9cbd8461ac11309f9da6",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 2.28,
+      "bytes": 17632
+    },
+    "audio/a2/work-review-turn-2.m4a": {
+      "scriptHash": "c887a9c690804918713aab225f72889aa62b38e009d286b98a6513ab3dc63e9c",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 1.44,
+      "bytes": 11940
+    },
+    "audio/a2/study-practice-conversation.m4a": {
+      "scriptHash": "70cf122bc2e2a2b865899ff754bfb1cf95b86332e78bef9c5adcf5db21a79c92",
+      "voices": [
+        "Ellen",
+        "Xander"
+      ],
+      "durationSeconds": 10.72,
+      "bytes": 68365
+    },
+    "audio/a2/study-practice-announcement.m4a": {
+      "scriptHash": "ef8cff37ddb6a638b783585e780113bc0bb5e5df728ae34932d86b526c127111",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 12.31,
+      "bytes": 77842
+    },
+    "audio/a2/study-practice-turn-0.m4a": {
+      "scriptHash": "9a01513457e925ed0bdc4e127b7cebddd8f13006936155a71269733826ed9915",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 2.32,
+      "bytes": 17522
+    },
+    "audio/a2/study-practice-turn-1.m4a": {
+      "scriptHash": "06d6aec50267c0206b3e897ecb0d42b79845f6ddc89a9cbd8461ac11309f9da6",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 2.28,
+      "bytes": 17632
+    },
+    "audio/a2/study-practice-turn-2.m4a": {
+      "scriptHash": "c887a9c690804918713aab225f72889aa62b38e009d286b98a6513ab3dc63e9c",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 1.44,
+      "bytes": 11940
+    },
+    "audio/a2/study-check-conversation.m4a": {
+      "scriptHash": "7e572c61710a3908aefd09dba42d920e074b56378038134c9c69e34e8fe0fd00",
+      "voices": [
+        "Ellen",
+        "Xander"
+      ],
+      "durationSeconds": 10.63,
+      "bytes": 67377
+    },
+    "audio/a2/study-check-announcement.m4a": {
+      "scriptHash": "95f6789e33bc78da31632a01520d6e6fa57405150bb5c120f7b9b497ff1d5354",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 12.31,
+      "bytes": 77797
+    },
+    "audio/a2/study-check-turn-0.m4a": {
+      "scriptHash": "9a01513457e925ed0bdc4e127b7cebddd8f13006936155a71269733826ed9915",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 2.32,
+      "bytes": 17522
+    },
+    "audio/a2/study-check-turn-1.m4a": {
+      "scriptHash": "06d6aec50267c0206b3e897ecb0d42b79845f6ddc89a9cbd8461ac11309f9da6",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 2.28,
+      "bytes": 17632
+    },
+    "audio/a2/study-check-turn-2.m4a": {
+      "scriptHash": "c887a9c690804918713aab225f72889aa62b38e009d286b98a6513ab3dc63e9c",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 1.44,
+      "bytes": 11940
+    },
+    "audio/a2/study-review-conversation.m4a": {
+      "scriptHash": "793e4fc9ae4114e7d347b08cc9cf36a457c831d62911198e9f81157318a1e3d4",
+      "voices": [
+        "Ellen",
+        "Xander"
+      ],
+      "durationSeconds": 10.89,
+      "bytes": 69673
+    },
+    "audio/a2/study-review-announcement.m4a": {
+      "scriptHash": "7ae6d1f6c529c6ba66862ebfff78baf14c0f9d3c55566ebcc678baf849a8e768",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 12.36,
+      "bytes": 78087
+    },
+    "audio/a2/study-review-turn-0.m4a": {
+      "scriptHash": "9a01513457e925ed0bdc4e127b7cebddd8f13006936155a71269733826ed9915",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 2.32,
+      "bytes": 17522
+    },
+    "audio/a2/study-review-turn-1.m4a": {
+      "scriptHash": "06d6aec50267c0206b3e897ecb0d42b79845f6ddc89a9cbd8461ac11309f9da6",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 2.28,
+      "bytes": 17632
+    },
+    "audio/a2/study-review-turn-2.m4a": {
+      "scriptHash": "c887a9c690804918713aab225f72889aa62b38e009d286b98a6513ab3dc63e9c",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 1.44,
+      "bytes": 11940
+    },
+    "audio/a2/past-practice-conversation.m4a": {
+      "scriptHash": "b72299c7656ed00146e76be2e80061e38b2ebb204f22408d03c0e5c2d025bec9",
+      "voices": [
+        "Ellen",
+        "Xander"
+      ],
+      "durationSeconds": 9.46,
+      "bytes": 60240
+    },
+    "audio/a2/past-practice-announcement.m4a": {
+      "scriptHash": "0051662e71eb7afea7d09bc81afee7e507d37f53cb26861c58e186d23e8157f8",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 13.0,
+      "bytes": 82189
+    },
+    "audio/a2/past-practice-turn-0.m4a": {
+      "scriptHash": "c6f7e086ada2001989847dd4b1693710d6806df7ac48b7fb52fad52c2f8bbbd3",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 2.39,
+      "bytes": 18054
+    },
+    "audio/a2/past-practice-turn-1.m4a": {
+      "scriptHash": "06d6aec50267c0206b3e897ecb0d42b79845f6ddc89a9cbd8461ac11309f9da6",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 2.28,
+      "bytes": 17632
+    },
+    "audio/a2/past-practice-turn-2.m4a": {
+      "scriptHash": "c887a9c690804918713aab225f72889aa62b38e009d286b98a6513ab3dc63e9c",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 1.44,
+      "bytes": 11940
+    },
+    "audio/a2/past-check-conversation.m4a": {
+      "scriptHash": "dde3f7390ad7085ade1e85793cb2016e8d594b8b47a14dee289a41e8d1928ee9",
+      "voices": [
+        "Ellen",
+        "Xander"
+      ],
+      "durationSeconds": 9.55,
+      "bytes": 60558
+    },
+    "audio/a2/past-check-announcement.m4a": {
+      "scriptHash": "10a9f79529a9ab789e22b1f130aa35446a54fff47edd32f40b469cc2c8139bd4",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 13.18,
+      "bytes": 83086
+    },
+    "audio/a2/past-check-turn-0.m4a": {
+      "scriptHash": "c6f7e086ada2001989847dd4b1693710d6806df7ac48b7fb52fad52c2f8bbbd3",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 2.39,
+      "bytes": 18054
+    },
+    "audio/a2/past-check-turn-1.m4a": {
+      "scriptHash": "06d6aec50267c0206b3e897ecb0d42b79845f6ddc89a9cbd8461ac11309f9da6",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 2.28,
+      "bytes": 17632
+    },
+    "audio/a2/past-check-turn-2.m4a": {
+      "scriptHash": "c887a9c690804918713aab225f72889aa62b38e009d286b98a6513ab3dc63e9c",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 1.44,
+      "bytes": 11940
+    },
+    "audio/a2/past-review-conversation.m4a": {
+      "scriptHash": "2f31288c55ffa397077ba452faaeaf23cd01c35163ed8364325cdbebc4d64797",
+      "voices": [
+        "Ellen",
+        "Xander"
+      ],
+      "durationSeconds": 9.74,
+      "bytes": 61805
+    },
+    "audio/a2/past-review-announcement.m4a": {
+      "scriptHash": "433a6368d6b6a5f591283d76f63fc8ad9cbc2d40f0f67231a834b2f60aa357b1",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 13.04,
+      "bytes": 82470
+    },
+    "audio/a2/past-review-turn-0.m4a": {
+      "scriptHash": "c6f7e086ada2001989847dd4b1693710d6806df7ac48b7fb52fad52c2f8bbbd3",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 2.39,
+      "bytes": 18054
+    },
+    "audio/a2/past-review-turn-1.m4a": {
+      "scriptHash": "06d6aec50267c0206b3e897ecb0d42b79845f6ddc89a9cbd8461ac11309f9da6",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 2.28,
+      "bytes": 17632
+    },
+    "audio/a2/past-review-turn-2.m4a": {
+      "scriptHash": "c887a9c690804918713aab225f72889aa62b38e009d286b98a6513ab3dc63e9c",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 1.44,
+      "bytes": 11940
+    },
+    "audio/a2/services-practice-conversation.m4a": {
+      "scriptHash": "06156e5b4e639a5f55a0a5eca0bf21e843fbf40f3b8ae24923957373833ac447",
+      "voices": [
+        "Ellen",
+        "Xander"
+      ],
+      "durationSeconds": 15.29,
+      "bytes": 97121
+    },
+    "audio/a2/services-practice-announcement.m4a": {
+      "scriptHash": "87e17ff38e14365e1f7ef759bc68382da3bc9f2613ca0cd18f3f82d9f293af4f",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 14.44,
+      "bytes": 92154
+    },
+    "audio/a2/services-practice-turn-0.m4a": {
+      "scriptHash": "876766165e4eea4e6283d7b522287dc1c9e76632160f5031f3f4195f6e29cdf7",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 2.93,
+      "bytes": 21785
+    },
+    "audio/a2/services-practice-turn-1.m4a": {
+      "scriptHash": "06d6aec50267c0206b3e897ecb0d42b79845f6ddc89a9cbd8461ac11309f9da6",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 2.28,
+      "bytes": 17632
+    },
+    "audio/a2/services-practice-turn-2.m4a": {
+      "scriptHash": "c887a9c690804918713aab225f72889aa62b38e009d286b98a6513ab3dc63e9c",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 1.44,
+      "bytes": 11940
+    },
+    "audio/a2/services-check-conversation.m4a": {
+      "scriptHash": "6c93e965ba3c61b53050de64e1c6e8927f5653ae6e87ccb79d95146a27259886",
+      "voices": [
+        "Ellen",
+        "Xander"
+      ],
+      "durationSeconds": 15.65,
+      "bytes": 99234
+    },
+    "audio/a2/services-check-announcement.m4a": {
+      "scriptHash": "52fd3dde3a303e13db22348df0e43164b55a1102816cdf0d0de253e94c863926",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 14.48,
+      "bytes": 92465
+    },
+    "audio/a2/services-check-turn-0.m4a": {
+      "scriptHash": "876766165e4eea4e6283d7b522287dc1c9e76632160f5031f3f4195f6e29cdf7",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 2.93,
+      "bytes": 21785
+    },
+    "audio/a2/services-check-turn-1.m4a": {
+      "scriptHash": "06d6aec50267c0206b3e897ecb0d42b79845f6ddc89a9cbd8461ac11309f9da6",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 2.28,
+      "bytes": 17632
+    },
+    "audio/a2/services-check-turn-2.m4a": {
+      "scriptHash": "c887a9c690804918713aab225f72889aa62b38e009d286b98a6513ab3dc63e9c",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 1.44,
+      "bytes": 11940
+    },
+    "audio/a2/services-review-conversation.m4a": {
+      "scriptHash": "c2e12cfb2c312b9754b8d4e15189d0c883a9238d4719eeab2e8d50876f584cf5",
+      "voices": [
+        "Ellen",
+        "Xander"
+      ],
+      "durationSeconds": 15.94,
+      "bytes": 101442
+    },
+    "audio/a2/services-review-announcement.m4a": {
+      "scriptHash": "bccbb7993057d4c5d5db29f4a085e5176a3bf2035ebad067824954ddc6a08d30",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 14.57,
+      "bytes": 93215
+    },
+    "audio/a2/services-review-turn-0.m4a": {
+      "scriptHash": "876766165e4eea4e6283d7b522287dc1c9e76632160f5031f3f4195f6e29cdf7",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 2.93,
+      "bytes": 21785
+    },
+    "audio/a2/services-review-turn-1.m4a": {
+      "scriptHash": "06d6aec50267c0206b3e897ecb0d42b79845f6ddc89a9cbd8461ac11309f9da6",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 2.28,
+      "bytes": 17632
+    },
+    "audio/a2/services-review-turn-2.m4a": {
+      "scriptHash": "c887a9c690804918713aab225f72889aa62b38e009d286b98a6513ab3dc63e9c",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 1.44,
+      "bytes": 11940
+    },
+    "audio/a2/mixed-practice-conversation.m4a": {
+      "scriptHash": "6cae482dfb0f6a4104616231ee29ff2fbbd14a447b824f17b39d5a9ebaeedf31",
+      "voices": [
+        "Ellen",
+        "Xander"
+      ],
+      "durationSeconds": 12.42,
+      "bytes": 78810
+    },
+    "audio/a2/mixed-practice-announcement.m4a": {
+      "scriptHash": "20b27a840e3377da14768ca805fe5659ca310f1835057e913f76db9c63ab5c67",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 13.79,
+      "bytes": 87640
+    },
+    "audio/a2/mixed-practice-turn-0.m4a": {
+      "scriptHash": "76f9f8949956ba882d2b290d1e177b4991073c63860d41d2e1cd07b65f184b9e",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 3.75,
+      "bytes": 26885
+    },
+    "audio/a2/mixed-practice-turn-1.m4a": {
+      "scriptHash": "06d6aec50267c0206b3e897ecb0d42b79845f6ddc89a9cbd8461ac11309f9da6",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 2.28,
+      "bytes": 17632
+    },
+    "audio/a2/mixed-practice-turn-2.m4a": {
+      "scriptHash": "c887a9c690804918713aab225f72889aa62b38e009d286b98a6513ab3dc63e9c",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 1.44,
+      "bytes": 11940
+    },
+    "audio/a2/mixed-check-conversation.m4a": {
+      "scriptHash": "71fc7d5f811c401829e40a75cb2e0d9cc1d9eb92a911bcdb7d1a4559587642de",
+      "voices": [
+        "Ellen",
+        "Xander"
+      ],
+      "durationSeconds": 11.98,
+      "bytes": 75303
+    },
+    "audio/a2/mixed-check-announcement.m4a": {
+      "scriptHash": "5eb751010bc4080566c23151edb9996886de2184021a54a530713df1e1111962",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 13.41,
+      "bytes": 84311
+    },
+    "audio/a2/mixed-check-turn-0.m4a": {
+      "scriptHash": "76f9f8949956ba882d2b290d1e177b4991073c63860d41d2e1cd07b65f184b9e",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 3.75,
+      "bytes": 26885
+    },
+    "audio/a2/mixed-check-turn-1.m4a": {
+      "scriptHash": "06d6aec50267c0206b3e897ecb0d42b79845f6ddc89a9cbd8461ac11309f9da6",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 2.28,
+      "bytes": 17632
+    },
+    "audio/a2/mixed-check-turn-2.m4a": {
+      "scriptHash": "c887a9c690804918713aab225f72889aa62b38e009d286b98a6513ab3dc63e9c",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 1.44,
+      "bytes": 11940
+    },
+    "audio/a2/mixed-review-conversation.m4a": {
+      "scriptHash": "6105573f7c5c7a608f069c6c4530b3ea48dce63b095e4825d8783eee398e3427",
+      "voices": [
+        "Ellen",
+        "Xander"
+      ],
+      "durationSeconds": 12.02,
+      "bytes": 76510
+    },
+    "audio/a2/mixed-review-announcement.m4a": {
+      "scriptHash": "5f15dce6b6cfade162dd63e81a73dd59d720666e5c37ed12c006407e1b94f028",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 13.26,
+      "bytes": 84619
+    },
+    "audio/a2/mixed-review-turn-0.m4a": {
+      "scriptHash": "76f9f8949956ba882d2b290d1e177b4991073c63860d41d2e1cd07b65f184b9e",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 3.75,
+      "bytes": 26885
+    },
+    "audio/a2/mixed-review-turn-1.m4a": {
+      "scriptHash": "06d6aec50267c0206b3e897ecb0d42b79845f6ddc89a9cbd8461ac11309f9da6",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 2.28,
+      "bytes": 17632
+    },
+    "audio/a2/mixed-review-turn-2.m4a": {
+      "scriptHash": "c887a9c690804918713aab225f72889aa62b38e009d286b98a6513ab3dc63e9c",
+      "voices": [
+        "Xander"
+      ],
+      "durationSeconds": 1.44,
+      "bytes": 11940
+    }
+  }
+}

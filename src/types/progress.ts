@@ -1,3 +1,4 @@
+import type { A2State } from '../modules/a2/types';
 import type { WordListsState } from '../modules/word-lists/wordListEngine';
 import type { Difficulty } from './exercise';
 import type { AppSettings, UserProfile } from './settings';
@@ -66,6 +67,7 @@ export interface ReviewState {
 export interface AppState {
   version: 1;
   wordLists: WordListsState;
+  a2: A2State;
   profile: UserProfile;
   progress: ProgressState;
   review: ReviewState;

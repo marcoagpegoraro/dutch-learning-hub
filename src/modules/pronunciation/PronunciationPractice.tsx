@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react';
 import { useAppState } from '../../app/AppStateContext';
 import { ExerciseShell } from '../../components/ExerciseShell';
 import { DutchAudio } from '../../components/DutchAudio';
-import { calculateXp } from '../../services/scoring';
 import type { Difficulty } from '../../types/exercise';
 import { pronunciationPhrases, recognitionMatchPercent } from './pronunciationData';
 
@@ -44,7 +43,7 @@ function pickPhrase(difficulty: Difficulty, previousId?: string) {
 }
 
 export function PronunciationPractice() {
-  const { state, updateSettings, addAttempt } = useAppState();
+  const { state, updateSettings, completeActivity } = useAppState();
   const Recognition = recognitionConstructor();
   const recognitionRef = useRef<RecognitionLike | null>(null);
   const [difficulty, setDifficulty] = useState<Difficulty>(state.settings.defaultDifficulty);
@@ -97,18 +96,7 @@ export function PronunciationPractice() {
 
   function saveAttempt() {
     if (!transcript || saved) return;
-    const correct = match >= 70;
-    const xp = calculateXp(difficulty, { correct });
-    addAttempt({
-      questionId: phrase.id,
-      moduleId: 'pronunciation',
-      difficulty,
-      prompt: phrase.phrase,
-      submittedAnswer: transcript,
-      correctAnswer: phrase.phrase,
-      correct,
-      xpEarned: xp,
-    });
+    completeActivity(`shadowing:${phrase.id}`, 5);
     setSaved(true);
     setCompleted((current) => current + 1);
   }

@@ -34,13 +34,19 @@ export function SettingsPage() {
     }
   }
 
-  function confirmReset() {
+  async function confirmReset() {
     if (
       !window.confirm('Reset all Dutch Learning Hub progress and settings? This cannot be undone.')
     )
       return;
-    resetState();
-    setMessage('All progress and settings were reset.');
+    try {
+      await resetState();
+      setMessage('All progress, recordings, and settings were reset.');
+    } catch {
+      setMessage(
+        'Não foi possível excluir as gravações. Nenhum progresso foi apagado. Tente novamente.',
+      );
+    }
   }
 
   return (
@@ -182,7 +188,8 @@ export function SettingsPage() {
               <h2 className="h4 fw-bold">Your data</h2>
               <p className="text-secondary small">
                 Export a backup or move your progress to another browser. Imported files are
-                validated before use.
+                validated before use. Gravações de voz são exportadas separadamente pelo portfólio
+                da trilha A2.
               </p>
               <div className="d-grid gap-2">
                 <button

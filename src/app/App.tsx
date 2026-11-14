@@ -28,7 +28,6 @@ import { AchievementsPage } from '../pages/AchievementsPage';
 import { DashboardPage } from '../pages/DashboardPage';
 import { LearnPage } from '../pages/LearnPage';
 import { NotFoundPage, PlaceholderModulePage } from '../pages/PlaceholderModulePage';
-import { ProgressPage } from '../pages/ProgressPage';
 import { ReviewPage } from '../pages/ReviewPage';
 import { SettingsPage } from '../pages/SettingsPage';
 import { CoursePage } from '../pages/CoursePage';
@@ -37,10 +36,32 @@ import { DailyGoalsPage } from '../pages/DailyGoalsPage';
 import { SpeechSynthesisProvider } from './SpeechSynthesisProvider';
 import { AppStateProvider } from './AppStateContext';
 
+const ProgressPage = lazy(() =>
+  import('../pages/ProgressPage').then((m) => ({ default: m.ProgressPage })),
+);
+
 const QuestionsAnswersPractice = lazy(() =>
   import('../modules/questions-answers/QuestionsAnswersPractice').then((module) => ({
     default: module.QuestionsAnswersPractice,
   })),
+);
+
+const A2CoursePage = lazy(() =>
+  import('../modules/a2/A2CoursePage').then((m) => ({ default: m.A2CoursePage })),
+);
+const A2UnitPage = lazy(() =>
+  import('../modules/a2/A2UnitPage').then((m) => ({ default: m.A2UnitPage })),
+);
+const A2PortfolioPage = lazy(() =>
+  import('../modules/a2/A2PortfolioPage').then((m) => ({ default: m.A2PortfolioPage })),
+);
+const A2TeacherPage = lazy(() =>
+  import('../modules/a2/A2PortfolioPage').then((m) => ({ default: m.A2TeacherPage })),
+);
+const a2Fallback = (
+  <div className="container py-5" role="status">
+    Carregando a trilha A2…
+  </div>
 );
 
 export function App() {
@@ -51,12 +72,57 @@ export function App() {
           <Routes>
             <Route element={<AppShell />}>
               <Route index element={<DashboardPage />} />
+              <Route
+                path="a2"
+                element={
+                  <Suspense fallback={a2Fallback}>
+                    <A2CoursePage />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="a2/portfolio"
+                element={
+                  <Suspense fallback={a2Fallback}>
+                    <A2PortfolioPage />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="a2/teacher"
+                element={
+                  <Suspense fallback={a2Fallback}>
+                    <A2TeacherPage />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="a2/:unitId"
+                element={
+                  <Suspense fallback={a2Fallback}>
+                    <A2UnitPage />
+                  </Suspense>
+                }
+              />
               <Route path="learn" element={<LearnPage />} />
               <Route path="course" element={<CoursePage />} />
               <Route path="course/:unitId" element={<CourseUnitPage />} />
               <Route path="goals" element={<DailyGoalsPage />} />
               <Route path="review" element={<ReviewPage />} />
-              <Route path="progress" element={<ProgressPage />} />
+              <Route
+                path="progress"
+                element={
+                  <Suspense
+                    fallback={
+                      <div className="container py-5" role="status">
+                        Carregando progresso…
+                      </div>
+                    }
+                  >
+                    <ProgressPage />
+                  </Suspense>
+                }
+              />
               <Route path="achievements" element={<AchievementsPage />} />
               <Route path="settings" element={<SettingsPage />} />
               <Route path="about" element={<AboutPage />} />

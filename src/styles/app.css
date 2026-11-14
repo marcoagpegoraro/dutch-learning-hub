@@ -883,3 +883,32 @@ html[data-reduced-motion='true'] *::after {
 .word-list-card summary {
   cursor: pointer;
 }
+
+.a2-document {
+  padding: 1.25rem;
+  border: 1px solid #dce3ee;
+  border-left: 4px solid var(--hub-primary);
+  border-radius: 0.6rem;
+  background: #f8faff;
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+  line-height: 1.8;
+}
+.a2-response {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.a2-recorder audio,
+.a2-player audio {
+  max-width: 100%;
+  vertical-align: middle;
+}
+.a2-status-confirmed {
+  color: #08783f;
+}
+.a2-status-demonstrated {
+  color: #1756b0;
+}
+.a2-status-practised {
+  color: #916100;
+}

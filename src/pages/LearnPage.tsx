@@ -15,8 +15,8 @@ export function LearnPage() {
       <span className="eyebrow">Free practice</span>
       <h1 className="display-6 fw-bold">Choose what to learn</h1>
       <p className="text-secondary mb-5">
-        Grammar, listening, conversation, pronunciation, and picture-description practice are ready.
-        Remaining cards show the roadmap for later phases.
+        Explore os exercícios individuais ou abra a Trilha A2 para praticar situações completas com
+        leitura, escuta, produção própria e portfólio.
       </p>
       {(Object.keys(categoryLabels) as LearningModule['category'][]).map((category) => (
         <section className="mb-5" key={category}>

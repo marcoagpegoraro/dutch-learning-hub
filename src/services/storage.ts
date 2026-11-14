@@ -1,3 +1,5 @@
+import { createA2State } from '../modules/a2/types';
+import { sanitizeA2State } from '../modules/a2/a2Progress';
 import { createWordListsState } from '../modules/word-lists/wordListEngine';
 import { loadCustomWordLists, sanitizeWordListsState } from '../modules/word-lists/wordListStorage';
 import type { Difficulty } from '../types/exercise';
@@ -54,6 +56,7 @@ export function createDefaultState(): AppState {
   return {
     version: APP_STATE_VERSION,
     wordLists: createWordListsState(),
+    a2: createA2State(),
     profile: { displayName: 'Dutch learner', joinedAt: todayIso() },
     progress: createDefaultProgress(),
     review: { items: [] },
@@ -237,6 +240,7 @@ export function validateAndMigrateState(value: unknown): AppState {
   return {
     version: APP_STATE_VERSION,
     wordLists: sanitizeWordListsState(value.wordLists),
+    a2: sanitizeA2State(value.a2),
     profile: isRecord(value.profile)
       ? {
           displayName:
